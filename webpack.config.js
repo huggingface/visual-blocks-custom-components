@@ -1,7 +1,10 @@
-const path = require('path');
+import { fileURLToPath } from 'url';
+import path from 'path';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 /** @type {import('webpack').Configuration} */
-module.exports = {
+export default {
     mode: 'development',
     devtool: 'source-map',
     entry: './src/index.js',

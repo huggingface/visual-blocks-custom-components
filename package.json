@@ -3,6 +3,7 @@
   "description": "Custom Hugging Face components for Visual Blocks",
   "version": "0.0.1",
   "private": true,
+  "type": "module",
   "scripts": {
     "build": "webpack",
     "watch": "webpack --watch",
