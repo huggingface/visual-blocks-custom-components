@@ -54,7 +54,7 @@ class MakeUppercase extends HTMLElement {
         super();
     }
 
-    runWithInputs(inputs) {
+    async runWithInputs(inputs) {
         // `text` and `option` should match the `name` of this node's
         // input specs and property specs names to destruct object correctly.
         const { text, option } = inputs;
