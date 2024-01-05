@@ -1,0 +1,21 @@
+{
+  "name": "visual-blocks-custom-components",
+  "description": "Custom Hugging Face components for Visual Blocks",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "build": "webpack",
+    "watch": "webpack --watch",
+    "dev": "webpack serve --no-client-overlay"
+  },
+  "license": "Apache-2.0",
+  "author": "Hugging Face",
+  "dependencies": {
+    "@xenova/transformers": "^2.13.4"
+  },
+  "devDependencies": {
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1"
+  }
+}
