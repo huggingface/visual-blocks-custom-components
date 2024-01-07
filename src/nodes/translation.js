@@ -82,6 +82,8 @@ class Text2TextGenerationNode extends BasePipelineNode {
         const translator = await this.instance;
 
         const prompt = `translate English to ${language}: ${text}`;
+
+        // TODO: Live updates to UI, then dispatch final result at end
         const result = await translator(prompt);
         this.root.innerHTML = JSON.stringify(result);
 
