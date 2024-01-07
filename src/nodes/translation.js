@@ -75,8 +75,10 @@ class Text2TextGenerationNode extends BasePipelineNode {
 
     async runWithInputs(inputs) {
         const { text, language } = inputs;
-        if (!text) return; // No input node
-
+        if (!text) {  // No input node
+            this.dispatchEvent(new CustomEvent('outputs', { detail: { result: null } }));
+            return;
+        }
         const translator = await this.instance;
 
         const prompt = `translate English to ${language}: ${text}`;

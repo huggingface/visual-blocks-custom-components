@@ -203,7 +203,10 @@ class ImageSegmentationNode extends BasePipelineNode {
 
     async runWithInputs(inputs) {
         const { image, option } = inputs;
-        if (!image) return; // No input node
+        if (!image) {  // No input node
+            this.dispatchEvent(new CustomEvent('outputs', { detail: { result: null } }));
+            return;
+        }
 
         // Clear masks
         this.masks.innerHTML = '';

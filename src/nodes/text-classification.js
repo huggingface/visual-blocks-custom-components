@@ -71,8 +71,10 @@ class TextClassificationNode extends BasePipelineNode {
 
     async runWithInputs(inputs) {
         const { text, option } = inputs;
-        if (!text) return; // No input node
-
+        if (!text) {  // No input node
+            this.dispatchEvent(new CustomEvent('outputs', { detail: { result: null } }));
+            return;
+        }
         const classifier = await this.instance;
 
         const result = await classifier(text, { topk: 5 });
