@@ -6,7 +6,7 @@ import {
 } from '../constants.js';
 
 const NODE_SPEC = {
-    'id': 'image-segmentation',
+    'id': 'transformers-image-segmentation',
     'name': 'Image segmentation',
     'description': 'TODO',
 

@@ -6,7 +6,7 @@ import {
 } from '../constants.js';
 
 const NODE_SPEC = {
-    'id': 'text-classification',
+    'id': 'transformers-text-classification',
     'name': 'Text Classification',
     'description': 'TODO',
 
@@ -57,10 +57,9 @@ class TextClassificationPipelineSingleton extends PipelineSingleton {
 }
 
 const TEXT_CLASSIFICATION_NODE_STYLE = `
-* {
+.container {
     width: 100%;
-    height: 200px;
-    background-color: red;
+    height: 100%;
 }
 `
 
