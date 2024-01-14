@@ -3,6 +3,9 @@ import { pipeline, env } from '@xenova/transformers';
 // Disable local model check
 env.allowLocalModels = false;
 
+// Proxy execution to a web worker to avoid freezing the UI
+env.backends.onnx.wasm.proxy = true;
+
 /**
  * @abstract
  */
