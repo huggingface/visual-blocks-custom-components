@@ -201,9 +201,9 @@ class ImageSegmentationNode extends BasePipelineNode {
         this.masks.appendChild(canvas);
     }
 
-    async runWithInputs(inputs) {
+    async runWithInputs(inputs, services) {
         const { image, option } = inputs;
-        if (!image) {  // No input node
+        if (!image?.canvasId) {  // No input node
             this.dispatchEvent(new CustomEvent('outputs', { detail: { result: null } }));
             return;
         }
@@ -211,16 +211,11 @@ class ImageSegmentationNode extends BasePipelineNode {
         // Clear masks
         this.masks.innerHTML = '';
 
-        const segmenter = await this.instance;
-
-        // TODO: Get canvas from input node
-        // This just gets the first canvas on the screen
-        const canvas = document.querySelectorAll('canvas')[0];
-        if (!canvas) return;
-
+        const canvas = services.resourceService.get(image.canvasId);
         this.image.appendChild(canvas);
         const data = canvas.toDataURL();
 
+        const segmenter = await this.instance;
 
         // Predict segments
         const output = await segmenter(data);

@@ -134,9 +134,9 @@ class ObjectDetectionNode extends BasePipelineNode {
         this.boxes.appendChild(boxElement);
     }
 
-    async runWithInputs(inputs) {
+    async runWithInputs(inputs, services) {
         const { image, option } = inputs;
-        if (!image) {  // No input node
+        if (!image?.canvasId) {  // No input node
             this.dispatchEvent(new CustomEvent('outputs', { detail: { result: null } }));
             return;
         }
@@ -144,16 +144,11 @@ class ObjectDetectionNode extends BasePipelineNode {
         // Clear boxes
         this.boxes.innerHTML = '';
 
-        const detector = await this.instance;
-
-        // TODO: Get canvas from input node
-        // This just gets the first canvas on the screen
-        const canvas = document.querySelectorAll('canvas')[0];
-        if (!canvas) return;
-
+        const canvas = services.resourceService.get(image.canvasId);
         this.image.appendChild(canvas);
         const data = canvas.toDataURL();
 
+        const detector = await this.instance;
 
         // Predict segments
         const output = await detector(data, {
@@ -161,7 +156,6 @@ class ObjectDetectionNode extends BasePipelineNode {
             // threshold: 0.5,
             percentage: true,
         });
-        // console.log(output);
 
         // Render boxes
         output.forEach((x, i) => this.renderBox(x, i));
