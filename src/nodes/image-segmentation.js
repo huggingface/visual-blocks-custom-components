@@ -5,6 +5,8 @@ import {
     COLLECTION_NAME,
 } from '../constants.js';
 
+import { clamp } from '../utils.js';
+
 const NODE_SPEC = {
     'id': 'transformers-image-segmentation',
     'name': 'Image segmentation',
@@ -98,14 +100,6 @@ const colours = [
     [21, 178, 208], // cyan
     [132, 197, 33], // lime
 ];
-
-
-
-// Clamp a value inside a range [min, max]
-function clamp(x, min = 0, max = 1) {
-    return Math.max(Math.min(x, max), min)
-}
-
 
 class ImageSegmentationNode extends BasePipelineNode {
     constructor() {
