@@ -12,7 +12,11 @@
   "license": "Apache-2.0",
   "author": "Hugging Face",
   "dependencies": {
-    "@xenova/transformers": "^2.14.0"
+    "@huggingface/hub": "^0.14.1",
+    "@huggingface/inference": "^2.6.4",
+    "@huggingface/tasks": "^0.3.3",
+    "@xenova/transformers": "^2.14.0",
+    "lit": "^3.1.2"
   },
   "devDependencies": {
     "webpack": "^5.89.0",
