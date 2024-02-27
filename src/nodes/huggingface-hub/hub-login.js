@@ -1,4 +1,3 @@
-import { HfInference } from "@huggingface/inference";
 import { HF_HUB_COLLECTION } from "../../constants.js";
 import { css, html, LitElement } from "lit";
 import { property } from "lit/decorators.js";
@@ -42,13 +41,19 @@ const NODE_SPEC = {
 
   category: "input",
   collection: HF_HUB_COLLECTION,
-
-  inputSpecs: [
+  propertySpecs: [
     {
       name: "apikey",
+      displayLabel: "API Key",
       type: "string",
+      info: "Type your Hugging Face API Key or click the button to login",
+      editorSpec: {
+        type: "text_input",
+        password: true,
+      },
     },
   ],
+  inputSpecs: [],
   // Outputs.
   outputSpecs: [
     {
@@ -75,9 +80,10 @@ class HFHubLoginNode extends LitElement {
     const oauthResult = await oauthHandleRedirectIfPresent();
     if (oauthResult) {
       this.oauthResult = oauthResult;
+      console.log("oauthResult", this.oauthResult);
       this.dispatchEvent(
         new CustomEvent("outputs", {
-          detail: { result: oauthResult.accessToken },
+          detail: { _apikey: this.oauthResult?.accessToken },
         })
       );
     } else {
@@ -87,6 +93,7 @@ class HFHubLoginNode extends LitElement {
   async _login() {
     window.location.href = await oauthLoginUrl({
       clientId: "8da93e24-c51a-430b-b8cb-1affa96c1f81",
+      scopes: "inference-api",
     });
   }
 
@@ -114,44 +121,24 @@ ${JSON.stringify(this.oauthResult, null, 2)}
   }
 
   async runWithInputs(inputs) {
-    const { text, apikey, modelId } = inputs;
-    if (!text) {
-      // No input node
-      this.dispatchEvent(
-        new CustomEvent("outputs", { detail: { result: null } })
-      );
-      return;
-    }
-    try {
-      const hf = new HfInference(apikey);
-      const textClassRes = await hf.textClassification(
-        {
-          model: modelId,
-          inputs: text,
-        },
-        { wait_for_model: true }
-      );
-      // remap to visualblocks classification result
-      const result = textClassRes.map((e) => ({
-        className: e.label,
-        probability: e.score,
-      }));
-      console.log(result);
-      this.dispatchEvent(
-        new CustomEvent("outputs", { detail: { result: { classes: result } } })
-      );
-    } catch (error) {
+    const { apikey } = inputs;
+    const _apikey = apikey ? apikey.trim() : this.oauthResult?.accessToken;
+    if (!_apikey) {
       this.dispatchEvent(
         new CustomEvent("outputs", {
           detail: {
             error: {
               title: "Error",
-              message: error.message,
+              message: "No API Key provided",
             },
           },
         })
       );
+      return;
     }
+    this.dispatchEvent(
+      new CustomEvent("outputs", { detail: { apikey: _apikey } })
+    );
   }
 }
 
