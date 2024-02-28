@@ -80,7 +80,7 @@ class Text2TextGenerationNode extends BasePipelineNode {
             this.dispatchEvent(new CustomEvent('outputs', { detail: { result: null } }));
             return;
         }
-        const translator = await this.instance;
+        const translator = this.instance;
 
         const prompt = `translate English to ${language}: ${text}`;
 

@@ -17,7 +17,9 @@
       "noFallthroughCasesInSwitch": true,
       "allowUnreachableCode": true,
       "incremental": true,
-      "moduleResolution": "node"
+      "moduleResolution": "node",
+      "experimentalDecorators": true, // If using decorators
+      "useDefineForClassFields": false,
     },
     "include": [
       "./src",

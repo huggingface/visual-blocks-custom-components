@@ -1,58 +1,55 @@
-import type { CustomNodeInfo } from '@visualblocks/custom-node-types';
-import { PipelineSingleton, BasePipelineNode } from './base';
-
+import type { CustomNodeInfo, NodeSpec } from "@visualblocks/custom-node-types";
 import {
-    COLLECTION_NAME,
-} from '../constants';
+    DataType,
+    Category,
+    EditorType,
+} from "@visualblocks/custom-node-types";
+import { PipelineSingleton, BasePipelineNode } from "./base";
 
-const NODE_SPEC = {
-    'id': 'transformers-text-classification',
-    'name': 'Text Classification',
-    'description': 'TODO',
+import { COLLECTION_NAME } from "../constants";
 
-    'category': 'processor',
-    'collection': COLLECTION_NAME,
+const NODE_SPEC: NodeSpec = {
+    id: "transformers-text-classification",
+    name: "Text Classification",
+    description: "TODO",
+
+    category: Category.PROCESSOR,
+    collection: COLLECTION_NAME,
 
     // Properties.
-    "propertySpecs": [
-        {
-            "name": "option",
-            "type": "string",
-            "editorSpec": {
-                "type": "dropdown",
-                "options": [
-                    {
-                        "value": "first-letter",
-                        "label": "First letter only"
-                    },
-                    {
-                        "value": "all-letters",
-                        "label": "All letters"
-                    }
-                ]
-            }
-        }
-    ],
+    propertySpecs: [],
 
     // Inputs.
-    'inputSpecs': [{
-        'name': 'text',
-        'type': 'string',
-        "editorSpec": {
-            "type": "text_input"
+    inputSpecs: [
+        {
+            name: "text",
+            type: "string",
+            editorSpec: {
+                type: EditorType.TEXT_INPUT,
+            },
         },
-    }],
+    ],
 
     // Outputs.
-    'outputSpecs': [{
-        'name': 'result',
-        'type': 'string',
-    }],
+    outputSpecs: [
+        {
+            name: "result",
+            type: DataType.CLASSIFICATION_RESULT,
+        },
+        {
+            name: "text",
+            type: DataType.STRING,
+        },
+    ],
 };
 
+declare interface Inputs {
+    text: string;
+}
+
 class TextClassificationPipelineSingleton extends PipelineSingleton {
-    static task = 'text-classification';
-    static modelId = 'Xenova/distilbert-base-uncased-finetuned-sst-2-english';
+    static task = "text-classification";
+    static modelId = "Xenova/distilbert-base-uncased-finetuned-sst-2-english";
     static quantized = true;
 }
 
@@ -61,28 +58,42 @@ const TEXT_CLASSIFICATION_NODE_STYLE = `
     width: 100%;
     height: 100%;
 }
-`
+`;
 
 class TextClassificationNode extends BasePipelineNode {
     constructor() {
         super(TextClassificationPipelineSingleton, TEXT_CLASSIFICATION_NODE_STYLE);
     }
 
-
-    async runWithInputs(inputs) {
-        const { text, option } = inputs;
-        if (!text) {  // No input node
-            this.dispatchEvent(new CustomEvent('outputs', { detail: { result: null } }));
+    async runWithInputs(inputs: Inputs) {
+        const { text } = inputs;
+        if (!text) {
+            // No input node
+            this.dispatchEvent(
+                new CustomEvent("outputs", { detail: { result: null, text: text } })
+            );
             return;
         }
         const classifier = await this.instance;
 
         const result = await classifier(text, { topk: 5 });
-        this.root.innerHTML = JSON.stringify(result);
+        const classProb = result.map((e: { label: string; score: string }) => ({
+            className: e.label,
+            probability: e.score,
+        }));
 
         // Output.
-        this.dispatchEvent(new CustomEvent('outputs', { detail: { 'result': result } }));
+        console.log("Text Classification result:", {
+            result: classProb,
+            text: text,
+        });
+        this.dispatchEvent(
+            new CustomEvent("outputs", { detail: { result: { classes: classProb }, text: text } })
+        );
     }
 }
 
-export default { nodeSpec: NODE_SPEC, nodeImpl: TextClassificationNode } as CustomNodeInfo;
+export default {
+    nodeSpec: NODE_SPEC,
+    nodeImpl: TextClassificationNode,
+} as CustomNodeInfo;
