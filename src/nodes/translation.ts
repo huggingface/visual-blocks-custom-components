@@ -1,4 +1,5 @@
 
+import type { CustomNodeInfo } from '@visualblocks/custom-node-types';
 import { PipelineSingleton, BasePipelineNode } from './base.js';
 
 import {
@@ -92,4 +93,4 @@ class Text2TextGenerationNode extends BasePipelineNode {
     }
 }
 
-export default { nodeSpec: NODE_SPEC, nodeImpl: Text2TextGenerationNode };
+export default { nodeSpec: NODE_SPEC, nodeImpl: Text2TextGenerationNode } as CustomNodeInfo

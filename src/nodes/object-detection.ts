@@ -1,9 +1,10 @@
 
-import { PipelineSingleton, BasePipelineNode } from './base.js';
+import type { CustomNodeInfo } from '@visualblocks/custom-node-types';
+import { PipelineSingleton, BasePipelineNode } from './base';
 
 import {
     COLLECTION_NAME,
-} from '../constants.js';
+} from '../constants';
 
 const NODE_SPEC = {
     'id': 'transformers-object-detection',
@@ -164,4 +165,4 @@ class ObjectDetectionNode extends BasePipelineNode {
     }
 }
 
-export default { nodeSpec: NODE_SPEC, nodeImpl: ObjectDetectionNode };
+export default { nodeSpec: NODE_SPEC, nodeImpl: ObjectDetectionNode } as CustomNodeInfo;

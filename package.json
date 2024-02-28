@@ -5,13 +5,17 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "esbuild --bundle ./src/index.js --outdir=dist",
-    "dev": "esbuild --bundle ./src/index.js --outfile=www/index.js --servedir=www"
+    "build": "esbuild --bundle ./src/index.ts --outfile=dist/index.js",
+    "start": "npm run build -- --servedir=dist",
+    "watch": "npm run build -- --watch"
   },
   "license": "Apache-2.0",
   "author": "Hugging Face",
   "dependencies": {
-    "@xenova/transformers": "^2.14.0"
+    "@visualblocks/custom-node-types": "^0.0.3",
+    "@xenova/transformers": "^2.14.0",
+    "lit": "^3.1.2",
+    "typescript": "^5.3.3"
   },
   "devDependencies": {
     "esbuild": "0.20.1"

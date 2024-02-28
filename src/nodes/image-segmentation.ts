@@ -1,11 +1,12 @@
 
-import { PipelineSingleton, BasePipelineNode } from './base.js';
+import type { CustomNodeInfo } from '@visualblocks/custom-node-types';
+import { PipelineSingleton, BasePipelineNode } from './base';
 
 import {
     COLLECTION_NAME,
-} from '../constants.js';
+} from '../constants';
 
-import { clamp } from '../utils.js';
+import { clamp } from '../utils';
 
 const NODE_SPEC = {
     'id': 'transformers-image-segmentation',
@@ -225,4 +226,4 @@ class ImageSegmentationNode extends BasePipelineNode {
     }
 }
 
-export default { nodeSpec: NODE_SPEC, nodeImpl: ImageSegmentationNode };
+export default { nodeSpec: NODE_SPEC, nodeImpl: ImageSegmentationNode } as CustomNodeInfo;
