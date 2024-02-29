@@ -39,9 +39,6 @@ const NODE_SPEC: NodeSpec = {
     {
       name: "image",
       type: DataType.IMAGE,
-      editorSpec: {
-        type: EditorType.IMAGE_RESOURCE,
-      },
     },
   ],
 
