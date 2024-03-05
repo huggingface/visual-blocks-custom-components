@@ -2,6 +2,7 @@ import type {
   CustomNodeInfo,
   Services,
   VisualBlocksImage,
+  VisualBlocksDetectedObject,
 } from "@visualblocks/custom-node-types";
 
 import type {
@@ -27,17 +28,29 @@ class ObjectDetectionPipelineSingleton extends PipelineSingleton {
 }
 
 class ObjectDetectionNode extends BasePipelineNode {
+  private cachedInput: string | null = null;
+  private cachedResult: VisualBlocksDetectedObject[] | null = null;
+
   constructor() {
     super(ObjectDetectionPipelineSingleton);
   }
 
   async runWithInputs(inputs: Inputs, services: Services) {
     const { image } = inputs;
-    console.log("RUUUNing object detection", image);
+
     if (!image?.canvasId) {
       // No input node
       this.dispatchEvent(
         new CustomEvent("outputs", { detail: { result: null } })
+      );
+      return;
+    }
+
+    if (this.cachedResult && this.cachedInput === image.canvasId) {
+      this.dispatchEvent(
+        new CustomEvent("outputs", {
+          detail: { results: { results: this.cachedResult } },
+        })
       );
       return;
     }
@@ -59,7 +72,7 @@ class ObjectDetectionNode extends BasePipelineNode {
       Array.isArray(result) ? result : [result]
     ) as ObjectDetectionPipelineSingle[];
 
-    const outputVB = resultArray.map((x) => {
+    const outputVB: VisualBlocksDetectedObject[] = resultArray.map((x) => {
       return {
         label: x.label,
         score: x.score,
@@ -71,6 +84,8 @@ class ObjectDetectionNode extends BasePipelineNode {
         },
       };
     });
+    this.cachedResult = outputVB;
+    this.cachedInput = image.canvasId;
 
     this.dispatchEvent(
       new CustomEvent("outputs", { detail: { results: { results: outputVB } } })

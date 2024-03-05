@@ -31,6 +31,10 @@ export const NODE_SPEC: NodeSpec = {
           nodeSpecId: "bounding_box_visualizer",
           extraInputIdsToConnect: ["image"],
         },
+        {
+          nodeSpecId: "bounding_box_to_image",
+          extraInputIdsToConnect: ["image"],
+        },
       ],
     },
   ],
