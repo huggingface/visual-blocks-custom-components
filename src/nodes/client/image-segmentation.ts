@@ -27,7 +27,6 @@ declare interface Inputs {
 }
 declare interface Outputs {
   segData: ImageSegmentationPipelineOutput[];
-  image: VisualBlocksImage;
 }
 
 class ImageSegmentationNode extends BasePipelineNode {
@@ -53,12 +52,12 @@ class ImageSegmentationNode extends BasePipelineNode {
       image.canvasId
     ) as HTMLCanvasElement;
     const data = canvas.toDataURL();
-    const segmenter = (await this.instance) as ImageSegmentationPipeline;
+    const segmenter: ImageSegmentationPipeline = await this.instance;
 
     // Predict segments
     const output = await segmenter(data);
 
-    const detail: Outputs = { segData: output, image: image };
+    const detail: Outputs = { segData: output };
     this.dispatchEvent(new CustomEvent("outputs", { detail: detail }));
   }
 }

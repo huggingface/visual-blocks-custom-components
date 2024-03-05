@@ -33,6 +33,7 @@ class ObjectDetectionNode extends BasePipelineNode {
 
   async runWithInputs(inputs: Inputs, services: Services) {
     const { image } = inputs;
+    console.log("RUUUNing object detection", image);
     if (!image?.canvasId) {
       // No input node
       this.dispatchEvent(

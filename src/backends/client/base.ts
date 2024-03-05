@@ -24,10 +24,19 @@ export class PipelineSingleton {
       throw new Error("Invalid class configuration");
     }
     if (!this.instance) {
+      console.info(
+        "Creating pipeline instance. Model not loaded yet, modelId:",
+        this.modelId
+      );
       this.instance = pipeline(this.task, this.modelId, {
         quantized: this.quantized,
       });
       // TODO: use progress callback
+    } else {
+      console.info(
+        "Pipeline instance already created for modelId:",
+        this.modelId
+      );
     }
     return this.instance;
   }

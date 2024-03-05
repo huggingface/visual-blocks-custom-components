@@ -84,7 +84,6 @@ class ImageSegmentationViewerNode extends LitElement {
     px = clamp(px);
     py = clamp(py);
     this.selectedPoints.push({ x: px, y: py });
-    console.log("selected points", this.selectedPoints);
     if (event.metaKey) {
       this.selectedPoints = [];
     }
