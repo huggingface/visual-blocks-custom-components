@@ -56,5 +56,9 @@ export const NODE_SPEC: NodeSpec = {
       name: "result",
       type: DataType.STRING,
     },
+    {
+      name: "text",
+      type: DataType.STRING,
+    },
   ],
 };

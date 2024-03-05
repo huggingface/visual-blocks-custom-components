@@ -34,9 +34,5 @@ export const NODE_SPEC: NodeSpec = {
         },
       ],
     },
-    {
-      name: "image",
-      type: DataType.IMAGE,
-    },
   ],
 };

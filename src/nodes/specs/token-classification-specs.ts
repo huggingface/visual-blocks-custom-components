@@ -1,4 +1,5 @@
 import { COLLECTION_NAME } from "../../constants";
+import { CustomDataTypeEnum } from "../../types";
 import type { NodeSpec } from "@visualblocks/custom-node-types";
 import {
   DataType,
@@ -7,15 +8,11 @@ import {
 } from "@visualblocks/custom-node-types";
 
 export const NODE_SPEC: NodeSpec = {
-  id: "hf-client-transformers-text-classification",
-  name: "Text Classification (client)",
+  id: "hf-client-token-classification",
+  name: "Token Classification (client)",
   description: "TODO",
-
   category: Category.PROCESSOR,
   collection: COLLECTION_NAME,
-
-  // Properties.
-  propertySpecs: [],
 
   // Inputs.
   inputSpecs: [
@@ -32,10 +29,10 @@ export const NODE_SPEC: NodeSpec = {
   outputSpecs: [
     {
       name: "result",
-      type: DataType.CLASSIFICATION_RESULT,
+      type: CustomDataTypeEnum.TOKEN_CLASSIFICATION_RESULT,
       recommendedNodes: [
         {
-          nodeSpecId: "classification_visualizer",
+          nodeSpecId: "hf-client-token-classification-viewer",
         },
       ],
     },
