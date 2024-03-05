@@ -27,6 +27,10 @@ class TokenClassificationPipelineSingleton extends PipelineSingleton {
 }
 
 class TokenClassificationNode extends BasePipelineNode {
+  private cachedInput: string | null = null;
+  private cachedProcessedTokens: processedTokens[] | null = null;
+  private cachedTokens: TokenClassificationSingle[] | null = null;
+
   constructor() {
     super(TokenClassificationPipelineSingleton);
   }
@@ -94,6 +98,26 @@ class TokenClassificationNode extends BasePipelineNode {
       );
       return;
     }
+
+    if (
+      this.cachedProcessedTokens &&
+      this.cachedTokens &&
+      this.cachedInput === text
+    ) {
+      this.dispatchEvent(
+        new CustomEvent("outputs", {
+          detail: {
+            result: {
+              tokens: this.cachedProcessedTokens,
+              results: this.cachedTokens,
+            },
+            text: text,
+          },
+        })
+      );
+      return;
+    }
+
     const classifier: TokenClassificationPipeline = await this.instance;
 
     const result = await classifier(text, {
@@ -104,6 +128,9 @@ class TokenClassificationNode extends BasePipelineNode {
     ) as TokenClassificationSingle[];
 
     const tokens = this.postProcess(classifier.tokenizer, resultArray);
+    this.cachedInput = text;
+    this.cachedProcessedTokens = tokens;
+    this.cachedTokens = resultArray;
 
     this.dispatchEvent(
       new CustomEvent("outputs", {

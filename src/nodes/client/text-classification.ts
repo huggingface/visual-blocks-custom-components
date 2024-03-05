@@ -2,7 +2,10 @@ import type {
   TextClassificationPipeline,
   TextClassificationSingle,
 } from "@xenova/transformers";
-import type { CustomNodeInfo } from "@visualblocks/custom-node-types";
+import type {
+  CustomNodeInfo,
+  VisualBlocksClassificationResult,
+} from "@visualblocks/custom-node-types";
 import { NODE_SPEC } from "../specs/text-classification-specs";
 import {
   PipelineSingleton,
@@ -20,6 +23,9 @@ class TextClassificationPipelineSingleton extends PipelineSingleton {
 }
 
 class TextClassificationNode extends BasePipelineNode {
+  private cachedInput: string | null = null;
+  private cachedResult: VisualBlocksClassificationResult | null = null;
+
   constructor() {
     super(TextClassificationPipelineSingleton);
   }
@@ -33,6 +39,14 @@ class TextClassificationNode extends BasePipelineNode {
       );
       return;
     }
+    if (this.cachedResult && this.cachedInput === text) {
+      this.dispatchEvent(
+        new CustomEvent("outputs", {
+          detail: { result: this.cachedResult, text: text },
+        })
+      );
+      return;
+    }
     const classifier: TextClassificationPipeline = await this.instance;
 
     const result = await classifier(text, {
@@ -43,14 +57,18 @@ class TextClassificationNode extends BasePipelineNode {
       Array.isArray(result) ? result : [result]
     ) as TextClassificationSingle[];
 
-    const classProb = resultArray.map((e) => ({
-      className: e.label,
-      probability: e.score,
-    }));
+    const classProb: VisualBlocksClassificationResult = {
+      classes: resultArray.map((e) => ({
+        className: e.label,
+        probability: e.score,
+      })),
+    };
+    this.cachedInput = text;
+    this.cachedResult = classProb;
 
     this.dispatchEvent(
       new CustomEvent("outputs", {
-        detail: { result: { classes: classProb }, text: text },
+        detail: { result: classProb, text: text },
       })
     );
   }

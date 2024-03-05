@@ -102,7 +102,18 @@ class TokenClassificationViwerNode extends LitElement {
 
   async runWithInputs(inputs: Inputs) {
     const { tokenClassResult } = inputs;
-    console.log("Token Classification Viewer", tokenClassResult);
+    if (!tokenClassResult) {
+      this.dispatchEvent(
+        new CustomEvent("outputs", {
+          detail: {
+            error: {
+              title: "Error",
+              message: "No input tokens",
+            },
+          },
+        })
+      );
+    }
     const { tokens } = tokenClassResult;
     this.tokens = tokens;
 

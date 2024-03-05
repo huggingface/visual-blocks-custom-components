@@ -43,7 +43,7 @@ export class PipelineSingleton {
 }
 
 export class BasePipelineNode extends LitElement {
-  singleton: any;
+  private singleton: any;
   constructor(singleton: typeof PipelineSingleton) {
     super();
     this.singleton = singleton;
