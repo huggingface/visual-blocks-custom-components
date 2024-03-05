@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "run-p dev:*",
-    "dev:server": "npm run build -- --servedir=dist",
+    "dev:server": "npm run build -- --servedir=dist --serve=8080",
     "dev:tsc": "tsc --watch --preserveWatchOutput",
     "build": "esbuild --bundle ./src/index.ts --outfile=dist/index.js"
   },
