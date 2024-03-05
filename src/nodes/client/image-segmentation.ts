@@ -30,6 +30,9 @@ declare interface Outputs {
 }
 
 class ImageSegmentationNode extends BasePipelineNode {
+  private cachedInput: string | null = null;
+  private cachedResult: ImageSegmentationPipelineOutput[] | null = null;
+
   constructor() {
     super(ImageSegmentationPipelineSingleton);
   }
@@ -45,6 +48,14 @@ class ImageSegmentationNode extends BasePipelineNode {
       return;
     }
 
+    if (this.cachedResult && this.cachedInput === image.canvasId) {
+      this.dispatchEvent(
+        new CustomEvent("outputs", { detail: { segData: this.cachedResult } })
+      );
+      return;
+    }
+    this.cachedInput = image.canvasId;
+
     // Clear masks
     // this.masks.innerHTML = '';
 
@@ -56,6 +67,7 @@ class ImageSegmentationNode extends BasePipelineNode {
 
     // Predict segments
     const output = await segmenter(data);
+    this.cachedResult = output;
 
     const detail: Outputs = { segData: output };
     this.dispatchEvent(new CustomEvent("outputs", { detail: detail }));

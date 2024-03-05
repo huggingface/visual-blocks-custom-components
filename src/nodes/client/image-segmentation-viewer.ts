@@ -38,6 +38,10 @@ declare interface Outputs {
 }
 
 class ImageSegmentationViewerNode extends LitElement {
+  private cachedSegData: ImageSegmentationPipelineOutput[] | null = null;
+  private cachedOutputImage: HTMLCanvasElement | null = null;
+  private cachedInputImage: string | null = null;
+
   canvas: HTMLCanvasElement | null = null;
 
   @property()
@@ -72,6 +76,7 @@ class ImageSegmentationViewerNode extends LitElement {
     </div>`;
   }
   onPointerDown(event: PointerEvent) {
+    if (!this.inputImage) return;
     const canvasEl = this.canvas as HTMLCanvasElement;
     if (this.masks.length === 0) return;
 
@@ -92,6 +97,7 @@ class ImageSegmentationViewerNode extends LitElement {
     const outputImage = {
       canvasId: this.services.resourceService.put(canvas),
     };
+    this.cachedOutputImage = canvas;
     this.dispatchEvent(
       new CustomEvent("outputs", {
         detail: { segData: null, image: outputImage },
@@ -100,7 +106,6 @@ class ImageSegmentationViewerNode extends LitElement {
   }
 
   cutImage(points: { x: number; y: number }[]) {
-    if (!this.inputImage) return;
     const canvas = document.createElement("canvas");
     canvas.width = this.inputImage.width;
     canvas.height = this.inputImage.height;
@@ -243,12 +248,35 @@ class ImageSegmentationViewerNode extends LitElement {
         })
       );
     }
+    if (
+      this.cachedSegData &&
+      this.cachedOutputImage &&
+      this.cachedInputImage === image.canvasId
+    ) {
+      let outputImage = image;
+      if (this.cachedOutputImage) {
+        outputImage = {
+          canvasId: this.services.resourceService.put(this.cachedOutputImage),
+        };
+      }
+
+      this.dispatchEvent(
+        new CustomEvent("outputs", {
+          detail: {
+            segData: this.cachedSegData,
+            image: outputImage,
+          },
+        })
+      );
+      return;
+    }
 
     if (image?.canvasId !== undefined) {
       const imgCanvas = services.resourceService.get(
         image.canvasId
       ) as HTMLCanvasElement;
       this.inputImage = imgCanvas;
+      this.cachedOutputImage = imgCanvas;
     }
     this.canvas = document.createElement("canvas");
     this.masks = segData.map((x, i) => this.renderMask(x, i));
@@ -264,12 +292,9 @@ class ImageSegmentationViewerNode extends LitElement {
     ctx.globalAlpha = 0.6;
     this.masks.forEach((mask) => ctx.drawImage(mask, 0, 0));
     ctx.restore();
-    //  segments
-    // // Render masks
-    // output.forEach((x, i) => this.renderMask(x, i));
 
-    // // TODO improve output
-    // const result = { done: true }
+    this.cachedSegData = segData;
+    this.cachedInputImage = image.canvasId;
 
     this.dispatchEvent(
       new CustomEvent("outputs", {
