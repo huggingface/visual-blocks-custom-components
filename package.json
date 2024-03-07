@@ -1,6 +1,9 @@
 {
   "name": "@huggingface/visual-blocks-custom-components",
-  "repository": "https://github.com/huggingface/visual-blocks-custom-components.git",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/huggingface/visual-blocks-custom-components.git"
+  },
   "description": "Custom Hugging Face components for Visual Blocks",
   "version": "0.0.1",
   "type": "module",
@@ -14,6 +17,8 @@
   "license": "Apache-2.0",
   "author": "Hugging Face",
   "dependencies": {
+    "@huggingface/inference": "^2.6.4",
+    "@huggingface/tasks": "^0.5.2",
     "@visualblocks/custom-node-types": "^0.0.3",
     "@xenova/transformers": "^2.14.0",
     "lit": "^3.1.2",

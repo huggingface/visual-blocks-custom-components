@@ -12,11 +12,23 @@ import TEXT_CLASSIFICATION_NODE from "./nodes/client/text-classification";
 import TEXT2TEXT_GENERATION_NODE from "./nodes/client/translation";
 import OBJECT_DETECTION_GENERATION_NODE from "./nodes/client/object-detection";
 
-// Register custom nodes with visual blocks to start using them.
-visualblocks.registerCustomNode(TOKEN_CLASSIFICATION_NODE);
-visualblocks.registerCustomNode(TOKEN_CLASSIFICATION_VIEWER_NODE);
-visualblocks.registerCustomNode(TEXT_CLASSIFICATION_NODE);
-visualblocks.registerCustomNode(IMAGE_SEGMENTATION_NODE);
-visualblocks.registerCustomNode(IMAGE_SEGMENTATION_VIEWER_NODE);
-visualblocks.registerCustomNode(TEXT2TEXT_GENERATION_NODE);
-visualblocks.registerCustomNode(OBJECT_DETECTION_GENERATION_NODE);
+import TEXT_CLASSIFICATION_SERVER_NODE from "./nodes/server/text-classification";
+
+const client_node = [
+  TOKEN_CLASSIFICATION_NODE,
+  TOKEN_CLASSIFICATION_VIEWER_NODE,
+  IMAGE_SEGMENTATION_NODE,
+  IMAGE_SEGMENTATION_VIEWER_NODE,
+  TEXT_CLASSIFICATION_NODE,
+  TEXT2TEXT_GENERATION_NODE,
+  OBJECT_DETECTION_GENERATION_NODE,
+];
+const server_nodes = [TEXT_CLASSIFICATION_SERVER_NODE];
+
+// Register client nodes custom nodes with visual blocks to start using them.
+client_node.forEach((node) => {
+  visualblocks.registerCustomNode(node);
+});
+server_nodes.forEach((node) => {
+  visualblocks.registerCustomNode(node);
+});
