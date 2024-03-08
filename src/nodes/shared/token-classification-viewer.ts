@@ -1,10 +1,8 @@
 import type { CustomNodeInfo } from "@visualblocks/custom-node-types";
-
-import type { TokenClassificationSingle } from "@xenova/transformers";
-
 import { html, LitElement } from "lit";
 import { property } from "lit/decorators.js";
 import { NODE_SPEC } from "./token-classification-viewer-specs";
+import type { TokenClassificationResult, ProcessedTokens } from "../../types";
 
 const TOKEN_CLASSIFICATION_NODE_STYLE = `
 .container {
@@ -32,15 +30,9 @@ const TOKEN_CLASSIFICATION_NODE_STYLE = `
 }
 `;
 
-interface processedTokens {
-  type: string;
-  text: string;
-}
-
 declare interface Inputs {
   tokenClassResult: {
-    tokens: processedTokens[];
-    results: TokenClassificationSingle[];
+    tokens: TokenClassificationResult;
   };
 }
 
@@ -57,12 +49,15 @@ const NER_TAGS: Record<string, string[]> = {
 
 class TokenClassificationViwerNode extends LitElement {
   @property()
-  tokens: processedTokens[] = [];
+  tokens: TokenClassificationResult = [];
 
   constructor() {
     super();
   }
   render() {
+    if (!this.tokens) {
+      return html`<div class="container">No tokens</div>`;
+    }
     return html`<div class="container">
       <div>
         ${this.processTokens(this.tokens)}
@@ -73,7 +68,7 @@ class TokenClassificationViwerNode extends LitElement {
     </div>`;
   }
 
-  processTokens(tokens: processedTokens[]) {
+  processTokens(tokens: ProcessedTokens[]) {
     const elements = [];
     for (const token of tokens) {
       let elem;
@@ -102,13 +97,12 @@ class TokenClassificationViwerNode extends LitElement {
 
   async runWithInputs(inputs: Inputs) {
     const { tokenClassResult } = inputs;
-    console.log("Token Classification Viewer", tokenClassResult);
-    const { tokens } = tokenClassResult;
-    this.tokens = tokens;
+
+    this.tokens = tokenClassResult.tokens;
 
     this.dispatchEvent(
       new CustomEvent("outputs", {
-        detail: { result: tokenClassResult },
+        detail: { result: this.tokens },
       })
     );
   }

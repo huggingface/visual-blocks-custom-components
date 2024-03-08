@@ -10,16 +10,12 @@ import type {
 } from "@xenova/transformers";
 import { compareObjects } from "../../utils";
 import { NODE_SPEC } from "./token-classification-specs";
+import type { TokenClassificationResult, ProcessedTokens } from "../../types";
 
 declare interface Inputs {
   text: string;
   modelid: string;
   quantized: boolean;
-}
-
-interface processedTokens {
-  type: string;
-  text: string;
 }
 
 class TokenClassificationPipelineSingleton extends PipelineSingleton {
@@ -28,10 +24,7 @@ class TokenClassificationPipelineSingleton extends PipelineSingleton {
 
 class TokenClassificationNode extends BasePipelineNode {
   private cachedInput?: Inputs;
-  private cachedResult?: {
-    tokens: processedTokens[];
-    results: TokenClassificationSingle[];
-  };
+  private cachedResult?: TokenClassificationResult;
 
   constructor() {
     super(TokenClassificationPipelineSingleton);
@@ -40,7 +33,7 @@ class TokenClassificationNode extends BasePipelineNode {
   postProcess(
     tokenizer: PreTrainedTokenizer,
     outputs: TokenClassificationSingle[]
-  ): processedTokens[] {
+  ): ProcessedTokens[] {
     const chunks = [];
     let currentChunk: { type: string; text: number[] } = { type: "", text: [] };
 
@@ -96,14 +89,19 @@ class TokenClassificationNode extends BasePipelineNode {
     if (!text) {
       // No input node
       this.dispatchEvent(
-        new CustomEvent("outputs", { detail: { result: null, text: text } })
+        new CustomEvent("outputs", { detail: { results: null, text: text } })
       );
       return;
     }
     if (this.cachedResult && compareObjects(this.cachedInput, inputs)) {
       this.dispatchEvent(
         new CustomEvent("outputs", {
-          detail: { result: this.cachedResult, text: text },
+          detail: {
+            results: {
+              tokens: this.cachedResult,
+            },
+            text: text,
+          },
         })
       );
       return;
@@ -122,17 +120,13 @@ class TokenClassificationNode extends BasePipelineNode {
 
     const tokens = this.postProcess(classifier.tokenizer, resultArray);
     this.cachedInput = inputs;
-    this.cachedResult = {
-      results: resultArray,
-      tokens: tokens,
-    };
+    this.cachedResult = tokens;
 
     this.dispatchEvent(
       new CustomEvent("outputs", {
         detail: {
-          result: {
+          results: {
             tokens: tokens,
-            results: resultArray,
           },
           text: text,
         },

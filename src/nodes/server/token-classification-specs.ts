@@ -1,4 +1,4 @@
-import { COLLECTION_NAME_CLIENT } from "../../constants";
+import { COLLECTION_NAME_SERVER } from "../../constants";
 import { CustomDataTypeEnum } from "../../types";
 import type { NodeSpec } from "@visualblocks/custom-node-types";
 import {
@@ -7,15 +7,14 @@ import {
   EditorType,
 } from "@visualblocks/custom-node-types";
 
-const DEFAULT_MODEL_ID = "Xenova/bert-base-multilingual-cased-ner-hrl";
+const DEFAULT_MODEL_ID = "dslim/bert-base-NER";
 
 export const NODE_SPEC: NodeSpec = {
-  id: "hf-client-token-classification",
+  id: "hf-server-token-classification",
   name: "Token Classification",
   description: "TODO",
   category: Category.PROCESSOR,
-  collection: COLLECTION_NAME_CLIENT,
-
+  collection: COLLECTION_NAME_SERVER,
   // Inputs.
   inputSpecs: [
     {
@@ -28,20 +27,19 @@ export const NODE_SPEC: NodeSpec = {
     {
       name: "modelid",
       displayLabel: "Model ID",
-      info: "Transformer.js Image Segmentation model ID",
-      defaultValue: DEFAULT_MODEL_ID,
       type: DataType.STRING,
+      defaultValue: DEFAULT_MODEL_ID,
       editorSpec: {
         type: EditorType.TEXT_INPUT,
       },
     },
     {
-      name: "quantized",
-      displayLabel: "Quantized Model",
-      defaultValue: true,
-      type: DataType.BOOLEAN,
+      name: "apikey",
+      displayLabel: "API Key",
+      type: DataType.STRING,
       editorSpec: {
-        type: EditorType.SLIDE_TOGGLE,
+        type: EditorType.TEXT_INPUT,
+        password: true,
       },
     },
   ],
