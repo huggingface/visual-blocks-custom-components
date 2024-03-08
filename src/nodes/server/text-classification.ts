@@ -56,7 +56,7 @@ class TextClassificationNode extends LitElement {
 
     try {
       const textClassRes = await this.hf?.textClassification({
-        model: modelid || DEFAULT_MODEL_ID,
+        model: modelid.trim() || DEFAULT_MODEL_ID,
         inputs: text,
       });
       if (!textClassRes) {
