@@ -2,7 +2,7 @@ import { HfInference } from "@huggingface/inference";
 import { NODE_SPEC } from "./token-classification-specs";
 import { LitElement } from "lit";
 import { compareObjects } from "../../utils";
-import type { TokenClassificationResult, ProcessedTokens } from "../../types";
+import type { TokenClassificationResult } from "../../types";
 
 declare interface Inputs {
   text: string;
@@ -10,7 +10,7 @@ declare interface Inputs {
   apikey: string;
 }
 
-class TokenClassificationNode extends LitElement {
+class TokenClassificationServerNode extends LitElement {
   private cachedInputs?: Inputs;
   private cachedResult?: TokenClassificationResult;
   private hf?: HfInference;
@@ -31,7 +31,7 @@ class TokenClassificationNode extends LitElement {
 
     if (!text) {
       this.dispatchEvent(
-        new CustomEvent("outputs", { detail: { result: null } })
+        new CustomEvent("outputs", { detail: { results: null, text: text } })
       );
       return;
     }
@@ -96,4 +96,4 @@ class TokenClassificationNode extends LitElement {
   }
 }
 
-export default { nodeSpec: NODE_SPEC, nodeImpl: TokenClassificationNode };
+export default { nodeSpec: NODE_SPEC, nodeImpl: TokenClassificationServerNode };

@@ -10,7 +10,7 @@ declare interface Inputs {
   apikey: string;
 }
 interface Outputs {
-  result: VisualBlocksClassificationResult;
+  results: VisualBlocksClassificationResult;
 }
 
 class TextClassificationNode extends LitElement {
@@ -35,7 +35,7 @@ class TextClassificationNode extends LitElement {
 
     if (!text) {
       this.dispatchEvent(
-        new CustomEvent("outputs", { detail: { result: null } })
+        new CustomEvent("outputs", { detail: { results: null } })
       );
       return;
     }
@@ -62,7 +62,7 @@ class TextClassificationNode extends LitElement {
       }));
 
       const output: Outputs = {
-        result: { classes: result },
+        results: { classes: result },
       };
       this.cachedOutput = output;
       this.cachedInputs = inputs;

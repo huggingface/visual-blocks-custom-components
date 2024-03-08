@@ -51,7 +51,7 @@ export const NODE_SPEC: NodeSpec = {
       type: CustomDataTypeEnum.TOKEN_CLASSIFICATION_RESULT,
       recommendedNodes: [
         {
-          nodeSpecId: "hf-client-token-classification-viewer",
+          nodeSpecId: "hf-token-classification-viewer",
         },
       ],
     },

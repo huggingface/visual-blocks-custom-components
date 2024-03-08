@@ -35,7 +35,7 @@ class Text2TextGenerationNode extends BasePipelineNode {
     if (!text) {
       // No input node
       this.dispatchEvent(
-        new CustomEvent("outputs", { detail: { result: null } })
+        new CustomEvent("outputs", { detail: { results: null } })
       );
       return;
     }
@@ -62,7 +62,7 @@ class Text2TextGenerationNode extends BasePipelineNode {
 
     this.dispatchEvent(
       new CustomEvent("outputs", {
-        detail: { result: resultSingle.generated_text, text: text },
+        detail: { results: resultSingle.generated_text, text: text },
       })
     );
   }

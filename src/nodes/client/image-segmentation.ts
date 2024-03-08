@@ -47,7 +47,7 @@ class ImageSegmentationNode extends BasePipelineNode {
     if (!image?.canvasId) {
       // No input node
       this.dispatchEvent(
-        new CustomEvent("outputs", { detail: { result: null } })
+        new CustomEvent("outputs", { detail: { segData: null } })
       );
       return;
     }

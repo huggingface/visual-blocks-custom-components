@@ -112,7 +112,7 @@ export const NODE_SPEC: NodeSpec = {
   // Outputs.
   outputSpecs: [
     {
-      name: "result",
+      name: "results",
       type: DataType.STRING,
       recommendedNodes: [
         {

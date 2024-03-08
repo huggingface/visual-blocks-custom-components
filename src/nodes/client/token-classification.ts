@@ -22,7 +22,7 @@ class TokenClassificationPipelineSingleton extends PipelineSingleton {
   static task = "token-classification";
 }
 
-class TokenClassificationNode extends BasePipelineNode {
+class TokenClassificationClientNode extends BasePipelineNode {
   private cachedInput?: Inputs;
   private cachedResult?: TokenClassificationResult;
 
@@ -137,5 +137,5 @@ class TokenClassificationNode extends BasePipelineNode {
 
 export default {
   nodeSpec: NODE_SPEC,
-  nodeImpl: TokenClassificationNode,
+  nodeImpl: TokenClassificationClientNode,
 } as CustomNodeInfo;

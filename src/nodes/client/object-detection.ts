@@ -40,7 +40,7 @@ class ObjectDetectionNode extends BasePipelineNode {
     if (!image?.canvasId) {
       // No input node
       this.dispatchEvent(
-        new CustomEvent("outputs", { detail: { result: null } })
+        new CustomEvent("outputs", { detail: { results: null } })
       );
       return;
     }

@@ -36,10 +36,6 @@ declare interface Inputs {
   };
 }
 
-declare interface Outputs {
-  result: any;
-}
-
 const NER_TAGS: Record<string, string[]> = {
   // tag: [textColour, backgroundColour, tagColour]
   ORG: ["#115E59", "#CCFBF1", "#14B8A6"],
@@ -102,7 +98,7 @@ class TokenClassificationViwerNode extends LitElement {
 
     this.dispatchEvent(
       new CustomEvent("outputs", {
-        detail: { result: this.tokens },
+        detail: { results: this.tokens },
       })
     );
   }

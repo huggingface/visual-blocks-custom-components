@@ -36,7 +36,7 @@ class TextClassificationNode extends BasePipelineNode {
     if (!text) {
       // No input node
       this.dispatchEvent(
-        new CustomEvent("outputs", { detail: { result: null, text: text } })
+        new CustomEvent("outputs", { detail: { results: null, text: text } })
       );
       return;
     }
@@ -44,7 +44,7 @@ class TextClassificationNode extends BasePipelineNode {
     if (this.cachedResult && compareObjects(this.cachedInput, inputs)) {
       this.dispatchEvent(
         new CustomEvent("outputs", {
-          detail: { result: this.cachedResult, text: text },
+          detail: { results: this.cachedResult, text: text },
         })
       );
       return;
@@ -72,7 +72,7 @@ class TextClassificationNode extends BasePipelineNode {
 
     this.dispatchEvent(
       new CustomEvent("outputs", {
-        detail: { result: { classes: classProb }, text: text },
+        detail: { results: { classes: classProb }, text: text },
       })
     );
   }

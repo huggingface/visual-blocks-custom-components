@@ -15,7 +15,7 @@ interface Inputs {
 }
 
 interface Outputs {
-  result: string;
+  results: string;
 }
 
 class TextToImageNode extends LitElement {
@@ -49,7 +49,7 @@ class TextToImageNode extends LitElement {
 
     if (!prompt) {
       this.dispatchEvent(
-        new CustomEvent("outputs", { detail: { result: null } })
+        new CustomEvent("outputs", { detail: { results: null } })
       );
       return;
     }
@@ -87,12 +87,12 @@ class TextToImageNode extends LitElement {
         /data:image\/png;base64,|data:image\/jpeg;base64,/g,
         ""
       );
-      this.cachedOutput = { result: output };
+      this.cachedOutput = { results: output };
       this.cachedInputs = inputs;
 
       this.dispatchEvent(
         new CustomEvent("outputs", {
-          detail: { result: output },
+          detail: { results: output },
         })
       );
     } catch (error: any) {
