@@ -294,7 +294,7 @@ class ImageSegmentationViewerNode extends LitElement {
     ctx.restore();
 
     this.cachedSegData = segData;
-    this.cachedInputImage = image.canvasId;
+    this.cachedInputImage = image?.canvasId;
 
     this.dispatchEvent(
       new CustomEvent("outputs", {
