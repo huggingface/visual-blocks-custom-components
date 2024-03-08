@@ -1,4 +1,4 @@
-import { COLLECTION_NAME } from "../../constants";
+import { COLLECTION_NAME_SERVER } from "../../constants";
 import type { NodeSpec } from "@visualblocks/custom-node-types";
 import {
   DataType,
@@ -13,7 +13,7 @@ export const NODE_SPEC: NodeSpec = {
     "Authenticate with Hugging Face Hub to easily access your API key and get better rate limits.",
 
   category: Category.INPUT,
-  collection: COLLECTION_NAME,
+  collection: COLLECTION_NAME_SERVER,
 
   propertySpecs: [
     {

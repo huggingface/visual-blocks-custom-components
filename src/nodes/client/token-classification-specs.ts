@@ -1,4 +1,4 @@
-import { COLLECTION_NAME } from "../../constants";
+import { COLLECTION_NAME_CLIENT } from "../../constants";
 import { CustomDataTypeEnum } from "../../types";
 import type { NodeSpec } from "@visualblocks/custom-node-types";
 import {
@@ -11,10 +11,10 @@ const DEFAULT_MODEL_ID = "Xenova/bert-base-multilingual-cased-ner-hrl";
 
 export const NODE_SPEC: NodeSpec = {
   id: "hf-client-token-classification",
-  name: "Token Classification (client)",
+  name: "Token Classification",
   description: "TODO",
   category: Category.PROCESSOR,
-  collection: COLLECTION_NAME,
+  collection: COLLECTION_NAME_CLIENT,
 
   // Inputs.
   inputSpecs: [

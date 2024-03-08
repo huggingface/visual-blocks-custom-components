@@ -1,4 +1,4 @@
-import { COLLECTION_NAME } from "../../constants";
+import { COLLECTION_NAME_CLIENT } from "../../constants";
 import type { NodeSpec } from "@visualblocks/custom-node-types";
 import {
   DataType,
@@ -11,11 +11,11 @@ const DEFAULT_MODEL_ID =
 
 export const NODE_SPEC: NodeSpec = {
   id: "hf-client-transformers-text-classification",
-  name: "Text Classification (client)",
+  name: "Text Classification",
   description: "TODO",
 
   category: Category.PROCESSOR,
-  collection: COLLECTION_NAME,
+  collection: COLLECTION_NAME_CLIENT,
 
   // Properties.
   propertySpecs: [],

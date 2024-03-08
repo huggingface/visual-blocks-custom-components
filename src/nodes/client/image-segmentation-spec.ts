@@ -1,4 +1,4 @@
-import { COLLECTION_NAME } from "../../constants";
+import { COLLECTION_NAME_CLIENT } from "../../constants";
 import { CustomDataTypeEnum } from "../../types";
 import {
   DataType,
@@ -10,11 +10,11 @@ import type { NodeSpec } from "@visualblocks/custom-node-types";
 const DEFAULT_MODEL_ID = "Xenova/segformer_b0_clothes";
 export const NODE_SPEC: NodeSpec = {
   id: "hf-client-transformers-image-segmentation",
-  name: "Image segmentation (client)",
+  name: "Image segmentation",
   description: "TODO",
 
   category: Category.PROCESSOR,
-  collection: COLLECTION_NAME,
+  collection: COLLECTION_NAME_CLIENT,
 
   // Properties.
   propertySpecs: [],

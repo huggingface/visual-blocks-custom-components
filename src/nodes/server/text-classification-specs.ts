@@ -1,4 +1,4 @@
-import { COLLECTION_NAME } from "../../constants";
+import { COLLECTION_NAME_SERVER } from "../../constants";
 import type { NodeSpec } from "@visualblocks/custom-node-types";
 import {
   DataType,
@@ -8,11 +8,11 @@ import {
 
 export const NODE_SPEC: NodeSpec = {
   id: "hf-server-transformers-text-classification",
-  name: "Text Classification (server)",
+  name: "Text Classification",
   description: "TODO",
 
   category: Category.PROCESSOR,
-  collection: COLLECTION_NAME,
+  collection: COLLECTION_NAME_SERVER,
 
   // Properties.
   propertySpecs: [],

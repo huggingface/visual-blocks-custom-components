@@ -1,4 +1,4 @@
-import { COLLECTION_NAME } from "../../constants";
+import { COLLECTION_NAME_SHARED } from "../../constants";
 import { CustomDataTypeEnum } from "../../types";
 import { DataType, Category } from "@visualblocks/custom-node-types";
 import type { NodeSpec } from "@visualblocks/custom-node-types";
@@ -10,7 +10,7 @@ export const NODE_SPEC: NodeSpec = {
     "View the image segmentation result. Click on the image to see the segmentation mask to select segments, CMD/CTRL + click to clear selection.",
 
   category: Category.OUTPUT,
-  collection: COLLECTION_NAME,
+  collection: COLLECTION_NAME_SHARED,
 
   // Properties.
   propertySpecs: [],

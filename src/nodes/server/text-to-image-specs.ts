@@ -1,4 +1,4 @@
-import { COLLECTION_NAME } from "../../constants";
+import { COLLECTION_NAME_SERVER } from "../../constants";
 import type { NodeSpec } from "@visualblocks/custom-node-types";
 import {
   DataType,
@@ -10,11 +10,11 @@ const DEFAULT_MODEL_ID = "stabilityai/stable-diffusion-xl-base-1.0";
 
 export const NODE_SPEC: NodeSpec = {
   id: "hf-server-text-to-image",
-  name: "Text to Image (server)",
+  name: "Text to Image",
   description: "TODO",
 
   category: Category.PROCESSOR,
-  collection: COLLECTION_NAME,
+  collection: COLLECTION_NAME_SERVER,
 
   // Properties.
   propertySpecs: [],

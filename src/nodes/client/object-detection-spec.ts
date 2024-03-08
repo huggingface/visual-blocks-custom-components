@@ -1,4 +1,4 @@
-import { COLLECTION_NAME } from "../../constants";
+import { COLLECTION_NAME_CLIENT } from "../../constants";
 import {
   DataType,
   Category,
@@ -10,11 +10,11 @@ const DEFAULT_MODEL_ID = "Xenova/detr-resnet-50";
 
 export const NODE_SPEC: NodeSpec = {
   id: "hf-client-transformers-object-detection",
-  name: "Object detection (client)",
+  name: "Object detection",
   description: "TODO",
 
   category: Category.PROCESSOR,
-  collection: COLLECTION_NAME,
+  collection: COLLECTION_NAME_CLIENT,
 
   // Properties.
   propertySpecs: [],

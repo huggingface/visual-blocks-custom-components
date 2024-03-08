@@ -1,4 +1,4 @@
-import { COLLECTION_NAME } from "../../constants";
+import { COLLECTION_NAME_SHARED } from "../../constants";
 import { CustomDataTypeEnum } from "../../types";
 import type { NodeSpec } from "@visualblocks/custom-node-types";
 import { DataType, Category } from "@visualblocks/custom-node-types";
@@ -8,7 +8,7 @@ export const NODE_SPEC: NodeSpec = {
   name: "Token Classification Viewer",
   description: "TODO",
   category: Category.OUTPUT,
-  collection: COLLECTION_NAME,
+  collection: COLLECTION_NAME_SHARED,
 
   // Inputs.
   inputSpecs: [
