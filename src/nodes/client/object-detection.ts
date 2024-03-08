@@ -2,6 +2,7 @@ import type {
   CustomNodeInfo,
   Services,
   VisualBlocksImage,
+  VisualBlocksObjectDetectionResult,
 } from "@visualblocks/custom-node-types";
 
 import type {
@@ -14,26 +15,28 @@ import {
   BasePipelineNode,
 } from "../../backends/client/base";
 
-import { NODE_SPEC } from "../specs/object-detection-spec";
+import { NODE_SPEC } from "./object-detection-spec";
+import { compareObjects } from "../../utils";
 
 declare interface Inputs {
   image: VisualBlocksImage;
+  modelid: string;
+  quantized: boolean;
 }
 
 class ObjectDetectionPipelineSingleton extends PipelineSingleton {
   static task = "object-detection";
-  static modelId = "Xenova/detr-resnet-50";
-  static quantized = true;
 }
 
 class ObjectDetectionNode extends BasePipelineNode {
+  private cachedInput?: Inputs;
+  private cachedResult?: VisualBlocksObjectDetectionResult;
   constructor() {
     super(ObjectDetectionPipelineSingleton);
   }
 
   async runWithInputs(inputs: Inputs, services: Services) {
-    const { image } = inputs;
-    console.log("RUUUNing object detection", image);
+    const { image, modelid, quantized } = inputs;
     if (!image?.canvasId) {
       // No input node
       this.dispatchEvent(
@@ -41,12 +44,23 @@ class ObjectDetectionNode extends BasePipelineNode {
       );
       return;
     }
+
+    if (this.cachedResult && compareObjects(this.cachedInput, inputs)) {
+      this.dispatchEvent(
+        new CustomEvent("outputs", { detail: { results: this.cachedResult } })
+      );
+      return;
+    }
+
     const canvas = services.resourceService.get(
       image.canvasId
     ) as HTMLCanvasElement;
     const data = canvas.toDataURL();
 
-    const detector: ObjectDetectionPipeline = await this.instance;
+    const detector: ObjectDetectionPipeline = await this.getInstance(
+      modelid,
+      quantized
+    );
 
     // Predict segments
     const result = await detector(data, {
@@ -71,9 +85,11 @@ class ObjectDetectionNode extends BasePipelineNode {
         },
       };
     });
+    this.cachedInput = inputs;
+    this.cachedResult = { results: outputVB };
 
     this.dispatchEvent(
-      new CustomEvent("outputs", { detail: { results: { results: outputVB } } })
+      new CustomEvent("outputs", { detail: { results: this.cachedResult } })
     );
   }
 }

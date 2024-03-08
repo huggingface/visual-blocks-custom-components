@@ -14,31 +14,26 @@ env.backends.onnx.wasm.proxy = true;
  */
 export class PipelineSingleton {
   static task?: any;
-  static modelId?: string;
-  static quantized = true;
 
-  static instance: Promise<Pipeline>;
+  static instance: { [key: string]: Promise<Pipeline> } = {};
 
-  static async getInstance() {
-    if (!this.task || !this.modelId) {
+  static async getInstance(modelId: string, quantized: boolean) {
+    if (!this.task) {
       throw new Error("Invalid class configuration");
     }
-    if (!this.instance) {
+    if (!(modelId in this.instance)) {
       console.info(
         "Creating pipeline instance. Model not loaded yet, modelId:",
-        this.modelId
+        modelId
       );
-      this.instance = pipeline(this.task, this.modelId, {
-        quantized: this.quantized,
+      this.instance[modelId] = pipeline(this.task, modelId, {
+        quantized: quantized,
       });
       // TODO: use progress callback
     } else {
-      console.info(
-        "Pipeline instance already created for modelId:",
-        this.modelId
-      );
+      console.info("Pipeline instance already created for modelId:", modelId);
     }
-    return this.instance;
+    return this.instance[modelId];
   }
 }
 
@@ -49,8 +44,8 @@ export class BasePipelineNode extends LitElement {
     this.singleton = singleton;
   }
 
-  get instance() {
-    return this.singleton.getInstance();
+  getInstance(modelId: string, quantized: boolean) {
+    return this.singleton.getInstance(modelId, quantized);
   }
 
   async runWithInputs(inputs?: {}, services?: Services) {

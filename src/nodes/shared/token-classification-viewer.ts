@@ -4,7 +4,7 @@ import type { TokenClassificationSingle } from "@xenova/transformers";
 
 import { html, LitElement } from "lit";
 import { property } from "lit/decorators.js";
-import { NODE_SPEC } from "../specs/token-classification-viewer-specs";
+import { NODE_SPEC } from "./token-classification-viewer-specs";
 
 const TOKEN_CLASSIFICATION_NODE_STYLE = `
 .container {

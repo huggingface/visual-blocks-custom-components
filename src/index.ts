@@ -2,10 +2,11 @@
  * Registry containing the definitions of the custom components.
  */
 
+import TOKEN_CLASSIFICATION_VIEWER_NODE from "./nodes/shared/token-classification-viewer";
+import IMAGE_SEGMENTATION_VIEWER_NODE from "./nodes/shared/image-segmentation-viewer";
+
 import TOKEN_CLASSIFICATION_NODE from "./nodes/client/token-classification";
-import TOKEN_CLASSIFICATION_VIEWER_NODE from "./nodes/client/token-classification-viewer";
 import IMAGE_SEGMENTATION_NODE from "./nodes/client/image-segmentation";
-import IMAGE_SEGMENTATION_VIEWER_NODE from "./nodes/client/image-segmentation-viewer";
 import TEXT_CLASSIFICATION_NODE from "./nodes/client/text-classification";
 import TEXT2TEXT_GENERATION_NODE from "./nodes/client/translation";
 import OBJECT_DETECTION_GENERATION_NODE from "./nodes/client/object-detection";

@@ -9,7 +9,7 @@ import type { ImageSegmentationPipelineOutput } from "@xenova/transformers";
 import { html, LitElement } from "lit";
 import { property } from "lit/decorators.js";
 import { clamp } from "../../utils";
-import { NODE_SPEC } from "../specs/image-segmentation-viewer-spec";
+import { NODE_SPEC } from "./image-segmentation-viewer-spec";
 import { COLORS } from "../../constants";
 
 const IMAGE_SEGMENTATION_NODE_STYLE = `
@@ -236,7 +236,7 @@ class ImageSegmentationViewerNode extends LitElement {
     const { segData, image } = inputs;
 
     this.services = services;
-    if (segData.length <= 0) {
+    if (segData === undefined || segData?.length === 0) {
       this.dispatchEvent(
         new CustomEvent("outputs", {
           detail: {

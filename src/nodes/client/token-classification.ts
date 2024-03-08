@@ -8,11 +8,13 @@ import type {
   TokenClassificationSingle,
   PreTrainedTokenizer,
 } from "@xenova/transformers";
-
-import { NODE_SPEC } from "../specs/token-classification-specs";
+import { compareObjects } from "../../utils";
+import { NODE_SPEC } from "./token-classification-specs";
 
 declare interface Inputs {
   text: string;
+  modelid: string;
+  quantized: boolean;
 }
 
 interface processedTokens {
@@ -22,11 +24,15 @@ interface processedTokens {
 
 class TokenClassificationPipelineSingleton extends PipelineSingleton {
   static task = "token-classification";
-  static modelId = "Xenova/bert-base-multilingual-cased-ner-hrl";
-  static quantized = true;
 }
 
 class TokenClassificationNode extends BasePipelineNode {
+  private cachedInput?: Inputs;
+  private cachedResult?: {
+    tokens: processedTokens[];
+    results: TokenClassificationSingle[];
+  };
+
   constructor() {
     super(TokenClassificationPipelineSingleton);
   }
@@ -86,7 +92,7 @@ class TokenClassificationNode extends BasePipelineNode {
   }
 
   async runWithInputs(inputs: Inputs) {
-    const { text } = inputs;
+    const { text, modelid, quantized } = inputs;
     if (!text) {
       // No input node
       this.dispatchEvent(
@@ -94,7 +100,18 @@ class TokenClassificationNode extends BasePipelineNode {
       );
       return;
     }
-    const classifier: TokenClassificationPipeline = await this.instance;
+    if (this.cachedResult && compareObjects(this.cachedInput, inputs)) {
+      this.dispatchEvent(
+        new CustomEvent("outputs", {
+          detail: { result: this.cachedResult, text: text },
+        })
+      );
+      return;
+    }
+    const classifier: TokenClassificationPipeline = await this.getInstance(
+      modelid,
+      quantized
+    );
 
     const result = await classifier(text, {
       ignore_labels: [], // Return all labels
@@ -104,6 +121,11 @@ class TokenClassificationNode extends BasePipelineNode {
     ) as TokenClassificationSingle[];
 
     const tokens = this.postProcess(classifier.tokenizer, resultArray);
+    this.cachedInput = inputs;
+    this.cachedResult = {
+      results: resultArray,
+      tokens: tokens,
+    };
 
     this.dispatchEvent(
       new CustomEvent("outputs", {
