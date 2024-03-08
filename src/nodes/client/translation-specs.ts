@@ -6,7 +6,8 @@ import {
   EditorType,
 } from "@visualblocks/custom-node-types";
 
-const DEFAULT_MODEL_ID = "Xenova/LaMini-Flan-T5-783M";
+// const DEFAULT_MODEL_ID = "Xenova/LaMini-Flan-T5-783M";
+const DEFAULT_MODEL_ID = "Xenova/LaMini-Flan-T5-77M";
 
 export const NODE_SPEC: NodeSpec = {
   id: "hf-client-transformers-translation",
