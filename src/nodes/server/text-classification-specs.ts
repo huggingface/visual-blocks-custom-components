@@ -6,6 +6,8 @@ import {
   EditorType,
 } from "@visualblocks/custom-node-types";
 
+const DEFAULT_MODEL_ID = "cardiffnlp/twitter-roberta-base-sentiment-latest";
+
 export const NODE_SPEC: NodeSpec = {
   id: "hf-server-transformers-text-classification",
   name: "Text Classification",
@@ -30,6 +32,7 @@ export const NODE_SPEC: NodeSpec = {
       name: "modelid",
       displayLabel: "Model ID",
       type: DataType.STRING,
+      defaultValue: DEFAULT_MODEL_ID,
       editorSpec: {
         type: EditorType.TEXT_INPUT,
       },

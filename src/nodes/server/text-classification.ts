@@ -2,6 +2,7 @@ import type { VisualBlocksClassificationResult } from "@visualblocks/custom-node
 import { HfInference } from "@huggingface/inference";
 import { NODE_SPEC } from "./text-classification-specs";
 import { LitElement } from "lit";
+import { compareObjects } from "../../utils";
 
 declare interface Inputs {
   text: string;
@@ -11,12 +12,9 @@ declare interface Inputs {
 interface Outputs {
   result: VisualBlocksClassificationResult;
 }
-const DEFAULT_MODEL_ID = "cardiffnlp/twitter-roberta-base-sentiment-latest";
 
 class TextClassificationNode extends LitElement {
-  private cachedApikey?: string;
-  private cachedInput?: string;
-  private cachedModelId?: string;
+  private cachedInputs?: Inputs;
   private cachedOutput?: Outputs;
   private hf?: HfInference;
 
@@ -42,12 +40,7 @@ class TextClassificationNode extends LitElement {
       return;
     }
 
-    if (
-      this.cachedOutput &&
-      this.cachedInput === text &&
-      this.cachedModelId === modelid &&
-      this.cachedApikey === apikey
-    ) {
+    if (this.cachedOutput && compareObjects(this.cachedInputs, inputs)) {
       this.dispatchEvent(
         new CustomEvent("outputs", { detail: this.cachedOutput })
       );
@@ -56,7 +49,7 @@ class TextClassificationNode extends LitElement {
 
     try {
       const textClassRes = await this.hf?.textClassification({
-        model: modelid.trim() || DEFAULT_MODEL_ID,
+        model: modelid.trim(),
         inputs: text,
       });
       if (!textClassRes) {
@@ -72,9 +65,7 @@ class TextClassificationNode extends LitElement {
         result: { classes: result },
       };
       this.cachedOutput = output;
-      this.cachedInput = text;
-      this.cachedModelId = modelid;
-      this.cachedApikey = apikey;
+      this.cachedInputs = inputs;
 
       this.dispatchEvent(new CustomEvent("outputs", { detail: output }));
     } catch (error: any) {
