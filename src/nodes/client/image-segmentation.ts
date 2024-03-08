@@ -13,25 +13,29 @@ import {
   PipelineSingleton,
   BasePipelineNode,
 } from "../../backends/client/base";
+// import { compareObjects } from "../../utils";
 
-import { NODE_SPEC } from "../specs/image-segmentation-spec";
+import { NODE_SPEC } from "./image-segmentation-spec";
+import { compareObjects } from "../../utils";
 
 class ImageSegmentationPipelineSingleton extends PipelineSingleton {
   static task = "image-segmentation";
-  static modelId = "Xenova/face-parsing";
-  static quantized = true;
+  static modelId = "Xenova/segformer_b0_clothes";
+  static quantized = false;
 }
 
 declare interface Inputs {
   image: VisualBlocksImage;
+  quantized: boolean;
+  modelid: string;
 }
 declare interface Outputs {
   segData: ImageSegmentationPipelineOutput[];
 }
 
 class ImageSegmentationNode extends BasePipelineNode {
-  private cachedInput: string | null = null;
-  private cachedResult: ImageSegmentationPipelineOutput[] | null = null;
+  private cachedInput?: Inputs;
+  private cachedResult?: ImageSegmentationPipelineOutput[];
 
   constructor() {
     super(ImageSegmentationPipelineSingleton);
@@ -39,7 +43,7 @@ class ImageSegmentationNode extends BasePipelineNode {
   render() {}
 
   async runWithInputs(inputs: Inputs, services: Services) {
-    const { image } = inputs;
+    const { image, modelid, quantized } = inputs;
     if (!image?.canvasId) {
       // No input node
       this.dispatchEvent(
@@ -48,13 +52,13 @@ class ImageSegmentationNode extends BasePipelineNode {
       return;
     }
 
-    if (this.cachedResult && this.cachedInput === image.canvasId) {
+    if (this.cachedResult && compareObjects(this.cachedInput, inputs)) {
       this.dispatchEvent(
         new CustomEvent("outputs", { detail: { segData: this.cachedResult } })
       );
       return;
     }
-    this.cachedInput = image.canvasId;
+    this.cachedInput = inputs;
 
     // Clear masks
     // this.masks.innerHTML = '';
@@ -63,7 +67,10 @@ class ImageSegmentationNode extends BasePipelineNode {
       image.canvasId
     ) as HTMLCanvasElement;
     const data = canvas.toDataURL();
-    const segmenter: ImageSegmentationPipeline = await this.instance;
+    const segmenter: ImageSegmentationPipeline = await this.getInstance(
+      modelid,
+      quantized
+    );
 
     // Predict segments
     const output = await segmenter(data);

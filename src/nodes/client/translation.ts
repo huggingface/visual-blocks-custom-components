@@ -6,28 +6,32 @@ import type { CustomNodeInfo } from "@visualblocks/custom-node-types";
 import {
   PipelineSingleton,
   BasePipelineNode,
-} from "../../backends/client/base.js";
+} from "../../backends/client/base";
+import { compareObjects } from "../../utils";
 
-import { NODE_SPEC } from "../specs/translation-specs";
+import { NODE_SPEC } from "./translation-specs";
 
 class Text2TextPipelineSingleton extends PipelineSingleton {
   static task = "text2text-generation";
-  static modelId = "Xenova/LaMini-Flan-T5-783M";
-  static quantized = true;
 }
 
 declare interface Inputs {
   text: string;
   language: string;
+  modelid: string;
+  quantized: boolean;
 }
 
 class Text2TextGenerationNode extends BasePipelineNode {
+  private cachedInput?: Inputs;
+  private cachedResult?: Text2TextGenerationSingle;
+
   constructor() {
     super(Text2TextPipelineSingleton);
   }
 
   async runWithInputs(inputs: Inputs) {
-    const { text, language } = inputs;
+    const { text, language, modelid, quantized } = inputs;
     if (!text) {
       // No input node
       this.dispatchEvent(
@@ -35,7 +39,16 @@ class Text2TextGenerationNode extends BasePipelineNode {
       );
       return;
     }
-    const translator: Text2TextGenerationPipeline = await this.instance;
+    if (this.cachedResult && compareObjects(this.cachedInput, inputs)) {
+      this.dispatchEvent(
+        new CustomEvent("outputs", { detail: this.cachedResult.generated_text })
+      );
+      return;
+    }
+    const translator: Text2TextGenerationPipeline = await this.getInstance(
+      modelid,
+      quantized
+    );
 
     const prompt = `translate English to ${language}: ${text}`;
     // TODO: Live updates to UI, then dispatch final result at end
@@ -44,6 +57,9 @@ class Text2TextGenerationNode extends BasePipelineNode {
       Array.isArray(result) ? result[0] : result
     ) as Text2TextGenerationSingle;
     // Output.
+    this.cachedInput = inputs;
+    this.cachedResult = resultSingle;
+
     this.dispatchEvent(
       new CustomEvent("outputs", {
         detail: { result: resultSingle.generated_text, text: text },

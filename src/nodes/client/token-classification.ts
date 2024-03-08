@@ -8,25 +8,24 @@ import type {
   TokenClassificationSingle,
   PreTrainedTokenizer,
 } from "@xenova/transformers";
-
-import { NODE_SPEC } from "../specs/token-classification-specs";
+import { compareObjects } from "../../utils";
+import { NODE_SPEC } from "./token-classification-specs";
+import type { TokenClassificationResult, ProcessedTokens } from "../../types";
 
 declare interface Inputs {
   text: string;
-}
-
-interface processedTokens {
-  type: string;
-  text: string;
+  modelid: string;
+  quantized: boolean;
 }
 
 class TokenClassificationPipelineSingleton extends PipelineSingleton {
   static task = "token-classification";
-  static modelId = "Xenova/bert-base-multilingual-cased-ner-hrl";
-  static quantized = true;
 }
 
 class TokenClassificationNode extends BasePipelineNode {
+  private cachedInput?: Inputs;
+  private cachedResult?: TokenClassificationResult;
+
   constructor() {
     super(TokenClassificationPipelineSingleton);
   }
@@ -34,7 +33,7 @@ class TokenClassificationNode extends BasePipelineNode {
   postProcess(
     tokenizer: PreTrainedTokenizer,
     outputs: TokenClassificationSingle[]
-  ): processedTokens[] {
+  ): ProcessedTokens[] {
     const chunks = [];
     let currentChunk: { type: string; text: number[] } = { type: "", text: [] };
 
@@ -86,15 +85,31 @@ class TokenClassificationNode extends BasePipelineNode {
   }
 
   async runWithInputs(inputs: Inputs) {
-    const { text } = inputs;
+    const { text, modelid, quantized } = inputs;
     if (!text) {
       // No input node
       this.dispatchEvent(
-        new CustomEvent("outputs", { detail: { result: null, text: text } })
+        new CustomEvent("outputs", { detail: { results: null, text: text } })
       );
       return;
     }
-    const classifier: TokenClassificationPipeline = await this.instance;
+    if (this.cachedResult && compareObjects(this.cachedInput, inputs)) {
+      this.dispatchEvent(
+        new CustomEvent("outputs", {
+          detail: {
+            results: {
+              tokens: this.cachedResult,
+            },
+            text: text,
+          },
+        })
+      );
+      return;
+    }
+    const classifier: TokenClassificationPipeline = await this.getInstance(
+      modelid,
+      quantized
+    );
 
     const result = await classifier(text, {
       ignore_labels: [], // Return all labels
@@ -104,13 +119,14 @@ class TokenClassificationNode extends BasePipelineNode {
     ) as TokenClassificationSingle[];
 
     const tokens = this.postProcess(classifier.tokenizer, resultArray);
+    this.cachedInput = inputs;
+    this.cachedResult = tokens;
 
     this.dispatchEvent(
       new CustomEvent("outputs", {
         detail: {
-          result: {
+          results: {
             tokens: tokens,
-            results: resultArray,
           },
           text: text,
         },

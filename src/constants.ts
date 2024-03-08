@@ -1,4 +1,6 @@
-export const COLLECTION_NAME = "Hugging Face Collection";
+export const COLLECTION_NAME_CLIENT = "Hugging Face Collection (Client)";
+export const COLLECTION_NAME_SERVER = "Hugging Face Collection (Server)";
+export const COLLECTION_NAME_SHARED = "Hugging Face Collection";
 
 // d3 schemePaired
 export const COLORS = [
