@@ -12,7 +12,7 @@ const DEFAULT_MODEL_ID = "Xenova/LaMini-Flan-T5-77M";
 export const NODE_SPEC: NodeSpec = {
   id: "hf-client-transformers-translation",
   name: "Translation",
-  description: "TODO",
+  description: "Converting text from one language to another.",
 
   category: Category.PROCESSOR,
   collection: COLLECTION_NAME_CLIENT,
@@ -54,7 +54,7 @@ export const NODE_SPEC: NodeSpec = {
     {
       name: "modelid",
       displayLabel: "Model ID",
-      info: "Transformer.js Image Segmentation model ID",
+      info: "Transformers.js Translation model ID",
       defaultValue: DEFAULT_MODEL_ID,
       type: DataType.STRING,
       editorSpec: {

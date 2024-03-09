@@ -12,7 +12,7 @@ const DEFAULT_MODEL_ID = "Xenova/bert-base-multilingual-cased-ner-hrl";
 export const NODE_SPEC: NodeSpec = {
   id: "hf-client-token-classification",
   name: "Token Classification",
-  description: "TODO",
+  description: "Assigning a label to each token in a text.",
   category: Category.PROCESSOR,
   collection: COLLECTION_NAME_CLIENT,
 
@@ -28,7 +28,7 @@ export const NODE_SPEC: NodeSpec = {
     {
       name: "modelid",
       displayLabel: "Model ID",
-      info: "Transformer.js Image Segmentation model ID",
+      info: "Transformers.js Token Classification model ID",
       defaultValue: DEFAULT_MODEL_ID,
       type: DataType.STRING,
       editorSpec: {

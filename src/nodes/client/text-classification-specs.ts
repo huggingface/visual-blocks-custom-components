@@ -12,7 +12,7 @@ const DEFAULT_MODEL_ID =
 export const NODE_SPEC: NodeSpec = {
   id: "hf-client-transformers-text-classification",
   name: "Text Classification",
-  description: "TODO",
+  description: "Assigning a label or class to a given text.",
 
   category: Category.PROCESSOR,
   collection: COLLECTION_NAME_CLIENT,
@@ -32,7 +32,7 @@ export const NODE_SPEC: NodeSpec = {
     {
       name: "modelid",
       displayLabel: "Model ID",
-      info: "Transformer.js Image Segmentation model ID",
+      info: "Transformers.js Text Classification model ID",
       defaultValue: DEFAULT_MODEL_ID,
       type: DataType.STRING,
       editorSpec: {

@@ -10,8 +10,8 @@ import type { NodeSpec } from "@visualblocks/custom-node-types";
 const DEFAULT_MODEL_ID = "Xenova/segformer_b0_clothes";
 export const NODE_SPEC: NodeSpec = {
   id: "hf-client-transformers-image-segmentation",
-  name: "Image segmentation",
-  description: "TODO",
+  name: "Image Segmentation",
+  description: "Divides an image into segments where each pixel is mapped to an object.",
 
   category: Category.PROCESSOR,
   collection: COLLECTION_NAME_CLIENT,
@@ -28,7 +28,7 @@ export const NODE_SPEC: NodeSpec = {
     {
       name: "modelid",
       displayLabel: "Model ID",
-      info: "Transformer.js Image Segmentation model ID",
+      info: "Transformers.js Image Segmentation model ID",
       defaultValue: DEFAULT_MODEL_ID,
       type: DataType.STRING,
       editorSpec: {

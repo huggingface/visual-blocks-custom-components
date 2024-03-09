@@ -10,8 +10,8 @@ const DEFAULT_MODEL_ID = "Xenova/detr-resnet-50";
 
 export const NODE_SPEC: NodeSpec = {
   id: "hf-client-transformers-object-detection",
-  name: "Object detection",
-  description: "TODO",
+  name: "Object Detection",
+  description: "Identify and locate objects of certain defined classes within an image.",
 
   category: Category.PROCESSOR,
   collection: COLLECTION_NAME_CLIENT,
@@ -28,7 +28,7 @@ export const NODE_SPEC: NodeSpec = {
     {
       name: "modelid",
       displayLabel: "Model ID",
-      info: "Transformer.js Image Segmentation model ID",
+      info: "Transformers.js Object Detection model ID",
       defaultValue: DEFAULT_MODEL_ID,
       type: DataType.STRING,
       editorSpec: {
