@@ -1,0 +1,150 @@
+{
+  "project": {
+    "name": "Image Segmentation (client)",
+    "id": "le03ml",
+    "creationTs": 1709944948158,
+    "lastModifiedTs": 1709945288908,
+    "userSetData": {
+      "description": "",
+      "tags": [],
+      "contactURL": "",
+      "tutorialYouTube": ""
+    }
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "hf-transformers-image-segmentation-viewer_drr7z6",
+        "nodeSpecId": "hf-transformers-image-segmentation-viewer",
+        "customData": {
+          "previewX": 480,
+          "previewY": 16,
+          "previewWidth": 320,
+          "previewHeight": 464
+        },
+        "uiData": {
+          "posX": 683.79345703125,
+          "posY": 78,
+          "width": 230.9130859375,
+          "height": 93,
+          "selected": true
+        },
+        "incomingEdges": {
+          "segData": [
+            {
+              "sourceNodeId": "hf-client-transformers-image-segmentation_vwi3na",
+              "outputId": "segData"
+            }
+          ],
+          "image": [
+            {
+              "sourceNodeId": "input_image_yhy4xn",
+              "outputId": "image"
+            }
+          ]
+        }
+      },
+      {
+        "id": "image_viewer_d1bt2n",
+        "nodeSpecId": "image_viewer",
+        "customData": {
+          "previewX": 816,
+          "previewY": 16,
+          "previewWidth": 320,
+          "previewHeight": 240
+        },
+        "uiData": {
+          "posX": 1074.70654296875,
+          "posY": 32,
+          "width": 176,
+          "height": 185,
+          "selected": false
+        },
+        "propValues": {
+          "columnCount": "2",
+          "hidePreview": false
+        },
+        "inputValues": {
+          "images": [],
+          "urls": []
+        },
+        "incomingEdges": {
+          "images": [
+            {
+              "sourceNodeId": "hf-transformers-image-segmentation-viewer_drr7z6",
+              "outputId": "image"
+            }
+          ]
+        }
+      },
+      {
+        "id": "hf-client-transformers-image-segmentation_vwi3na",
+        "nodeSpecId": "hf-client-transformers-image-segmentation",
+        "customData": {
+          "previewX": 16,
+          "previewY": 16,
+          "previewWidth": 320,
+          "previewHeight": 240
+        },
+        "uiData": {
+          "posX": 336,
+          "posY": 0,
+          "width": 187.79345703125,
+          "height": 142,
+          "selected": false
+        },
+        "inputValues": {
+          "modelid": "Xenova/segformer_b0_clothes",
+          "quantized": true
+        },
+        "incomingEdges": {
+          "image": [
+            {
+              "sourceNodeId": "input_image_yhy4xn",
+              "outputId": "image"
+            }
+          ]
+        }
+      },
+      {
+        "id": "input_image_yhy4xn",
+        "nodeSpecId": "input_image",
+        "customData": {
+          "initialWidth": 448,
+          "initialHeight": 240,
+          "previewX": 16,
+          "previewY": 16,
+          "previewWidth": 448,
+          "previewHeight": 240
+        },
+        "uiData": {
+          "posX": -32,
+          "posY": -32,
+          "width": 176,
+          "height": 180,
+          "selected": false
+        },
+        "propValues": {
+          "urls": [
+            "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic1.jpg",
+            "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic2.jpeg",
+            "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic3.jpg",
+            "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic4.jpeg",
+            "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic5.jpg",
+            "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic6.jpg",
+            "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic7.jpeg",
+            "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic8.jpg",
+            "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic9.jpg"
+          ],
+          "gridColumnCount": 3,
+          "allowUserUpload": false,
+          "selectedImageUrl": "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic9.jpg",
+          "hidePreview": false
+        }
+      }
+    ]
+  },
+  "customNodeUrls": [
+    "http://localhost:8080/index.js"
+  ]
+}

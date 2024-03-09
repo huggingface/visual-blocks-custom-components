@@ -1,0 +1,128 @@
+{
+  "project": {
+    "name": "Token-Classification (Server)",
+    "id": "d01qdd",
+    "creationTs": 1710015776216,
+    "lastModifiedTs": 1710016008283,
+    "userSetData": {
+      "description": "",
+      "tags": [],
+      "contactURL": "",
+      "tutorialYouTube": ""
+    }
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "hf-token-classification-viewer_qoosma",
+        "nodeSpecId": "hf-token-classification-viewer",
+        "customData": {
+          "previewX": 352,
+          "previewY": 16,
+          "previewWidth": 320,
+          "previewHeight": 240
+        },
+        "uiData": {
+          "posX": 624,
+          "posY": 112,
+          "width": 228.005859375,
+          "height": 68,
+          "selected": false
+        },
+        "incomingEdges": {
+          "tokenClassResult": [
+            {
+              "sourceNodeId": "hf-server-token-classification_4rf7sk",
+              "outputId": "results"
+            }
+          ]
+        }
+      },
+      {
+        "id": "hf-hub-login_dnzrp8",
+        "nodeSpecId": "hf-hub-login",
+        "customData": {
+          "previewX": 16,
+          "previewY": 16,
+          "previewWidth": 320,
+          "previewHeight": 240
+        },
+        "uiData": {
+          "posX": -48,
+          "posY": 64,
+          "width": 213.81884765625,
+          "height": 130,
+          "selected": false
+        },
+        "propValues": {
+          "apikey": "",
+          "hidePreview": false
+        }
+      },
+      {
+        "id": "hf-server-token-classification_4rf7sk",
+        "nodeSpecId": "hf-server-token-classification",
+        "customData": {
+          "previewX": 608,
+          "previewY": 16,
+          "previewWidth": 320,
+          "previewHeight": 240
+        },
+        "uiData": {
+          "posX": 304,
+          "posY": 64,
+          "width": 184.88623046875,
+          "height": 166,
+          "selected": false
+        },
+        "inputValues": {
+          "text": "",
+          "modelid": "dslim/bert-base-NER",
+          "apikey": ""
+        },
+        "incomingEdges": {
+          "text": [
+            {
+              "sourceNodeId": "input_text_c5h6dd",
+              "outputId": "text"
+            }
+          ],
+          "apikey": [
+            {
+              "sourceNodeId": "hf-hub-login_dnzrp8",
+              "outputId": "apikey"
+            }
+          ]
+        }
+      },
+      {
+        "id": "input_text_c5h6dd",
+        "nodeSpecId": "input_text",
+        "customData": {
+          "initialWidth": 304,
+          "initialHeight": 144,
+          "leftOfNode": "hf-server-token-classification_4rf7sk",
+          "previewX": 688,
+          "previewY": 16,
+          "previewWidth": 304,
+          "previewHeight": 144
+        },
+        "uiData": {
+          "posX": 64,
+          "posY": -96,
+          "width": 176,
+          "height": 130,
+          "selected": false
+        },
+        "propValues": {
+          "text": "Eating strawberries in Italy, after spending the day in Berlin at Lego Land  ",
+          "passwordMode": false,
+          "hidePreview": false
+        }
+      }
+    ]
+  },
+  "customNodeUrls": [
+    "http://localhost:8080/index.js"
+  ]
+}

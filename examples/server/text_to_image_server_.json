@@ -1,0 +1,105 @@
+{
+  "project": {
+    "name": "Text-To-Image (server)",
+    "id": "d01qdd",
+    "creationTs": 1710015776216,
+    "lastModifiedTs": 1710015860508,
+    "userSetData": {
+      "description": "",
+      "tags": [],
+      "contactURL": "",
+      "tutorialYouTube": ""
+    }
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "base64_to_image_qy0e74",
+        "nodeSpecId": "base64_to_image",
+        "customData": {
+          "previewX": 352,
+          "previewY": 16,
+          "previewWidth": 320,
+          "previewHeight": 240
+        },
+        "uiData": {
+          "posX": 709.81884765625,
+          "posY": 99.5,
+          "width": 176,
+          "height": 68,
+          "selected": false
+        },
+        "inputValues": {
+          "base64": ""
+        },
+        "incomingEdges": {
+          "base64": [
+            {
+              "sourceNodeId": "hf-server-text-to-image_ei4nth",
+              "outputId": "results"
+            }
+          ]
+        }
+      },
+      {
+        "id": "hf-server-text-to-image_ei4nth",
+        "nodeSpecId": "hf-server-text-to-image",
+        "customData": {
+          "previewX": 352,
+          "previewY": 16,
+          "previewWidth": 320,
+          "previewHeight": 240
+        },
+        "uiData": {
+          "posX": 373.81884765625,
+          "posY": 0,
+          "width": 176,
+          "height": 267,
+          "selected": false
+        },
+        "inputValues": {
+          "prompt": "A monster cat",
+          "negative_prompt": "",
+          "num_inference_steps": 25,
+          "guidance_scale": 7.5,
+          "seed": 0,
+          "useCache": true,
+          "modelid": "stabilityai/stable-diffusion-xl-base-1.0",
+          "apikey": ""
+        },
+        "incomingEdges": {
+          "apikey": [
+            {
+              "sourceNodeId": "hf-hub-login_dnzrp8",
+              "outputId": "apikey"
+            }
+          ]
+        }
+      },
+      {
+        "id": "hf-hub-login_dnzrp8",
+        "nodeSpecId": "hf-hub-login",
+        "customData": {
+          "previewX": 16,
+          "previewY": 16,
+          "previewWidth": 320,
+          "previewHeight": 240
+        },
+        "uiData": {
+          "posX": 0,
+          "posY": 68.5,
+          "width": 213.81884765625,
+          "height": 130,
+          "selected": true
+        },
+        "propValues": {
+          "apikey": "",
+          "hidePreview": false
+        }
+      }
+    ]
+  },
+  "customNodeUrls": [
+    "http://localhost:8080/index.js"
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "project": {
+    "name": "Token Classification (client)",
+    "id": "new_hfdemo",
+    "creationTs": 1710010120818,
+    "lastModifiedTs": 1710010787716,
+    "userSetData": {
+      "description": "",
+      "tags": [],
+      "contactURL": "",
+      "tutorialYouTube": ""
+    }
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "input_text_zn56zh",
+        "nodeSpecId": "input_text",
+        "customData": {
+          "initialWidth": 304,
+          "initialHeight": 144,
+          "previewX": 16,
+          "previewY": 16,
+          "previewWidth": 304,
+          "previewHeight": 144
+        },
+        "uiData": {
+          "posX": 0,
+          "posY": 18,
+          "width": 176,
+          "height": 130,
+          "selected": false
+        },
+        "propValues": {
+          "text": "I was in Berlin, dining at Lego World, then I went to Italy to see Pisa.",
+          "passwordMode": false,
+          "hidePreview": false
+        }
+      },
+      {
+        "id": "hf-token-classification-viewer_ys00jb",
+        "nodeSpecId": "hf-token-classification-viewer",
+        "customData": {
+          "previewX": 336,
+          "previewY": 16,
+          "previewWidth": 416,
+          "previewHeight": 240
+        },
+        "uiData": {
+          "posX": 680.88623046875,
+          "posY": 49,
+          "width": 228.005859375,
+          "height": 68,
+          "selected": true
+        },
+        "incomingEdges": {
+          "tokenClassResult": [
+            {
+              "sourceNodeId": "hf-client-token-classification_apdmnx",
+              "outputId": "results"
+            }
+          ]
+        }
+      },
+      {
+        "id": "hf-client-token-classification_apdmnx",
+        "nodeSpecId": "hf-client-token-classification",
+        "customData": {
+          "previewX": 592,
+          "previewY": 16,
+          "previewWidth": 320,
+          "previewHeight": 240
+        },
+        "uiData": {
+          "posX": 336,
+          "posY": 0,
+          "width": 184.88623046875,
+          "height": 166,
+          "selected": false
+        },
+        "inputValues": {
+          "text": "",
+          "modelid": "Xenova/bert-base-multilingual-cased-ner-hrl",
+          "quantized": true
+        },
+        "incomingEdges": {
+          "text": [
+            {
+              "sourceNodeId": "input_text_zn56zh",
+              "outputId": "text"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "customNodeUrls": [
+    "http://localhost:8080/index.js"
+  ]
+}

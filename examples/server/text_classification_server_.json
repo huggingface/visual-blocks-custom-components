@@ -1,0 +1,133 @@
+{
+  "project": {
+    "name": "Text-Classification (Server)",
+    "id": "c1fxs6",
+    "creationTs": 1710016035815,
+    "lastModifiedTs": 1710016053220,
+    "userSetData": {
+      "description": "",
+      "tags": [],
+      "contactURL": "",
+      "tutorialYouTube": ""
+    }
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "hf-hub-login_dnzrp8",
+        "nodeSpecId": "hf-hub-login",
+        "customData": {
+          "previewX": 16,
+          "previewY": 16,
+          "previewWidth": 320,
+          "previewHeight": 240
+        },
+        "uiData": {
+          "posX": 0,
+          "posY": 0,
+          "width": 213.81884765625,
+          "height": 130,
+          "selected": false
+        },
+        "propValues": {
+          "apikey": "",
+          "hidePreview": false
+        }
+      },
+      {
+        "id": "classification_visualizer_glam8t",
+        "nodeSpecId": "classification_visualizer",
+        "customData": {
+          "initialWidth": 240,
+          "initialHeight": 320,
+          "previewX": 352,
+          "previewY": 16,
+          "previewWidth": 240,
+          "previewHeight": 320
+        },
+        "uiData": {
+          "posX": 709.81884765625,
+          "posY": 95.5,
+          "width": 187.76171875,
+          "height": 105,
+          "selected": false
+        },
+        "propValues": {
+          "hidePreview": false
+        },
+        "incomingEdges": {
+          "result": [
+            {
+              "sourceNodeId": "hf-server-transformers-text-classification_mjltdd",
+              "outputId": "results"
+            }
+          ]
+        }
+      },
+      {
+        "id": "hf-server-transformers-text-classification_mjltdd",
+        "nodeSpecId": "hf-server-transformers-text-classification",
+        "customData": {
+          "previewX": 688,
+          "previewY": 16,
+          "previewWidth": 320,
+          "previewHeight": 240
+        },
+        "uiData": {
+          "posX": 373.81884765625,
+          "posY": 65,
+          "width": 176,
+          "height": 166,
+          "selected": false
+        },
+        "inputValues": {
+          "text": "",
+          "modelid": "cardiffnlp/twitter-roberta-base-sentiment-latest",
+          "apikey": ""
+        },
+        "incomingEdges": {
+          "text": [
+            {
+              "sourceNodeId": "input_text_03p2y6",
+              "outputId": "text"
+            }
+          ],
+          "apikey": [
+            {
+              "sourceNodeId": "hf-hub-login_dnzrp8",
+              "outputId": "apikey"
+            }
+          ]
+        }
+      },
+      {
+        "id": "input_text_03p2y6",
+        "nodeSpecId": "input_text",
+        "customData": {
+          "initialWidth": 304,
+          "initialHeight": 144,
+          "leftOfNode": "hf-server-transformers-text-classification_mjltdd",
+          "previewX": 608,
+          "previewY": 16,
+          "previewWidth": 304,
+          "previewHeight": 144
+        },
+        "uiData": {
+          "posX": 18.909423828125,
+          "posY": 166,
+          "width": 176,
+          "height": 130,
+          "selected": false
+        },
+        "propValues": {
+          "text": "I don't feel very well today",
+          "passwordMode": false,
+          "hidePreview": false
+        }
+      }
+    ]
+  },
+  "customNodeUrls": [
+    "http://localhost:8080/index.js"
+  ]
+}

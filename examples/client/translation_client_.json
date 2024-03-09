@@ -1,0 +1,110 @@
+{
+  "project": {
+    "name": "Translation (client)",
+    "id": "nnz3q4",
+    "creationTs": 1710015602932,
+    "lastModifiedTs": 1710015742869,
+    "userSetData": {
+      "description": "",
+      "tags": [],
+      "contactURL": "",
+      "tutorialYouTube": ""
+    }
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "markdown_viewer_iy8l5e",
+        "nodeSpecId": "markdown_viewer",
+        "customData": {
+          "previewX": 336,
+          "previewY": 16,
+          "previewWidth": 320,
+          "previewHeight": 240
+        },
+        "uiData": {
+          "posX": 752,
+          "posY": 36.5,
+          "width": 176,
+          "height": 130,
+          "selected": false
+        },
+        "propValues": {
+          "hidePreview": false,
+          "hidePreviewFrame": false
+        },
+        "inputValues": {
+          "markdownString": ""
+        },
+        "incomingEdges": {
+          "markdownString": [
+            {
+              "sourceNodeId": "hf-client-transformers-translation_suvh9q",
+              "outputId": "results"
+            }
+          ]
+        }
+      },
+      {
+        "id": "input_text_b91wiq",
+        "nodeSpecId": "input_text",
+        "customData": {
+          "initialWidth": 304,
+          "initialHeight": 144,
+          "previewX": 16,
+          "previewY": 16,
+          "previewWidth": 304,
+          "previewHeight": 144
+        },
+        "uiData": {
+          "posX": 0,
+          "posY": 36.5,
+          "width": 176,
+          "height": 130,
+          "selected": false
+        },
+        "propValues": {
+          "text": "I don't speak French\n",
+          "passwordMode": false,
+          "hidePreview": false
+        }
+      },
+      {
+        "id": "hf-client-transformers-translation_suvh9q",
+        "nodeSpecId": "hf-client-transformers-translation",
+        "customData": {
+          "previewX": 16,
+          "previewY": 16,
+          "previewWidth": 320,
+          "previewHeight": 240
+        },
+        "uiData": {
+          "posX": 336,
+          "posY": 0,
+          "width": 256,
+          "height": 203,
+          "selected": true
+        },
+        "propValues": {
+          "language": "German"
+        },
+        "inputValues": {
+          "text": "",
+          "modelid": "Xenova/t5-small",
+          "quantized": true
+        },
+        "incomingEdges": {
+          "text": [
+            {
+              "sourceNodeId": "input_text_b91wiq",
+              "outputId": "text"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "customNodeUrls": [
+    "http://localhost:8080/index.js"
+  ]
+}
