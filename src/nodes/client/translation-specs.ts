@@ -6,8 +6,7 @@ import {
   EditorType,
 } from "@visualblocks/custom-node-types";
 
-// const DEFAULT_MODEL_ID = "Xenova/LaMini-Flan-T5-783M";
-const DEFAULT_MODEL_ID = "Xenova/LaMini-Flan-T5-77M";
+const DEFAULT_MODEL_ID = "Xenova/t5-small";
 
 export const NODE_SPEC: NodeSpec = {
   id: "hf-client-transformers-translation",
@@ -26,16 +25,16 @@ export const NODE_SPEC: NodeSpec = {
         type: EditorType.DROPDOWN,
         options: [
           {
-            value: "French",
-            label: "French",
-          },
-          {
             value: "German",
             label: "German",
           },
           {
             value: "Romanian",
             label: "Romanian",
+          },
+          {
+            value: "French",
+            label: "French",
           },
         ],
       },
