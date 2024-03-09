@@ -6,8 +6,8 @@ import type {
 } from "@visualblocks/custom-node-types";
 
 import type {
-  ObjectDetectionPipelineSingle,
   ObjectDetectionPipeline,
+  ObjectDetectionPipelineOutput,
 } from "@xenova/transformers";
 
 import {
@@ -71,7 +71,7 @@ class ObjectDetectionNode extends BasePipelineNode {
 
     const resultArray = (
       Array.isArray(result) ? result : [result]
-    ) as ObjectDetectionPipelineSingle[];
+    ) as ObjectDetectionPipelineOutput;
 
     const outputVB = resultArray.map((x) => {
       return {
