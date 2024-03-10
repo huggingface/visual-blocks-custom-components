@@ -1,0 +1,160 @@
+{
+  "project": {
+    "name": "Background Removal (client)",
+    "id": "new_hfdemo",
+    "creationTs": 1710046043852,
+    "lastModifiedTs": 1710046969196,
+    "userSetData": {
+      "description": "",
+      "tags": [],
+      "contactURL": "",
+      "tutorialYouTube": ""
+    }
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "input_image_y2leh8",
+        "nodeSpecId": "input_image",
+        "customData": {
+          "initialWidth": 448,
+          "initialHeight": 240,
+          "leftOfNode": "hf-client-transformers-background-removal_fbeasd",
+          "previewX": 16,
+          "previewY": 16,
+          "previewWidth": 448,
+          "previewHeight": 240
+        },
+        "uiData": {
+          "posX": 0,
+          "posY": 37,
+          "width": 176,
+          "height": 180,
+          "selected": false
+        },
+        "propValues": {
+          "urls": [
+            "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic1.jpg",
+            "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic2.jpeg",
+            "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic3.jpg",
+            "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic4.jpeg",
+            "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic5.jpg",
+            "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic6.jpg",
+            "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic7.jpeg",
+            "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic8.jpg",
+            "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic9.jpg"
+          ],
+          "gridColumnCount": 3,
+          "allowUserUpload": false,
+          "selectedImageUrl": "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic1.jpg",
+          "hidePreview": false
+        }
+      },
+      {
+        "id": "image_viewer_d7sxrh",
+        "nodeSpecId": "image_viewer",
+        "customData": {
+          "rightOfNode": "hf-client-transformers-background-removal_fbeasd",
+          "previewX": 816,
+          "previewY": 16,
+          "previewWidth": 320,
+          "previewHeight": 240
+        },
+        "uiData": {
+          "posX": 720,
+          "posY": -128,
+          "width": 176,
+          "height": 185,
+          "selected": false
+        },
+        "propValues": {
+          "columnCount": "2",
+          "hidePreview": false
+        },
+        "inputValues": {
+          "images": [],
+          "urls": []
+        },
+        "incomingEdges": {
+          "images": [
+            {
+              "sourceNodeId": "hf-client-transformers-background-removal_fbeasd",
+              "outputId": "foreground"
+            }
+          ]
+        }
+      },
+      {
+        "id": "image_mixer_rw1ale",
+        "nodeSpecId": "image_mixer",
+        "customData": {
+          "previewX": 480,
+          "previewY": 16,
+          "previewWidth": 320,
+          "previewHeight": 240
+        },
+        "uiData": {
+          "posX": 752,
+          "posY": 144,
+          "width": 224,
+          "height": 254,
+          "selected": false
+        },
+        "propValues": {
+          "mode": "source-out",
+          "hidePreview": false
+        },
+        "inputValues": {
+          "topText": "",
+          "midText": "",
+          "bottomText": ""
+        },
+        "incomingEdges": {
+          "image1": [
+            {
+              "sourceNodeId": "hf-client-transformers-background-removal_fbeasd",
+              "outputId": "foreground"
+            }
+          ],
+          "image2": [
+            {
+              "sourceNodeId": "input_image_y2leh8",
+              "outputId": "image"
+            }
+          ]
+        }
+      },
+      {
+        "id": "hf-client-transformers-background-removal_fbeasd",
+        "nodeSpecId": "hf-client-transformers-background-removal",
+        "customData": {
+          "previewX": 16,
+          "previewY": 16,
+          "previewWidth": 320,
+          "previewHeight": 240
+        },
+        "uiData": {
+          "posX": 336,
+          "posY": -32,
+          "width": 194.287109375,
+          "height": 117,
+          "selected": false
+        },
+        "inputValues": {
+          "quantized": true
+        },
+        "incomingEdges": {
+          "image": [
+            {
+              "sourceNodeId": "input_image_y2leh8",
+              "outputId": "image"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "customNodeUrls": [
+    "http://localhost:8080/index.js"
+  ]
+}
