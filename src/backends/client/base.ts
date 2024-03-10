@@ -9,7 +9,7 @@ env.allowLocalModels = false;
 // Proxy execution to a web worker to avoid freezing the UI
 env.backends.onnx.wasm.proxy = true;
 
-type ProgressCallbackFunction = (data: any) => void;
+export type ProgressCallbackFunction = (data: any) => void;
 
 /**
  * @abstract
@@ -43,7 +43,7 @@ export class PipelineSingleton {
 
 export class BasePipelineNode extends LitElement {
   singleton: any;
-  constructor(singleton: typeof PipelineSingleton) {
+  constructor(singleton: any) {
     super();
     this.singleton = singleton;
   }
