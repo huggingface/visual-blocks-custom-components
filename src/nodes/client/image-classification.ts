@@ -1,21 +1,18 @@
 import type {
+  ImageClassificationPipeline,
+  ImageClassificationOutput,
+} from "@xenova/transformers";
+import type {
   CustomNodeInfo,
   Services,
   VisualBlocksImage,
-  VisualBlocksObjectDetectionResult,
+  VisualBlocksClassificationResult,
 } from "@visualblocks/custom-node-types";
-
-import type {
-  ObjectDetectionPipeline,
-  ObjectDetectionPipelineOutput,
-} from "@xenova/transformers";
-
+import { NODE_SPEC } from "./image-classification-specs";
 import {
   PipelineSingleton,
   BasePipelineNode,
 } from "../../backends/client/base";
-
-import { NODE_SPEC } from "./object-detection-spec";
 import { compareObjects } from "../../utils";
 
 declare interface Inputs {
@@ -24,15 +21,16 @@ declare interface Inputs {
   quantized: boolean;
 }
 
-class ObjectDetectionPipelineSingleton extends PipelineSingleton {
-  static task = "object-detection";
+class ImageClassificationPipelineSingleton extends PipelineSingleton {
+  static task = "image-classification";
 }
 
-class ObjectDetectionNode extends BasePipelineNode {
+class ImageClassificationNode extends BasePipelineNode {
   private cachedInput?: Inputs;
-  private cachedResult?: VisualBlocksObjectDetectionResult;
+  private cachedResult?: VisualBlocksClassificationResult;
+
   constructor() {
-    super(ObjectDetectionPipelineSingleton);
+    super(ImageClassificationPipelineSingleton);
   }
 
   async runWithInputs(inputs: Inputs, services: Services) {
@@ -57,44 +55,35 @@ class ObjectDetectionNode extends BasePipelineNode {
     ) as HTMLCanvasElement;
     const data = canvas.toDataURL();
 
-    const detector: ObjectDetectionPipeline = await this.getInstance(
+    const classifier: ImageClassificationPipeline = await this.getInstance(
       modelid,
       quantized
     );
 
-    // Predict segments
-    const result = await detector(data, {
-      // TODO: Add option for threshold
-      // threshold: 0.5,
-      percentage: true,
+    const result = await classifier(data, {
+      topk: 5,
     });
 
     const resultArray = (
       Array.isArray(result) ? result : [result]
-    ) as ObjectDetectionPipelineOutput;
+    ) as ImageClassificationOutput;
 
-    const outputVB = resultArray.map((x) => {
-      return {
-        label: x.label,
-        score: x.score,
-        box: {
-          left: x.box.xmin,
-          top: x.box.ymin,
-          width: x.box.xmax - x.box.xmin,
-          height: x.box.ymax - x.box.ymin,
-        },
-      };
-    });
+    const classProb = resultArray.map((e) => ({
+      className: e.label,
+      probability: e.score,
+    }));
     this.cachedInput = inputs;
-    this.cachedResult = { results: outputVB };
+    this.cachedResult = { classes: classProb };
 
     this.dispatchEvent(
-      new CustomEvent("outputs", { detail: { results: this.cachedResult } })
+      new CustomEvent("outputs", {
+        detail: { results: { classes: classProb } },
+      })
     );
   }
 }
 
 export default {
   nodeSpec: NODE_SPEC,
-  nodeImpl: ObjectDetectionNode,
+  nodeImpl: ImageClassificationNode,
 } as CustomNodeInfo;
