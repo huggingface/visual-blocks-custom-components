@@ -4,13 +4,15 @@
 
 import TOKEN_CLASSIFICATION_VIEWER_NODE from "./nodes/shared/token-classification-viewer";
 import IMAGE_SEGMENTATION_VIEWER_NODE from "./nodes/shared/image-segmentation-viewer";
+import DEPTH_ESTIMATION_VIEWER_NODE from "./nodes/shared/depth-estimation-viewer";
 
 import TOKEN_CLASSIFICATION_NODE from "./nodes/client/token-classification";
 import IMAGE_SEGMENTATION_NODE from "./nodes/client/image-segmentation";
 import TEXT_CLASSIFICATION_NODE from "./nodes/client/text-classification";
 import IMAGE_CLASSIFICATION_NODE from "./nodes/client/image-classification";
 import TEXT2TEXT_GENERATION_NODE from "./nodes/client/translation";
-import OBJECT_DETECTION_GENERATION_NODE from "./nodes/client/object-detection";
+import OBJECT_DETECTION_NODE from "./nodes/client/object-detection";
+import DEPTH_ESTIMATION_NODE from "./nodes/client/depth-estimation";
 
 import TEXT_CLASSIFICATION_SERVER_NODE from "./nodes/server/text-classification";
 import TEXT_TO_IMAGE_SERVER_NODE from "./nodes/server/text-to-image";
@@ -22,10 +24,12 @@ const client_node = [
   TOKEN_CLASSIFICATION_VIEWER_NODE,
   IMAGE_SEGMENTATION_NODE,
   IMAGE_SEGMENTATION_VIEWER_NODE,
+  DEPTH_ESTIMATION_VIEWER_NODE,
   TEXT_CLASSIFICATION_NODE,
   IMAGE_CLASSIFICATION_NODE,
   TEXT2TEXT_GENERATION_NODE,
-  OBJECT_DETECTION_GENERATION_NODE,
+  OBJECT_DETECTION_NODE,
+  DEPTH_ESTIMATION_NODE,
 ];
 const server_nodes = [
   TEXT_CLASSIFICATION_SERVER_NODE,
