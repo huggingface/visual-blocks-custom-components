@@ -32,10 +32,6 @@ declare interface Inputs {
   segData: ImageSegmentationPipelineOutput[];
   image: VisualBlocksImage;
 }
-declare interface Outputs {
-  segData: ImageSegmentationPipelineOutput;
-  image: VisualBlocksImage;
-}
 
 class ImageSegmentationViewerNode extends LitElement {
   private cachedSegData: ImageSegmentationPipelineOutput[] | null = null;
