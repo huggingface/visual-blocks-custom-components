@@ -1,0 +1,137 @@
+{
+  "project": {
+    "name": "Summarization (Server)",
+    "id": "new_hfdemo",
+    "creationTs": 1710046043852,
+    "lastModifiedTs": 1710052467106,
+    "userSetData": {
+      "description": "",
+      "tags": [],
+      "contactURL": "",
+      "tutorialYouTube": ""
+    }
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "hf-server-summarization_gvors1",
+        "nodeSpecId": "hf-server-summarization",
+        "customData": {
+          "previewX": 16,
+          "previewY": 16,
+          "previewWidth": 320,
+          "previewHeight": 240
+        },
+        "uiData": {
+          "posX": 373.81884765625,
+          "posY": 65,
+          "width": 176,
+          "height": 166,
+          "selected": false
+        },
+        "inputValues": {
+          "text": "",
+          "modelid": "facebook/bart-large-cnn",
+          "apikey": ""
+        },
+        "incomingEdges": {
+          "text": [
+            {
+              "sourceNodeId": "input_text_q1k4q9",
+              "outputId": "text"
+            }
+          ],
+          "apikey": [
+            {
+              "sourceNodeId": "hf-hub-login_wqrv61",
+              "outputId": "apikey"
+            }
+          ]
+        }
+      },
+      {
+        "id": "markdown_viewer_fdblme",
+        "nodeSpecId": "markdown_viewer",
+        "customData": {
+          "rightOfNode": "hf-server-summarization_gvors1",
+          "previewX": 420,
+          "previewY": 20,
+          "previewWidth": 320,
+          "previewHeight": 240
+        },
+        "uiData": {
+          "posX": 709.81884765625,
+          "posY": 83,
+          "width": 176,
+          "height": 130,
+          "selected": true
+        },
+        "propValues": {
+          "hidePreview": false,
+          "hidePreviewFrame": false
+        },
+        "inputValues": {
+          "markdownString": ""
+        },
+        "incomingEdges": {
+          "markdownString": [
+            {
+              "sourceNodeId": "hf-server-summarization_gvors1",
+              "outputId": "results"
+            }
+          ]
+        }
+      },
+      {
+        "id": "input_text_q1k4q9",
+        "nodeSpecId": "input_text",
+        "customData": {
+          "initialWidth": 304,
+          "initialHeight": 144,
+          "leftOfNode": "hf-server-summarization_gvors1",
+          "previewX": 16,
+          "previewY": 16,
+          "previewWidth": 351,
+          "previewHeight": 293
+        },
+        "uiData": {
+          "posX": 18.909423828125,
+          "posY": 0,
+          "width": 176,
+          "height": 130,
+          "selected": false
+        },
+        "propValues": {
+          "text": "The tower is 324 metres (1,063 ft) tall, about the same height as an 81-storey building, and the tallest structure in Paris. Its base is square, measuring 125 metres (410 ft) on each side. During its construction, the Eiffel Tower surpassed the Washington Monument to become the tallest man-made structure in the world, a title it held for 41 years until the Chrysler Building in New York City was finished in 1930. It was the first structure to reach a height of 300 metres. Due to the addition of a broadcasting aerial at the top of the tower in 1957, it is now taller than the Chrysler Building by 5.2 metres (17 ft). Excluding transmitters, the Eiffel Tower is the second tallest free-standing structure in France after the Millau Viaduct.\n",
+          "passwordMode": false,
+          "hidePreview": false
+        }
+      },
+      {
+        "id": "hf-hub-login_wqrv61",
+        "nodeSpecId": "hf-hub-login",
+        "customData": {
+          "leftOfNode": "hf-server-summarization_gvors1",
+          "previewX": 672,
+          "previewY": 16,
+          "previewWidth": 320,
+          "previewHeight": 240
+        },
+        "uiData": {
+          "posX": 0,
+          "posY": 166,
+          "width": 213.81884765625,
+          "height": 130,
+          "selected": false
+        },
+        "propValues": {
+          "apikey": "",
+          "hidePreview": true
+        }
+      }
+    ]
+  },
+  "customNodeUrls": [
+    "http://localhost:8080/index.js"
+  ]
+}

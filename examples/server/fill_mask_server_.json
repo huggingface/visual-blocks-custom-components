@@ -1,0 +1,132 @@
+{
+  "project": {
+    "name": "Fill Mask (Server)",
+    "id": "ozns7w",
+    "creationTs": 1710052502659,
+    "lastModifiedTs": 1710052502659,
+    "userSetData": {
+      "description": "",
+      "tags": [],
+      "contactURL": "",
+      "tutorialYouTube": ""
+    }
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "hf-server-fill-mask_rkclgd",
+        "nodeSpecId": "hf-server-fill-mask",
+        "customData": {
+          "previewX": 16,
+          "previewY": 16,
+          "previewWidth": 320,
+          "previewHeight": 240
+        },
+        "uiData": {
+          "posX": 373.81884765625,
+          "posY": 65,
+          "width": 176,
+          "height": 166,
+          "selected": false
+        },
+        "inputValues": {
+          "text": "",
+          "modelid": "google-bert/bert-base-uncased",
+          "apikey": ""
+        },
+        "incomingEdges": {
+          "text": [
+            {
+              "sourceNodeId": "input_text_pxofnf",
+              "outputId": "text"
+            }
+          ],
+          "apikey": [
+            {
+              "sourceNodeId": "hf-hub-login_ghdquu",
+              "outputId": "apikey"
+            }
+          ]
+        }
+      },
+      {
+        "id": "input_text_pxofnf",
+        "nodeSpecId": "input_text",
+        "customData": {
+          "initialWidth": 304,
+          "initialHeight": 144,
+          "previewX": 16,
+          "previewY": 16,
+          "previewWidth": 304,
+          "previewHeight": 144
+        },
+        "uiData": {
+          "posX": 18.909423828125,
+          "posY": 0,
+          "width": 176,
+          "height": 130,
+          "selected": false
+        },
+        "propValues": {
+          "text": "The goal of life is [MASK] ,",
+          "passwordMode": false,
+          "hidePreview": false
+        }
+      },
+      {
+        "id": "hf-hub-login_ghdquu",
+        "nodeSpecId": "hf-hub-login",
+        "customData": {
+          "previewX": 592,
+          "previewY": 16,
+          "previewWidth": 320,
+          "previewHeight": 240
+        },
+        "uiData": {
+          "posX": 0,
+          "posY": 166,
+          "width": 213.81884765625,
+          "height": 130,
+          "selected": false
+        },
+        "propValues": {
+          "apikey": "",
+          "hidePreview": true
+        }
+      },
+      {
+        "id": "classification_visualizer_234cmi",
+        "nodeSpecId": "classification_visualizer",
+        "customData": {
+          "initialWidth": 240,
+          "initialHeight": 320,
+          "previewX": 336,
+          "previewY": 16,
+          "previewWidth": 240,
+          "previewHeight": 320
+        },
+        "uiData": {
+          "posX": 709.81884765625,
+          "posY": 95.5,
+          "width": 187.76171875,
+          "height": 105,
+          "selected": false
+        },
+        "propValues": {
+          "hidePreview": false
+        },
+        "incomingEdges": {
+          "result": [
+            {
+              "sourceNodeId": "hf-server-fill-mask_rkclgd",
+              "outputId": "results"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "customNodeUrls": [
+    "http://localhost:8080/index.js"
+  ]
+}
