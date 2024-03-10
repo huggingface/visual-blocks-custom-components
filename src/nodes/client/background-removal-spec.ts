@@ -6,12 +6,10 @@ import {
 } from "@visualblocks/custom-node-types";
 import type { NodeSpec } from "@visualblocks/custom-node-types";
 
-const DEFAULT_MODEL_ID = "Xenova/detr-resnet-50";
-
 export const NODE_SPEC: NodeSpec = {
-  id: "hf-client-transformers-object-detection",
-  name: "Object Detection",
-  description: "Identify and locate objects of certain defined classes within an image.",
+  id: "hf-client-transformers-background-removal",
+  name: "Background Removal",
+  description: "Remove the background from an image.",
 
   category: Category.PROCESSOR,
   collection: COLLECTION_NAME_CLIENT,
@@ -24,16 +22,6 @@ export const NODE_SPEC: NodeSpec = {
     {
       name: "image",
       type: DataType.IMAGE,
-    },
-    {
-      name: "modelid",
-      displayLabel: "Model ID",
-      info: "Transformers.js Object Detection model ID",
-      defaultValue: DEFAULT_MODEL_ID,
-      type: DataType.STRING,
-      editorSpec: {
-        type: EditorType.TEXT_INPUT,
-      },
     },
     {
       name: "quantized",
@@ -49,16 +37,12 @@ export const NODE_SPEC: NodeSpec = {
   // Outputs.
   outputSpecs: [
     {
-      name: "results",
-      type: DataType.OBJECT_DETECTION_RESULT,
+      name: "foreground",
+      displayLabel: "Foreground",
+      type: DataType.IMAGE,
       recommendedNodes: [
         {
-          nodeSpecId: "bounding_box_visualizer",
-          extraInputIdsToConnect: ["image"],
-        },
-        {
-          nodeSpecId: "bounding_box_to_image",
-          extraInputIdsToConnect: ["image"],
+          nodeSpecId: "image_viewer",
         },
       ],
     },

@@ -41,7 +41,12 @@ class Text2TextGenerationNode extends BasePipelineNode {
     }
     if (this.cachedResult && compareObjects(this.cachedInput, inputs)) {
       this.dispatchEvent(
-        new CustomEvent("outputs", { detail: this.cachedResult.generated_text })
+        new CustomEvent("outputs", {
+          detail: {
+            results: this.cachedResult.generated_text,
+            text: text,
+          },
+        })
       );
       return;
     }
@@ -62,7 +67,10 @@ class Text2TextGenerationNode extends BasePipelineNode {
 
     this.dispatchEvent(
       new CustomEvent("outputs", {
-        detail: { results: resultSingle.generated_text, text: text },
+        detail: {
+          results: resultSingle.generated_text,
+          text: text,
+        },
       })
     );
   }

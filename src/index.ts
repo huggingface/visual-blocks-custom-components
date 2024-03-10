@@ -13,6 +13,8 @@ import IMAGE_CLASSIFICATION_NODE from "./nodes/client/image-classification";
 import TEXT2TEXT_GENERATION_NODE from "./nodes/client/translation";
 import OBJECT_DETECTION_NODE from "./nodes/client/object-detection";
 import DEPTH_ESTIMATION_NODE from "./nodes/client/depth-estimation";
+import OBJECT_DETECTION_GENERATION_NODE from "./nodes/client/object-detection";
+import BACKGROUND_REMOVAL_NODE from "./nodes/client/background-removal";
 
 import TEXT_CLASSIFICATION_SERVER_NODE from "./nodes/server/text-classification";
 import TEXT_TO_IMAGE_SERVER_NODE from "./nodes/server/text-to-image";
@@ -30,6 +32,8 @@ const client_node = [
   TEXT2TEXT_GENERATION_NODE,
   OBJECT_DETECTION_NODE,
   DEPTH_ESTIMATION_NODE,
+  OBJECT_DETECTION_GENERATION_NODE,
+  BACKGROUND_REMOVAL_NODE,
 ];
 const server_nodes = [
   TEXT_CLASSIFICATION_SERVER_NODE,

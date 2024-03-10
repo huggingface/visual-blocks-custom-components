@@ -93,7 +93,14 @@ class TokenClassificationViwerNode extends LitElement {
 
   async runWithInputs(inputs: Inputs) {
     const { tokenClassResult } = inputs;
-
+    if (!tokenClassResult?.tokens) {
+      this.dispatchEvent(
+        new CustomEvent("outputs", {
+          detail: { results: null, text: "No tokens" },
+        })
+      );
+      return;
+    }
     this.tokens = tokenClassResult.tokens;
 
     this.dispatchEvent(

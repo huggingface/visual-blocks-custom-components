@@ -1,0 +1,157 @@
+{
+  "project": {
+    "name": "Object detection (client)",
+    "id": "t10jdf",
+    "creationTs": 1710009441213,
+    "lastModifiedTs": 1710009571676,
+    "userSetData": {
+      "description": "",
+      "tags": [],
+      "contactURL": "",
+      "tutorialYouTube": ""
+    }
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "input_image_b57b5n",
+        "nodeSpecId": "input_image",
+        "customData": {
+          "initialWidth": 448,
+          "initialHeight": 240,
+          "previewX": 16,
+          "previewY": 16,
+          "previewWidth": 448,
+          "previewHeight": 240
+        },
+        "uiData": {
+          "posX": 0,
+          "posY": 101.75,
+          "width": 176,
+          "height": 180,
+          "selected": false
+        },
+        "propValues": {
+          "urls": [
+            "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic1.jpg",
+            "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic2.jpeg",
+            "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic3.jpg",
+            "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic4.jpeg",
+            "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic5.jpg",
+            "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic6.jpg",
+            "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic7.jpeg",
+            "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic8.jpg",
+            "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic9.jpg"
+          ],
+          "gridColumnCount": 3,
+          "allowUserUpload": false,
+          "selectedImageUrl": "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic4.jpeg",
+          "hidePreview": false
+        }
+      },
+      {
+        "id": "bounding_box_to_image_jnoxqk",
+        "nodeSpecId": "bounding_box_to_image",
+        "customData": {
+          "previewX": 480,
+          "previewY": 16,
+          "previewWidth": 320,
+          "previewHeight": 240
+        },
+        "uiData": {
+          "posX": 672,
+          "posY": 216,
+          "width": 230,
+          "height": 155,
+          "selected": true
+        },
+        "propValues": {
+          "mode": "only-cropped",
+          "hidePreview": false
+        },
+        "incomingEdges": {
+          "image": [
+            {
+              "sourceNodeId": "input_image_b57b5n",
+              "outputId": "image"
+            }
+          ],
+          "boundingBoxes": [
+            {
+              "sourceNodeId": "hf-client-transformers-object-detection_384oam",
+              "outputId": "results"
+            }
+          ]
+        }
+      },
+      {
+        "id": "bounding_box_visualizer_y1va9j",
+        "nodeSpecId": "bounding_box_visualizer",
+        "customData": {
+          "previewX": 816,
+          "previewY": 16,
+          "previewWidth": 320,
+          "previewHeight": 240
+        },
+        "uiData": {
+          "posX": 672,
+          "posY": 0,
+          "width": 230,
+          "height": 180,
+          "selected": false
+        },
+        "propValues": {
+          "keypointScale": 1,
+          "color": "#08f7fe",
+          "hidePreview": false
+        },
+        "incomingEdges": {
+          "boundingBoxResult": [
+            {
+              "sourceNodeId": "hf-client-transformers-object-detection_384oam",
+              "outputId": "results"
+            }
+          ],
+          "image": [
+            {
+              "sourceNodeId": "input_image_b57b5n",
+              "outputId": "image"
+            }
+          ]
+        }
+      },
+      {
+        "id": "hf-client-transformers-object-detection_384oam",
+        "nodeSpecId": "hf-client-transformers-object-detection",
+        "customData": {
+          "previewX": 1152,
+          "previewY": 16,
+          "previewWidth": 320,
+          "previewHeight": 240
+        },
+        "uiData": {
+          "posX": 336,
+          "posY": 120.75,
+          "width": 176,
+          "height": 142,
+          "selected": false
+        },
+        "inputValues": {
+          "modelid": "Xenova/detr-resnet-50",
+          "quantized": true
+        },
+        "incomingEdges": {
+          "image": [
+            {
+              "sourceNodeId": "input_image_b57b5n",
+              "outputId": "image"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "customNodeUrls": [
+    "http://localhost:8080/index.js"
+  ]
+}

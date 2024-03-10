@@ -1,0 +1,106 @@
+{
+  "project": {
+    "name": "Text Classification (client)",
+    "id": "new_hfdemo",
+    "creationTs": 1710010120818,
+    "lastModifiedTs": 1710010351687,
+    "userSetData": {
+      "description": "",
+      "tags": [],
+      "contactURL": "",
+      "tutorialYouTube": ""
+    }
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "input_text_9j2g5j",
+        "nodeSpecId": "input_text",
+        "customData": {
+          "initialWidth": 304,
+          "initialHeight": 144,
+          "leftOfNode": "hf-client-transformers-text-classification_9gym0s",
+          "previewX": 16,
+          "previewY": 16,
+          "previewWidth": 304,
+          "previewHeight": 144
+        },
+        "uiData": {
+          "posX": 0,
+          "posY": 160,
+          "width": 176,
+          "height": 130,
+          "selected": false
+        },
+        "propValues": {
+          "text": "I don't feel well today",
+          "passwordMode": false,
+          "hidePreview": false
+        }
+      },
+      {
+        "id": "classification_visualizer_4kfmzs",
+        "nodeSpecId": "classification_visualizer",
+        "customData": {
+          "initialWidth": 240,
+          "initialHeight": 320,
+          "previewX": 336,
+          "previewY": 16,
+          "previewWidth": 240,
+          "previewHeight": 320
+        },
+        "uiData": {
+          "posX": 496,
+          "posY": 192,
+          "width": 187.76171875,
+          "height": 105,
+          "selected": false
+        },
+        "propValues": {
+          "hidePreview": false
+        },
+        "incomingEdges": {
+          "result": [
+            {
+              "sourceNodeId": "hf-client-transformers-text-classification_9gym0s",
+              "outputId": "results"
+            }
+          ]
+        }
+      },
+      {
+        "id": "hf-client-transformers-text-classification_9gym0s",
+        "nodeSpecId": "hf-client-transformers-text-classification",
+        "customData": {
+          "previewX": 16,
+          "previewY": 16,
+          "previewWidth": 320,
+          "previewHeight": 240
+        },
+        "uiData": {
+          "posX": 240,
+          "posY": 192,
+          "width": 176,
+          "height": 166,
+          "selected": true
+        },
+        "inputValues": {
+          "text": "",
+          "modelid": "Xenova/distilbert-base-uncased-finetuned-sst-2-english",
+          "quantized": true
+        },
+        "incomingEdges": {
+          "text": [
+            {
+              "sourceNodeId": "input_text_9j2g5j",
+              "outputId": "text"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "customNodeUrls": [
+    "http://localhost:8080/index.js"
+  ]
+}
