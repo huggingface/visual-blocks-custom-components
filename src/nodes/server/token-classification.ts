@@ -1,3 +1,4 @@
+import type { VisualBlocksImage } from "@visual-blocks/core";
 import { HfInference } from "@huggingface/inference";
 import { NODE_SPEC } from "./token-classification-specs";
 import { LitElement } from "lit";
@@ -5,7 +6,7 @@ import { compareObjects } from "../../utils";
 import type { TokenClassificationResult } from "../../types";
 
 declare interface Inputs {
-  text: string;
+  image: VisualBlocksImage;
   modelid: string;
   apikey: string;
 }

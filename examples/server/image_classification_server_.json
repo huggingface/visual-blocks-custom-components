@@ -1,0 +1,145 @@
+{
+  "project": {
+    "name": "Image Classification (Server)",
+    "id": "zfv2x2",
+    "creationTs": 1710122192981,
+    "lastModifiedTs": 1710122766817,
+    "userSetData": {
+      "description": "",
+      "tags": [],
+      "contactURL": "",
+      "tutorialYouTube": ""
+    }
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "hf-server-transformers-image-classification_pnm02e",
+        "nodeSpecId": "hf-server-transformers-image-classification",
+        "customData": {
+          "previewX": 928,
+          "previewY": 16,
+          "previewWidth": 320,
+          "previewHeight": 240
+        },
+        "uiData": {
+          "posX": 240,
+          "posY": 32,
+          "width": 186.3271484375,
+          "height": 142,
+          "selected": false
+        },
+        "inputValues": {
+          "modelid": "google/vit-base-patch16-224",
+          "apikey": ""
+        },
+        "incomingEdges": {
+          "image": [
+            {
+              "sourceNodeId": "input_image_lqdjsj",
+              "outputId": "image"
+            }
+          ],
+          "apikey": [
+            {
+              "sourceNodeId": "hf-hub-login_8p9uvq",
+              "outputId": "apikey"
+            }
+          ]
+        }
+      },
+      {
+        "id": "classification_visualizer_mk41ne",
+        "nodeSpecId": "classification_visualizer",
+        "customData": {
+          "initialWidth": 240,
+          "initialHeight": 320,
+          "previewX": 352,
+          "previewY": 16,
+          "previewWidth": 240,
+          "previewHeight": 320
+        },
+        "uiData": {
+          "posX": 576,
+          "posY": 64,
+          "width": 187.76171875,
+          "height": 105,
+          "selected": false
+        },
+        "propValues": {
+          "hidePreview": false
+        },
+        "incomingEdges": {
+          "result": [
+            {
+              "sourceNodeId": "hf-server-transformers-image-classification_pnm02e",
+              "outputId": "results"
+            }
+          ]
+        }
+      },
+      {
+        "id": "input_image_lqdjsj",
+        "nodeSpecId": "input_image",
+        "customData": {
+          "initialWidth": 448,
+          "initialHeight": 240,
+          "leftOfNode": "hf-server-transformers-image-classification_pnm02e",
+          "previewX": 608,
+          "previewY": 16,
+          "previewWidth": 448,
+          "previewHeight": 240
+        },
+        "uiData": {
+          "posX": -48,
+          "posY": -64,
+          "width": 176,
+          "height": 180,
+          "selected": false
+        },
+        "propValues": {
+          "urls": [
+            "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic1.jpg",
+            "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic2.jpeg",
+            "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic3.jpg",
+            "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic4.jpeg",
+            "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic5.jpg",
+            "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic6.jpg",
+            "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic7.jpeg",
+            "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic8.jpg",
+            "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic9.jpg"
+          ],
+          "gridColumnCount": 3,
+          "allowUserUpload": false,
+          "selectedImageUrl": "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic4.jpeg",
+          "hidePreview": false
+        }
+      },
+      {
+        "id": "hf-hub-login_8p9uvq",
+        "nodeSpecId": "hf-hub-login",
+        "customData": {
+          "leftOfNode": "hf-server-transformers-image-classification_pnm02e",
+          "previewX": 16,
+          "previewY": 16,
+          "previewWidth": 320,
+          "previewHeight": 240
+        },
+        "uiData": {
+          "posX": -80,
+          "posY": 144,
+          "width": 213.81884765625,
+          "height": 130,
+          "selected": true
+        },
+        "propValues": {
+          "apikey": "",
+          "hidePreview": true
+        }
+      }
+    ]
+  },
+  "customNodeUrls": [
+    "http://localhost:8080/index.js"
+  ]
+}

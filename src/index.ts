@@ -20,6 +20,8 @@ import TEXT_TO_IMAGE_SERVER_NODE from "./nodes/server/text-to-image";
 import TOKEN_CLASSIFICATION_SERVER_NODE from "./nodes/server/token-classification";
 import FILL_MASK_SERVER_NODE from "./nodes/server/fill-mask";
 import SUMMARIZATION_SERVER from "./nodes/server/summarization";
+import IMAGE_CLASSIFICATION_SERVER_NODE from "./nodes/server/image-classification";
+
 import HF_LOGIN_HUB from "./nodes/server/hf-hub-login";
 //
 const client_node = [
@@ -42,6 +44,7 @@ const server_nodes = [
   TOKEN_CLASSIFICATION_SERVER_NODE,
   SUMMARIZATION_SERVER,
   FILL_MASK_SERVER_NODE,
+  IMAGE_CLASSIFICATION_SERVER_NODE,
 ];
 
 // Register client nodes custom nodes with visual blocks to start using them.
