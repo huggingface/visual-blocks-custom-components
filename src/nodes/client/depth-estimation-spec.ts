@@ -56,6 +56,7 @@ export const NODE_SPEC: NodeSpec = {
       recommendedNodes: [
         {
           nodeSpecId: "hf-transformers-depth-estimation-viewer",
+          extraInputIdsToConnect: ["image"],
         },
       ],
     },

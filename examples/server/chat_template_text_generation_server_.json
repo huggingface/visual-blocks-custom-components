@@ -1,0 +1,175 @@
+{
+  "project": {
+    "name": "Chat Template - Text Generation (server)",
+    "id": "new_hfdemo",
+    "creationTs": 1710046043852,
+    "lastModifiedTs": 1710135082259,
+    "userSetData": {
+      "description": "",
+      "tags": [],
+      "contactURL": "",
+      "tutorialYouTube": ""
+    }
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "hf-server-text-generation_zbop0f",
+        "nodeSpecId": "hf-server-text-generation",
+        "customData": {
+          "previewX": 16,
+          "previewY": 16,
+          "previewWidth": 320,
+          "previewHeight": 240
+        },
+        "uiData": {
+          "posX": 375.96435546875,
+          "posY": 0,
+          "width": 176,
+          "height": 242,
+          "selected": false
+        },
+        "inputValues": {
+          "text": "",
+          "temperature": 1,
+          "max_new_tokens": 1000,
+          "return_full_text": false,
+          "repetition_penalty": 1,
+          "modelid": "mistralai/Mistral-7B-Instruct-v0.1",
+          "apikey": ""
+        },
+        "incomingEdges": {
+          "text": [
+            {
+              "sourceNodeId": "hf-chat-template-generator_tdp8kh",
+              "outputId": "template"
+            }
+          ],
+          "modelid": [
+            {
+              "sourceNodeId": "hf-chat-template-generator_tdp8kh",
+              "outputId": "modelid"
+            }
+          ],
+          "apikey": [
+            {
+              "sourceNodeId": "hf-hub-login_wmn1pq",
+              "outputId": "apikey"
+            }
+          ]
+        }
+      },
+      {
+        "id": "hf-hub-login_wmn1pq",
+        "nodeSpecId": "hf-hub-login",
+        "customData": {
+          "previewX": 16,
+          "previewY": 16,
+          "previewWidth": 320,
+          "previewHeight": 240
+        },
+        "uiData": {
+          "posX": 1.07275390625,
+          "posY": 38,
+          "width": 213.81884765625,
+          "height": 130,
+          "selected": true
+        },
+        "propValues": {
+          "apikey": "",
+          "hidePreview": true
+        }
+      },
+      {
+        "id": "hf-chat-template-generator_tdp8kh",
+        "nodeSpecId": "hf-chat-template-generator",
+        "customData": {
+          "previewX": 352,
+          "previewY": 16,
+          "previewWidth": 320,
+          "previewHeight": 240
+        },
+        "uiData": {
+          "posX": 0,
+          "posY": 234.75,
+          "width": 215.96435546875,
+          "height": 191,
+          "selected": false
+        },
+        "inputValues": {
+          "user": "How to make fresh pasta?",
+          "assistant": "",
+          "system": "",
+          "modelid": "mistralai/Mixtral-8x7B-Instruct-v0.1"
+        }
+      },
+      {
+        "id": "markdown_viewer_9566l8",
+        "nodeSpecId": "markdown_viewer",
+        "customData": {
+          "previewX": 736,
+          "previewY": 16,
+          "previewWidth": 320,
+          "previewHeight": 240
+        },
+        "uiData": {
+          "posX": 375.96435546875,
+          "posY": 283.25,
+          "width": 176,
+          "height": 130,
+          "selected": false
+        },
+        "propValues": {
+          "hidePreview": false,
+          "hidePreviewFrame": false
+        },
+        "inputValues": {
+          "markdownString": ""
+        },
+        "incomingEdges": {
+          "markdownString": [
+            {
+              "sourceNodeId": "hf-chat-template-generator_tdp8kh",
+              "outputId": "template"
+            }
+          ]
+        }
+      },
+      {
+        "id": "markdown_viewer_c6xcbn",
+        "nodeSpecId": "markdown_viewer",
+        "customData": {
+          "previewX": 352,
+          "previewY": 16,
+          "previewWidth": 368,
+          "previewHeight": 448
+        },
+        "uiData": {
+          "posX": 711.96435546875,
+          "posY": 56,
+          "width": 176,
+          "height": 130,
+          "selected": false
+        },
+        "propValues": {
+          "hidePreview": false,
+          "hidePreviewFrame": false
+        },
+        "inputValues": {
+          "markdownString": ""
+        },
+        "incomingEdges": {
+          "markdownString": [
+            {
+              "sourceNodeId": "hf-server-text-generation_zbop0f",
+              "outputId": "results"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "customNodeUrls": [
+    "http://localhost:8080/index.js"
+  ]
+}

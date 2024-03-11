@@ -1,0 +1,120 @@
+{
+  "project": {
+    "name": "Depth Estimation (client)",
+    "id": "new_hfdemo",
+    "creationTs": 1710046043852,
+    "lastModifiedTs": 1710122073527,
+    "userSetData": {
+      "description": "",
+      "tags": [],
+      "contactURL": "",
+      "tutorialYouTube": ""
+    }
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "input_image_x9b4h5",
+        "nodeSpecId": "input_image",
+        "customData": {
+          "initialWidth": 448,
+          "initialHeight": 240,
+          "previewX": 16,
+          "previewY": 16,
+          "previewWidth": 448,
+          "previewHeight": 240
+        },
+        "uiData": {
+          "posX": 0,
+          "posY": 34.5,
+          "width": 176,
+          "height": 180,
+          "selected": false
+        },
+        "propValues": {
+          "urls": [
+            "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic1.jpg",
+            "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic2.jpeg",
+            "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic3.jpg",
+            "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic4.jpeg",
+            "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic5.jpg",
+            "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic6.jpg",
+            "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic7.jpeg",
+            "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic8.jpg",
+            "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic9.jpg"
+          ],
+          "gridColumnCount": 3,
+          "allowUserUpload": false,
+          "selectedImageUrl": "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic1.jpg",
+          "hidePreview": false
+        }
+      },
+      {
+        "id": "hf-transformers-depth-estimation-viewer_leyz9n",
+        "nodeSpecId": "hf-transformers-depth-estimation-viewer",
+        "customData": {
+          "previewX": 480,
+          "previewY": 16,
+          "previewWidth": 496,
+          "previewHeight": 432
+        },
+        "uiData": {
+          "posX": 672,
+          "posY": 41.5,
+          "width": 212.111328125,
+          "height": 166,
+          "selected": true
+        },
+        "inputValues": {
+          "displacement": 0.5
+        },
+        "incomingEdges": {
+          "depthData": [
+            {
+              "sourceNodeId": "hf-client-transformers-depth-estimation_mq46hh",
+              "outputId": "depthData"
+            }
+          ],
+          "image": [
+            {
+              "sourceNodeId": "input_image_x9b4h5",
+              "outputId": "image"
+            }
+          ]
+        }
+      },
+      {
+        "id": "hf-client-transformers-depth-estimation_mq46hh",
+        "nodeSpecId": "hf-client-transformers-depth-estimation",
+        "customData": {
+          "previewX": 16,
+          "previewY": 16,
+          "previewWidth": 320,
+          "previewHeight": 240
+        },
+        "uiData": {
+          "posX": 336,
+          "posY": -80,
+          "width": 176,
+          "height": 142,
+          "selected": false
+        },
+        "inputValues": {
+          "modelid": "Xenova/depth-anything-small-hf",
+          "quantized": true
+        },
+        "incomingEdges": {
+          "image": [
+            {
+              "sourceNodeId": "input_image_x9b4h5",
+              "outputId": "image"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "customNodeUrls": [
+    "http://localhost:8080/index.js"
+  ]
+}

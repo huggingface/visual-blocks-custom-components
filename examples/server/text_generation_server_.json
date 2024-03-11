@@ -1,0 +1,109 @@
+{
+  "project": {
+    "name": "Text Generation (Server)",
+    "id": "wcoaj8",
+    "creationTs": 1710123932380,
+    "lastModifiedTs": 1710125539028,
+    "userSetData": {
+      "description": "",
+      "tags": [],
+      "contactURL": "",
+      "tutorialYouTube": ""
+    }
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "markdown_viewer_gen3z5",
+        "nodeSpecId": "markdown_viewer",
+        "customData": {
+          "rightOfNode": "hf-server-text-generation_64q4cp",
+          "previewX": 352,
+          "previewY": 16,
+          "previewWidth": 528,
+          "previewHeight": 400
+        },
+        "uiData": {
+          "posX": 288,
+          "posY": -64,
+          "width": 176,
+          "height": 130,
+          "selected": false
+        },
+        "propValues": {
+          "hidePreview": false,
+          "hidePreviewFrame": false
+        },
+        "inputValues": {
+          "markdownString": ""
+        },
+        "incomingEdges": {
+          "markdownString": [
+            {
+              "sourceNodeId": "hf-server-text-generation_64q4cp",
+              "outputId": "results"
+            }
+          ]
+        }
+      },
+      {
+        "id": "hf-hub-login_o4wn8f",
+        "nodeSpecId": "hf-hub-login",
+        "customData": {
+          "previewX": 16,
+          "previewY": 16,
+          "previewWidth": 320,
+          "previewHeight": 240
+        },
+        "uiData": {
+          "posX": -256,
+          "posY": 48,
+          "width": 213.81884765625,
+          "height": 130,
+          "selected": false
+        },
+        "propValues": {
+          "apikey": "",
+          "hidePreview": true
+        }
+      },
+      {
+        "id": "hf-server-text-generation_64q4cp",
+        "nodeSpecId": "hf-server-text-generation",
+        "customData": {
+          "previewX": 16,
+          "previewY": 16,
+          "previewWidth": 320,
+          "previewHeight": 240
+        },
+        "uiData": {
+          "posX": 32,
+          "posY": -144,
+          "width": 176,
+          "height": 242,
+          "selected": true
+        },
+        "inputValues": {
+          "text": "A lovely day",
+          "temperature": 0.8,
+          "max_new_tokens": 200,
+          "return_full_text": false,
+          "repetition_penalty": 1,
+          "modelid": "mistralai/Mistral-7B-Instruct-v0.1",
+          "apikey": ""
+        },
+        "incomingEdges": {
+          "apikey": [
+            {
+              "sourceNodeId": "hf-hub-login_o4wn8f",
+              "outputId": "apikey"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "customNodeUrls": [
+    "http://localhost:8080/index.js"
+  ]
+}

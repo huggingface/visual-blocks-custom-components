@@ -5,6 +5,7 @@
 import TOKEN_CLASSIFICATION_VIEWER_NODE from "./nodes/shared/token-classification-viewer";
 import IMAGE_SEGMENTATION_VIEWER_NODE from "./nodes/shared/image-segmentation-viewer";
 import DEPTH_ESTIMATION_VIEWER_NODE from "./nodes/shared/depth-estimation-viewer";
+import CHAT_TEMPLATE_GENERATOR_NODE from "./nodes/shared/chat-template-generator";
 
 import TOKEN_CLASSIFICATION_NODE from "./nodes/client/token-classification";
 import IMAGE_SEGMENTATION_NODE from "./nodes/client/image-segmentation";
@@ -18,6 +19,11 @@ import BACKGROUND_REMOVAL_NODE from "./nodes/client/background-removal";
 import TEXT_CLASSIFICATION_SERVER_NODE from "./nodes/server/text-classification";
 import TEXT_TO_IMAGE_SERVER_NODE from "./nodes/server/text-to-image";
 import TOKEN_CLASSIFICATION_SERVER_NODE from "./nodes/server/token-classification";
+import FILL_MASK_SERVER_NODE from "./nodes/server/fill-mask";
+import SUMMARIZATION_SERVER from "./nodes/server/summarization";
+import IMAGE_CLASSIFICATION_SERVER_NODE from "./nodes/server/image-classification";
+import TEXT_GENERATION_SERVER_NODE from "./nodes/server/text-generation";
+
 import HF_LOGIN_HUB from "./nodes/server/hf-hub-login";
 //
 const client_node = [
@@ -38,6 +44,11 @@ const server_nodes = [
   TEXT_TO_IMAGE_SERVER_NODE,
   HF_LOGIN_HUB,
   TOKEN_CLASSIFICATION_SERVER_NODE,
+  SUMMARIZATION_SERVER,
+  FILL_MASK_SERVER_NODE,
+  IMAGE_CLASSIFICATION_SERVER_NODE,
+  TEXT_GENERATION_SERVER_NODE,
+  CHAT_TEMPLATE_GENERATOR_NODE,
 ];
 
 // Register client nodes custom nodes with visual blocks to start using them.
