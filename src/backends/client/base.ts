@@ -3,11 +3,8 @@ import { pipeline, env } from "@xenova/transformers";
 import type { Pipeline } from "@xenova/transformers";
 import { LitElement } from "lit";
 
-// Disable local model check
-env.allowLocalModels = false;
-
-// Proxy execution to a web worker to avoid freezing the UI
-env.backends.onnx.wasm.proxy = true;
+env.backends.onnx.wasm.wasmPaths = 'https://cdn.jsdelivr.net/npm/onnxruntime-web@1.17.1/dist/';
+env.backends.onnx.wasm.numThreads = 1;
 
 export type ProgressCallbackFunction = (data: any) => void;
 
@@ -32,6 +29,7 @@ export class PipelineSingleton {
       this.instance[key] = pipeline(this.task, modelId, {
         quantized,
         progress_callback,
+        device: "webgpu",
       });
       // TODO: use progress callback
     } else {

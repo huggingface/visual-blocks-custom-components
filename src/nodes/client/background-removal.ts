@@ -45,7 +45,7 @@ export class ModelSingleton {
       const model = AutoModel.from_pretrained('briaai/RMBG-1.4', {
         // Do not require config.json to be present in the repository
         config: { model_type: 'custom' },
-
+        device: "webgpu",
       });
 
       const processor = await AutoProcessor.from_pretrained('briaai/RMBG-1.4', {

@@ -38,7 +38,7 @@ export const NODE_SPEC: NodeSpec = {
     {
       name: "quantized",
       displayLabel: "Quantized Model",
-      defaultValue: true,
+      defaultValue: false,
       type: DataType.BOOLEAN,
       editorSpec: {
         type: EditorType.SLIDE_TOGGLE,
