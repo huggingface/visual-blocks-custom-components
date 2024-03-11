@@ -1,0 +1,158 @@
+{
+  "project": {
+    "name": "Background Removal (client)",
+    "id": "new_hfdemo",
+    "creationTs": 1710046043852,
+    "lastModifiedTs": 1710121924057,
+    "userSetData": {
+      "description": "",
+      "tags": [],
+      "contactURL": "",
+      "tutorialYouTube": ""
+    }
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "input_image_2ancoy",
+        "nodeSpecId": "input_image",
+        "customData": {
+          "initialWidth": 448,
+          "initialHeight": 240,
+          "previewX": 16,
+          "previewY": 16,
+          "previewWidth": 448,
+          "previewHeight": 240
+        },
+        "uiData": {
+          "posX": -416,
+          "posY": 16,
+          "width": 176,
+          "height": 180,
+          "selected": false
+        },
+        "propValues": {
+          "urls": [
+            "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic1.jpg",
+            "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic2.jpeg",
+            "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic3.jpg",
+            "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic4.jpeg",
+            "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic5.jpg",
+            "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic6.jpg",
+            "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic7.jpeg",
+            "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic8.jpg",
+            "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic9.jpg"
+          ],
+          "gridColumnCount": 3,
+          "allowUserUpload": false,
+          "selectedImageUrl": "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic1.jpg",
+          "hidePreview": false
+        }
+      },
+      {
+        "id": "image_viewer_yopc8g",
+        "nodeSpecId": "image_viewer",
+        "customData": {
+          "previewX": 816,
+          "previewY": 16,
+          "previewWidth": 320,
+          "previewHeight": 240
+        },
+        "uiData": {
+          "posX": 288,
+          "posY": -80,
+          "width": 176,
+          "height": 185,
+          "selected": false
+        },
+        "propValues": {
+          "columnCount": "2",
+          "hidePreview": false
+        },
+        "inputValues": {
+          "images": [],
+          "urls": []
+        },
+        "incomingEdges": {
+          "images": [
+            {
+              "sourceNodeId": "hf-client-transformers-background-removal_qo2dkc",
+              "outputId": "foreground"
+            }
+          ]
+        }
+      },
+      {
+        "id": "hf-client-transformers-background-removal_qo2dkc",
+        "nodeSpecId": "hf-client-transformers-background-removal",
+        "customData": {
+          "previewX": 16,
+          "previewY": 16,
+          "previewWidth": 320,
+          "previewHeight": 240
+        },
+        "uiData": {
+          "posX": -48,
+          "posY": -16,
+          "width": 194.287109375,
+          "height": 117,
+          "selected": false
+        },
+        "inputValues": {
+          "quantized": true
+        },
+        "incomingEdges": {
+          "image": [
+            {
+              "sourceNodeId": "input_image_2ancoy",
+              "outputId": "image"
+            }
+          ]
+        }
+      },
+      {
+        "id": "image_mixer_7r1fo4",
+        "nodeSpecId": "image_mixer",
+        "customData": {
+          "previewX": 480,
+          "previewY": 16,
+          "previewWidth": 320,
+          "previewHeight": 240
+        },
+        "uiData": {
+          "posX": 592,
+          "posY": 160,
+          "width": 224,
+          "height": 254,
+          "selected": true
+        },
+        "propValues": {
+          "mode": "source-out",
+          "hidePreview": false
+        },
+        "inputValues": {
+          "topText": "",
+          "midText": "",
+          "bottomText": ""
+        },
+        "incomingEdges": {
+          "image1": [
+            {
+              "sourceNodeId": "hf-client-transformers-background-removal_qo2dkc",
+              "outputId": "foreground"
+            }
+          ],
+          "image2": [
+            {
+              "sourceNodeId": "input_image_2ancoy",
+              "outputId": "image"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "customNodeUrls": [
+    "http://localhost:8080/index.js"
+  ]
+}

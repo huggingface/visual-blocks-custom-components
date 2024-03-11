@@ -1,0 +1,117 @@
+{
+  "project": {
+    "name": "Image Classification (client)",
+    "id": "new_hfdemo",
+    "creationTs": 1710046043852,
+    "lastModifiedTs": 1710122134215,
+    "userSetData": {
+      "description": "",
+      "tags": [],
+      "contactURL": "",
+      "tutorialYouTube": ""
+    }
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "hf-client-transformers-image-classification_4u1xs7",
+        "nodeSpecId": "hf-client-transformers-image-classification",
+        "customData": {
+          "previewX": 16,
+          "previewY": 16,
+          "previewWidth": 320,
+          "previewHeight": 240
+        },
+        "uiData": {
+          "posX": 157.42666625976562,
+          "posY": 17.24720573425293,
+          "width": 186.3271484375,
+          "height": 142,
+          "selected": false
+        },
+        "inputValues": {
+          "modelid": "Xenova/mobilevit-x-small",
+          "quantized": false
+        },
+        "incomingEdges": {
+          "image": [
+            {
+              "sourceNodeId": "input_image_ondys7",
+              "outputId": "image"
+            }
+          ]
+        }
+      },
+      {
+        "id": "classification_visualizer_r6lbe5",
+        "nodeSpecId": "classification_visualizer",
+        "customData": {
+          "initialWidth": 240,
+          "initialHeight": 320,
+          "previewX": 480,
+          "previewY": 16,
+          "previewWidth": 240,
+          "previewHeight": 320
+        },
+        "uiData": {
+          "posX": 496,
+          "posY": 16,
+          "width": 187.76171875,
+          "height": 105,
+          "selected": false
+        },
+        "propValues": {
+          "hidePreview": false
+        },
+        "incomingEdges": {
+          "result": [
+            {
+              "sourceNodeId": "hf-client-transformers-image-classification_4u1xs7",
+              "outputId": "results"
+            }
+          ]
+        }
+      },
+      {
+        "id": "input_image_ondys7",
+        "nodeSpecId": "input_image",
+        "customData": {
+          "initialWidth": 448,
+          "initialHeight": 240,
+          "leftOfNode": "hf-client-transformers-image-classification_4u1xs7",
+          "previewX": 16,
+          "previewY": 16,
+          "previewWidth": 448,
+          "previewHeight": 240
+        },
+        "uiData": {
+          "posX": -128,
+          "posY": 16,
+          "width": 176,
+          "height": 180,
+          "selected": true
+        },
+        "propValues": {
+          "urls": [
+            "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic1.jpg",
+            "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic2.jpeg",
+            "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic3.jpg",
+            "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic4.jpeg",
+            "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic5.jpg",
+            "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic6.jpg",
+            "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic7.jpeg",
+            "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic8.jpg",
+            "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic9.jpg"
+          ],
+          "gridColumnCount": 3,
+          "allowUserUpload": false,
+          "selectedImageUrl": "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic5.jpg",
+          "hidePreview": false
+        }
+      }
+    ]
+  },
+  "customNodeUrls": [
+    "http://localhost:8080/index.js"
+  ]
+}
