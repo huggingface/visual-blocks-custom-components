@@ -6,7 +6,7 @@ import {
   EditorType,
 } from "@visualblocks/custom-node-types";
 
-const DEFAULT_MODEL_ID = "mistralai/Mistral-7B-Instruct-v0.1";
+const DEFAULT_MODEL_ID = "mistralai/Mixtral-8x7B-Instruct-v0.1";
 
 export const NODE_SPEC: NodeSpec = {
   id: "hf-server-text-generation",

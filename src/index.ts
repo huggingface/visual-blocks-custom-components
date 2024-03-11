@@ -5,6 +5,7 @@
 import TOKEN_CLASSIFICATION_VIEWER_NODE from "./nodes/shared/token-classification-viewer";
 import IMAGE_SEGMENTATION_VIEWER_NODE from "./nodes/shared/image-segmentation-viewer";
 import DEPTH_ESTIMATION_VIEWER_NODE from "./nodes/shared/depth-estimation-viewer";
+import CHAT_TEMPLATE_GENERATOR_NODE from "./nodes/shared/chat-template-generator";
 
 import TOKEN_CLASSIFICATION_NODE from "./nodes/client/token-classification";
 import IMAGE_SEGMENTATION_NODE from "./nodes/client/image-segmentation";
@@ -47,6 +48,7 @@ const server_nodes = [
   FILL_MASK_SERVER_NODE,
   IMAGE_CLASSIFICATION_SERVER_NODE,
   TEXT_GENERATION_SERVER_NODE,
+  CHAT_TEMPLATE_GENERATOR_NODE,
 ];
 
 // Register client nodes custom nodes with visual blocks to start using them.
