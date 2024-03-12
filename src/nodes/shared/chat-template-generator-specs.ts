@@ -52,6 +52,15 @@ export const NODE_SPEC: NodeSpec = {
         type: EditorType.TEXT_INPUT,
       },
     },
+    {
+      name: "add_generation_prompt",
+      displayLabel: "Add Generation Prompt",
+      defaultValue: false,
+      type: DataType.BOOLEAN,
+      editorSpec: {
+        type: EditorType.SLIDE_TOGGLE,
+      },
+    },
   ],
 
   // Outputs.

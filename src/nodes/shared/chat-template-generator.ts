@@ -11,6 +11,7 @@ declare interface Inputs {
   system: string;
   user: string;
   modelid: string;
+  add_generation_prompt: boolean;
 }
 
 declare interface Outputs {
@@ -34,7 +35,7 @@ class ChatTemplateGenerator extends LitElement {
   }
 
   async runWithInputs(inputs: Inputs) {
-    const { user, assistant, system, modelid } = inputs;
+    const { user, assistant, system, modelid, add_generation_prompt } = inputs;
     if (!user || !modelid) {
       // No input node
       this.dispatchEvent(
@@ -79,6 +80,7 @@ class ChatTemplateGenerator extends LitElement {
     try {
       const template = new Template(this.configFile.chat_template);
       const result = template.render({
+        add_generation_prompt: add_generation_prompt,
         messages: chat,
         bos_token: this.configFile.bos_token,
         eos_token: this.configFile.eos_token,
