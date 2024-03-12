@@ -4,18 +4,15 @@ import type {
   VisualBlocksImage,
 } from "@visualblocks/custom-node-types";
 
-import {
-  AutoModel,
-  AutoProcessor,
-  RawImage,
-} from "@xenova/transformers";
+import { AutoModel, AutoProcessor, RawImage } from "@xenova/transformers";
 
 import {
   BasePipelineNode,
+  Devices,
+  type DevicesType,
 } from "../../backends/client/base";
 
 import type { ProgressCallbackFunction } from "../../backends/client/base";
-// import { compareObjects } from "../../utils";
 
 import { NODE_SPEC } from "./background-removal-spec";
 import { compareObjects } from "../../utils";
@@ -24,6 +21,7 @@ declare interface Inputs {
   image: VisualBlocksImage;
   quantized: boolean;
   modelid: string;
+  device: DevicesType;
 }
 declare interface Outputs {
   foreground: VisualBlocksImage;
@@ -31,49 +29,49 @@ declare interface Outputs {
 
 export class ModelSingleton {
   static task?: any;
-
   static instance: { [key: string]: Promise<AutoModel> } = {};
 
-  static async getInstance(modelId: string, quantized: boolean, progress_callback?: ProgressCallbackFunction) {
-
-    const key = `${modelId}${quantized ? "_quantized" : ""}`;
+  static async getInstance(
+    modelId: string,
+    quantized: boolean,
+    device: DevicesType,
+    progress_callback?: ProgressCallbackFunction
+  ) {
+    const revision = modelId.split("@")[1] || "main";
+    modelId = modelId.split("@")[0];
+    const key = `${modelId}${
+      quantized ? "_quantized" : ""
+    }_${device}_${revision}`;
     if (!(key in this.instance)) {
       console.info(
         "Creating model instance. Model not loaded yet, modelId:",
-        modelId
+        modelId,
+        "Device",
+        device
       );
-      const model = AutoModel.from_pretrained('briaai/RMBG-1.4', {
+      const model = AutoModel.from_pretrained(modelId, {
         // Do not require config.json to be present in the repository
-        config: { model_type: 'custom' },
-
+        quantized: device === Devices.webgpu ? false : quantized,
+        device: device,
+        revision: revision,
       });
-
-      const processor = await AutoProcessor.from_pretrained('briaai/RMBG-1.4', {
-        // Do not require config.json to be present in the repository
-        config: {
-          do_normalize: true,
-          do_pad: false,
-          do_rescale: true,
-          do_resize: true,
-          image_mean: [0.5, 0.5, 0.5],
-          feature_extractor_type: "ImageFeatureExtractor",
-          image_std: [1, 1, 1],
-          resample: 2,
-          rescale_factor: 0.00392156862745098,
-          size: { width: 1024, height: 1024 },
-        }
+      const processor = await AutoProcessor.from_pretrained(modelId, {
+        revision: revision,
       });
-
       this.instance[key] = Promise.all([model, processor]);
 
       // TODO: use progress callback
     } else {
-      console.info("Model instance already created for modelId:", modelId);
+      console.info(
+        "Model instance already created for modelId:",
+        modelId,
+        "Device",
+        device
+      );
     }
     return this.instance[key];
   }
 }
-
 
 class BackgroundRemovalNode extends BasePipelineNode {
   private cachedInput?: Inputs;
@@ -82,10 +80,10 @@ class BackgroundRemovalNode extends BasePipelineNode {
   constructor() {
     super(ModelSingleton);
   }
-  render() { }
+  render() {}
 
   async runWithInputs(inputs: Inputs, services: Services) {
-    const { image, modelid, quantized } = inputs;
+    const { image, modelid, quantized, device } = inputs;
     if (!image?.canvasId) {
       // No input node
       this.dispatchEvent(
@@ -96,7 +94,9 @@ class BackgroundRemovalNode extends BasePipelineNode {
 
     if (this.cachedResult && compareObjects(this.cachedInput, inputs)) {
       this.dispatchEvent(
-        new CustomEvent("outputs", { detail: { foreground: this.cachedResult } })
+        new CustomEvent("outputs", {
+          detail: { foreground: this.cachedResult },
+        })
       );
       return;
     }
@@ -111,7 +111,8 @@ class BackgroundRemovalNode extends BasePipelineNode {
     const data = canvas.toDataURL();
     const [model, processor] = await this.getInstance(
       modelid,
-      quantized
+      quantized,
+      device
     );
 
     // TODO: .fromCanvas() method
@@ -124,13 +125,15 @@ class BackgroundRemovalNode extends BasePipelineNode {
     const { output } = await model({ input: pixel_values });
 
     // Resize mask back to original size
-    const mask = await RawImage.fromTensor(output[0].mul(255).to('uint8')).resize(i.width, i.height);
+    const mask = await RawImage.fromTensor(
+      output[0].mul(255).to("uint8")
+    ).resize(i.width, i.height);
 
     // Create new canvas
-    const c = document.createElement('canvas');
+    const c = document.createElement("canvas");
     c.width = i.width;
     c.height = i.height;
-    const ctx = c.getContext('2d')!;
+    const ctx = c.getContext("2d")!;
 
     // Draw original image output to canvas
     ctx.drawImage(i.toCanvas(), 0, 0);
