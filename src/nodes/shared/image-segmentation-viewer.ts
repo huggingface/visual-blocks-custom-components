@@ -243,6 +243,7 @@ class ImageSegmentationViewerNode extends LitElement {
           },
         })
       );
+      return;
     }
     if (
       this.cachedSegData &&
