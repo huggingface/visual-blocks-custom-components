@@ -22,6 +22,7 @@ declare interface Inputs {
   quantized: boolean;
   modelid: string;
   device: DevicesType;
+  modelid_curated: string;
 }
 declare interface Outputs {
   foreground: VisualBlocksImage;
@@ -83,7 +84,10 @@ class BackgroundRemovalNode extends BasePipelineNode {
   render() {}
 
   async runWithInputs(inputs: Inputs, services: Services) {
-    const { image, modelid, quantized, device } = inputs;
+    const { image, modelid, quantized, device, modelid_curated } = inputs;
+
+    const _modelid = (modelid || modelid_curated)?.trim();
+
     if (!image?.canvasId) {
       // No input node
       this.dispatchEvent(
@@ -110,7 +114,7 @@ class BackgroundRemovalNode extends BasePipelineNode {
     ) as HTMLCanvasElement;
     const data = canvas.toDataURL();
     const [model, processor] = await this.getInstance(
-      modelid,
+      _modelid,
       quantized,
       device
     );

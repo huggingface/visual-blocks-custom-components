@@ -22,6 +22,7 @@ declare interface Inputs {
   language: string;
   modelid: string;
   device: DevicesType;
+  modelid_curated: string;
   quantized: boolean;
 }
 
@@ -34,7 +35,10 @@ class Text2TextGenerationNode extends BasePipelineNode {
   }
 
   async runWithInputs(inputs: Inputs) {
-    const { text, language, modelid, device, quantized } = inputs;
+    const { text, language, modelid, modelid_curated, device, quantized } =
+      inputs;
+
+    const _modelid = (modelid || modelid_curated)?.trim();
     if (!text) {
       // No input node
       this.dispatchEvent(
@@ -54,7 +58,7 @@ class Text2TextGenerationNode extends BasePipelineNode {
       return;
     }
     const translator: Text2TextGenerationPipeline = await this.getInstance(
-      modelid,
+      _modelid,
       quantized,
       device
     );

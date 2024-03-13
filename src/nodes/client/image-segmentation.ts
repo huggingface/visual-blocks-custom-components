@@ -27,6 +27,7 @@ class ImageSegmentationPipelineSingleton extends PipelineSingleton {
 declare interface Inputs {
   image: VisualBlocksImage;
   quantized: boolean;
+  modelid_curated: string;
   modelid: string;
   device: DevicesType;
 }
@@ -44,7 +45,9 @@ class ImageSegmentationNode extends BasePipelineNode {
   render() {}
 
   async runWithInputs(inputs: Inputs, services: Services) {
-    const { image, modelid, device, quantized } = inputs;
+    const { image, modelid, modelid_curated, device, quantized } = inputs;
+
+    const _modelid = (modelid || modelid_curated)?.trim();
     if (!image?.canvasId) {
       // No input node
       this.dispatchEvent(
@@ -69,7 +72,7 @@ class ImageSegmentationNode extends BasePipelineNode {
     ) as HTMLCanvasElement;
     const data = canvas.toDataURL();
     const segmenter: ImageSegmentationPipeline = await this.getInstance(
-      modelid,
+      _modelid,
       quantized,
       device
     );

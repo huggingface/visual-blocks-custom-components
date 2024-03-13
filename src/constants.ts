@@ -20,6 +20,93 @@ export const COLORS = [
   [177, 89, 40],
 ];
 
+export const CURATED_MODELS_CLIENT = {
+  background_removal: [
+    {
+      value: "Xenova/modnet",
+      label: "Xenova/modnet",
+    },
+    {
+      value: "briaai/RMBG-1.4",
+      label: "briaai/RMBG-1.4",
+    },
+  ],
+  depth_estimation: [
+    {
+      value: "Xenova/depth-anything-small-hf",
+      label: "Xenova/depth-anything-small-hf",
+    },
+    {
+      value: "Xenova/depth-anything-base-hf",
+      label: "Xenova/depth-anything-base-hf",
+    },
+  ],
+  image_classification: [
+    {
+      value: "Xenova/mobilevit-x-small",
+      label: "Xenova/mobilevit-x-small",
+    },
+    {
+      value: "Xenova/mobilevit-xx-small",
+      label: "Xenova/mobilevit-xx-small",
+    },
+    {
+      value: "Xenova/mobilevit-small",
+      label: "Xenova/mobilevit-small",
+    },
+  ],
+  image_segmentation: [
+    {
+      value: "Xenova/segformer_b0_clothes",
+      label: "Xenova/segformer_b0_clothes",
+    },
+    {
+      value: "Xenova/face-parsing",
+      label: "Xenova/face-parsing",
+    },
+  ],
+  object_detection: [
+    {
+      value: "Xenova/detr-resnet-50",
+      label: "Xenova/detr-resnet-50",
+    },
+    {
+      value: "Xenova/detr-resnet-101",
+      label: "Xenova/detr-resnet-101",
+    },
+  ],
+  text_classification: [
+    {
+      value: "Xenova/distilbert-base-uncased-finetuned-sst-2-english",
+      label: "Xenova/distilbert-base-uncased-finetuned-sst-2-english",
+    },
+    {
+      value: "Xenova/distilbert-base-uncased-distilled-squad",
+      label: "Xenova/distilbert-base-uncased-distilled-squad",
+    },
+  ],
+  token_classification: [
+    {
+      value: "Xenova/bert-base-multilingual-cased-ner-hrl",
+      label: "Xenova/bert-base-multilingual-cased-ner-hrl",
+    },
+    {
+      value: "Xenova/Xenova/bert-base-NER-uncased",
+      label: "Xenova/Xenova/bert-base-NER-uncased",
+    },
+  ],
+  translation: [
+    {
+      value: "Xenova/t5-small",
+      label: "Xenova/t5-small",
+    },
+    {
+      value: "Xenova/t5-base",
+      label: "Xenova/t5-base",
+    },
+  ],
+};
+
 export const CURATED_MODELS = {
   text_to_image: [
     {
