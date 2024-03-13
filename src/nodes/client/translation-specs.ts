@@ -1,12 +1,10 @@
-import { COLLECTION_NAME_CLIENT } from "../../constants";
+import { COLLECTION_NAME_CLIENT, CURATED_MODELS_CLIENT } from "../../constants";
 import type { NodeSpec } from "@visualblocks/custom-node-types";
 import {
   DataType,
   Category,
   EditorType,
 } from "@visualblocks/custom-node-types";
-
-const DEFAULT_MODEL_ID = "Xenova/t5-small";
 
 export const NODE_SPEC: NodeSpec = {
   id: "hf-client-transformers-translation",
@@ -39,6 +37,16 @@ export const NODE_SPEC: NodeSpec = {
         ],
       },
     },
+    {
+      name: "modelid_curated",
+      displayLabel: "Model ID",
+      info: "Curated models from Hugging Face",
+      type: DataType.STRING,
+      editorSpec: {
+        type: EditorType.DROPDOWN,
+        options: CURATED_MODELS_CLIENT.translation,
+      },
+    },
   ],
 
   // Inputs.
@@ -54,7 +62,6 @@ export const NODE_SPEC: NodeSpec = {
       name: "modelid",
       displayLabel: "Model ID",
       info: "Transformers.js Translation model ID",
-      defaultValue: DEFAULT_MODEL_ID,
       type: DataType.STRING,
       editorSpec: {
         type: EditorType.TEXT_INPUT,

@@ -21,6 +21,7 @@ import { compareObjects } from "../../utils";
 declare interface Inputs {
   image: VisualBlocksImage;
   modelid: string;
+  modelid_curated: string;
   quantized: boolean;
 }
 
@@ -36,7 +37,9 @@ class ObjectDetectionNode extends BasePipelineNode {
   }
 
   async runWithInputs(inputs: Inputs, services: Services) {
-    const { image, modelid, quantized } = inputs;
+    const { image, modelid, modelid_curated, quantized } = inputs;
+
+    const _modelid = (modelid || modelid_curated)?.trim();
     if (!image?.canvasId) {
       // No input node
       this.dispatchEvent(
@@ -58,7 +61,7 @@ class ObjectDetectionNode extends BasePipelineNode {
     const data = canvas.toDataURL();
 
     const detector: ObjectDetectionPipeline = await this.getInstance(
-      modelid,
+      _modelid,
       quantized
     );
 

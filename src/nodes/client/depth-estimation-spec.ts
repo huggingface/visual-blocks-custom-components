@@ -1,4 +1,4 @@
-import { COLLECTION_NAME_CLIENT } from "../../constants";
+import { COLLECTION_NAME_CLIENT, CURATED_MODELS_CLIENT } from "../../constants";
 import { CustomDataTypeEnum } from "../../types";
 import {
   DataType,
@@ -6,8 +6,6 @@ import {
   EditorType,
 } from "@visualblocks/custom-node-types";
 import type { NodeSpec } from "@visualblocks/custom-node-types";
-
-const DEFAULT_MODEL_ID = "Xenova/depth-anything-small-hf";
 
 export const NODE_SPEC: NodeSpec = {
   id: "hf-client-transformers-depth-estimation",
@@ -17,9 +15,18 @@ export const NODE_SPEC: NodeSpec = {
   category: Category.PROCESSOR,
   collection: COLLECTION_NAME_CLIENT,
 
-  // Properties.
-  propertySpecs: [],
-
+  propertySpecs: [
+    {
+      name: "modelid_curated",
+      displayLabel: "Model ID",
+      info: "Curated models from Hugging Face",
+      type: DataType.STRING,
+      editorSpec: {
+        type: EditorType.DROPDOWN,
+        options: CURATED_MODELS_CLIENT.depth_estimation,
+      },
+    },
+  ],
   // Inputs.
   inputSpecs: [
     {
@@ -30,7 +37,6 @@ export const NODE_SPEC: NodeSpec = {
       name: "modelid",
       displayLabel: "Model ID",
       info: "Transformers.js Depth Estimation model ID",
-      defaultValue: DEFAULT_MODEL_ID,
       type: DataType.STRING,
       editorSpec: {
         type: EditorType.TEXT_INPUT,
