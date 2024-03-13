@@ -1,4 +1,4 @@
-import { COLLECTION_NAME_CLIENT } from "../../constants";
+import { COLLECTION_NAME_CLIENT, CURATED_MODELS_CLIENT } from "../../constants";
 import {
   DataType,
   Category,
@@ -14,14 +14,32 @@ export const NODE_SPEC: NodeSpec = {
   category: Category.PROCESSOR,
   collection: COLLECTION_NAME_CLIENT,
 
-  // Properties.
-  propertySpecs: [],
-
+  propertySpecs: [
+    {
+      name: "modelid_curated",
+      displayLabel: "Model ID",
+      info: "Curated models from Hugging Face",
+      type: DataType.STRING,
+      editorSpec: {
+        type: EditorType.DROPDOWN,
+        options: CURATED_MODELS_CLIENT.background_removal,
+      },
+    },
+  ],
   // Inputs.
   inputSpecs: [
     {
       name: "image",
       type: DataType.IMAGE,
+    },
+    {
+      name: "modelid",
+      displayLabel: "Model ID",
+      info: "Transformers.js Depth Estimation model ID",
+      type: DataType.STRING,
+      editorSpec: {
+        type: EditorType.TEXT_INPUT,
+      },
     },
     {
       name: "quantized",

@@ -41,8 +41,8 @@ class TextGenerationServerNode extends LitElement {
       max_new_tokens,
       return_full_text,
     } = inputs;
-    let _modelid = modelid || modelid_curated;
-    _modelid = _modelid.trim();
+
+    const _modelid = (modelid || modelid_curated)?.trim();
 
     if (this.hf && apikey) {
       this.hf = new HfInference(apikey);

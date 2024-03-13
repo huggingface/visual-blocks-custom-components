@@ -1,4 +1,4 @@
-import { COLLECTION_NAME_CLIENT } from "../../constants";
+import { COLLECTION_NAME_CLIENT, CURATED_MODELS_CLIENT } from "../../constants";
 import { CustomDataTypeEnum } from "../../types";
 import type { NodeSpec } from "@visualblocks/custom-node-types";
 import {
@@ -7,8 +7,6 @@ import {
   EditorType,
 } from "@visualblocks/custom-node-types";
 
-const DEFAULT_MODEL_ID = "Xenova/bert-base-multilingual-cased-ner-hrl";
-
 export const NODE_SPEC: NodeSpec = {
   id: "hf-client-token-classification",
   name: "Token Classification",
@@ -16,6 +14,19 @@ export const NODE_SPEC: NodeSpec = {
   category: Category.PROCESSOR,
   collection: COLLECTION_NAME_CLIENT,
 
+  // Properties.
+  propertySpecs: [
+    {
+      name: "modelid_curated",
+      displayLabel: "Model ID",
+      info: "Curated models from Hugging Face",
+      type: DataType.STRING,
+      editorSpec: {
+        type: EditorType.DROPDOWN,
+        options: CURATED_MODELS_CLIENT.token_classification,
+      },
+    },
+  ],
   // Inputs.
   inputSpecs: [
     {
@@ -29,7 +40,6 @@ export const NODE_SPEC: NodeSpec = {
       name: "modelid",
       displayLabel: "Model ID",
       info: "Transformers.js Token Classification model ID",
-      defaultValue: DEFAULT_MODEL_ID,
       type: DataType.STRING,
       editorSpec: {
         type: EditorType.TEXT_INPUT,

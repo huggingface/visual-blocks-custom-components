@@ -4,15 +4,9 @@ import type {
   VisualBlocksImage,
 } from "@visualblocks/custom-node-types";
 
-import {
-  AutoModel,
-  AutoProcessor,
-  RawImage,
-} from "@xenova/transformers";
+import { AutoModel, AutoProcessor, RawImage } from "@xenova/transformers";
 
-import {
-  BasePipelineNode,
-} from "../../backends/client/base";
+import { BasePipelineNode } from "../../backends/client/base";
 
 import type { ProgressCallbackFunction } from "../../backends/client/base";
 // import { compareObjects } from "../../utils";
@@ -24,6 +18,7 @@ declare interface Inputs {
   image: VisualBlocksImage;
   quantized: boolean;
   modelid: string;
+  modelid_curated: string;
 }
 declare interface Outputs {
   foreground: VisualBlocksImage;
@@ -34,21 +29,23 @@ export class ModelSingleton {
 
   static instance: { [key: string]: Promise<AutoModel> } = {};
 
-  static async getInstance(modelId: string, quantized: boolean, progress_callback?: ProgressCallbackFunction) {
-
+  static async getInstance(
+    modelId: string,
+    quantized: boolean,
+    progress_callback?: ProgressCallbackFunction
+  ) {
     const key = `${modelId}${quantized ? "_quantized" : ""}`;
     if (!(key in this.instance)) {
       console.info(
         "Creating model instance. Model not loaded yet, modelId:",
         modelId
       );
-      const model = AutoModel.from_pretrained('briaai/RMBG-1.4', {
+      const model = AutoModel.from_pretrained("briaai/RMBG-1.4", {
         // Do not require config.json to be present in the repository
-        config: { model_type: 'custom' },
-
+        config: { model_type: "custom" },
       });
 
-      const processor = await AutoProcessor.from_pretrained('briaai/RMBG-1.4', {
+      const processor = await AutoProcessor.from_pretrained("briaai/RMBG-1.4", {
         // Do not require config.json to be present in the repository
         config: {
           do_normalize: true,
@@ -61,7 +58,7 @@ export class ModelSingleton {
           resample: 2,
           rescale_factor: 0.00392156862745098,
           size: { width: 1024, height: 1024 },
-        }
+        },
       });
 
       this.instance[key] = Promise.all([model, processor]);
@@ -74,7 +71,6 @@ export class ModelSingleton {
   }
 }
 
-
 class BackgroundRemovalNode extends BasePipelineNode {
   private cachedInput?: Inputs;
   private cachedResult?: VisualBlocksImage;
@@ -82,10 +78,13 @@ class BackgroundRemovalNode extends BasePipelineNode {
   constructor() {
     super(ModelSingleton);
   }
-  render() { }
+  render() {}
 
   async runWithInputs(inputs: Inputs, services: Services) {
-    const { image, modelid, quantized } = inputs;
+    const { image, modelid, quantized, modelid_curated } = inputs;
+
+    const _modelid = (modelid || modelid_curated)?.trim();
+
     if (!image?.canvasId) {
       // No input node
       this.dispatchEvent(
@@ -96,7 +95,9 @@ class BackgroundRemovalNode extends BasePipelineNode {
 
     if (this.cachedResult && compareObjects(this.cachedInput, inputs)) {
       this.dispatchEvent(
-        new CustomEvent("outputs", { detail: { foreground: this.cachedResult } })
+        new CustomEvent("outputs", {
+          detail: { foreground: this.cachedResult },
+        })
       );
       return;
     }
@@ -109,10 +110,7 @@ class BackgroundRemovalNode extends BasePipelineNode {
       image.canvasId
     ) as HTMLCanvasElement;
     const data = canvas.toDataURL();
-    const [model, processor] = await this.getInstance(
-      modelid,
-      quantized
-    );
+    const [model, processor] = await this.getInstance(_modelid, quantized);
 
     // TODO: .fromCanvas() method
     const i = await RawImage.fromURL(data);
@@ -124,13 +122,15 @@ class BackgroundRemovalNode extends BasePipelineNode {
     const { output } = await model({ input: pixel_values });
 
     // Resize mask back to original size
-    const mask = await RawImage.fromTensor(output[0].mul(255).to('uint8')).resize(i.width, i.height);
+    const mask = await RawImage.fromTensor(
+      output[0].mul(255).to("uint8")
+    ).resize(i.width, i.height);
 
     // Create new canvas
-    const c = document.createElement('canvas');
+    const c = document.createElement("canvas");
     c.width = i.width;
     c.height = i.height;
-    const ctx = c.getContext('2d')!;
+    const ctx = c.getContext("2d")!;
 
     // Draw original image output to canvas
     ctx.drawImage(i.toCanvas(), 0, 0);
