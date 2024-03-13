@@ -7,6 +7,7 @@ import { compareObjects } from "../../utils";
 declare interface Inputs {
   text: string;
   modelid: string;
+  modelid_curated: string;
   apikey: string;
 }
 interface Outputs {
@@ -27,8 +28,9 @@ class FillMaskNode extends LitElement {
     // This node doesn't have a preview UI.
   }
   async runWithInputs(inputs: Inputs) {
-    const { text, apikey, modelid } = inputs;
+    const { text, apikey, modelid, modelid_curated } = inputs;
 
+    const _modelid = (modelid || modelid_curated)?.trim();
     if (this.hf && apikey) {
       this.hf = new HfInference(apikey);
     }
@@ -49,7 +51,7 @@ class FillMaskNode extends LitElement {
 
     try {
       const fillMasksRes = await this.hf?.fillMask({
-        model: modelid.trim(),
+        model: _modelid,
         inputs: text,
       });
       if (!fillMasksRes) {

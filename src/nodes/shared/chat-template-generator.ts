@@ -11,6 +11,7 @@ declare interface Inputs {
   system: string;
   user: string;
   modelid: string;
+  modelid_curated: string;
   add_generation_prompt: boolean;
 }
 
@@ -35,8 +36,18 @@ class ChatTemplateGenerator extends LitElement {
   }
 
   async runWithInputs(inputs: Inputs) {
-    const { user, assistant, system, modelid, add_generation_prompt } = inputs;
-    if (!user || !modelid) {
+    const {
+      user,
+      assistant,
+      system,
+      modelid,
+      modelid_curated,
+      add_generation_prompt,
+    } = inputs;
+
+    const _modelid = (modelid || modelid_curated)?.trim();
+
+    if (!user || !_modelid) {
       // No input node
       this.dispatchEvent(
         new CustomEvent("outputs", { detail: { results: null } })
@@ -52,9 +63,9 @@ class ChatTemplateGenerator extends LitElement {
     }
 
     try {
-      if (this.cachedInput?.modelid !== modelid || !this.configFile) {
+      if (this.cachedInput?.modelid !== _modelid || !this.configFile) {
         const file = await this.downloadFile({
-          repo: modelid,
+          repo: _modelid,
           path: "tokenizer_config.json",
         });
         if (file) {
@@ -86,7 +97,7 @@ class ChatTemplateGenerator extends LitElement {
         eos_token: this.configFile.eos_token,
       });
       this.cachedInput = inputs;
-      this.cachedResult = { template: result, modelid: modelid };
+      this.cachedResult = { template: result, modelid: _modelid };
 
       this.dispatchEvent(
         new CustomEvent("outputs", {
