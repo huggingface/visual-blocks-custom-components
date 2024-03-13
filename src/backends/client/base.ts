@@ -45,7 +45,9 @@ export class PipelineSingleton {
     if (!(key in this.instance)) {
       console.info(
         "Creating pipeline instance. Model not loaded yet, modelId:",
-        modelId
+        modelId,
+        "Device",
+        device
       );
       this.instance[key] = pipeline(this.task, modelId, {
         quantized: device === Devices.webgpu ? false : quantized,
@@ -55,7 +57,12 @@ export class PipelineSingleton {
       });
       // TODO: use progress callback
     } else {
-      console.info("Pipeline instance already created for modelId:", modelId);
+      console.info(
+        "Pipeline instance already created for modelId:",
+        modelId,
+        "Device",
+        device
+      );
     }
     return this.instance[key];
   }

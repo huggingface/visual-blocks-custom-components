@@ -1,4 +1,6 @@
 import { COLLECTION_NAME_CLIENT } from "../../constants";
+import { Devices, CustomDataTypeEnum } from "../../types";
+import { isWebGPUAvailable } from "../../utils";
 import type { NodeSpec } from "@visualblocks/custom-node-types";
 import {
   DataType,
@@ -6,8 +8,7 @@ import {
   EditorType,
 } from "@visualblocks/custom-node-types";
 
-const DEFAULT_MODEL_ID =
-  "Xenova/mobilevit-x-small";
+const DEFAULT_MODEL_ID = "Xenova/mobilevit-x-small";
 
 export const NODE_SPEC: NodeSpec = {
   id: "hf-client-transformers-image-classification",
@@ -34,6 +35,19 @@ export const NODE_SPEC: NodeSpec = {
       type: DataType.STRING,
       editorSpec: {
         type: EditorType.TEXT_INPUT,
+      },
+    },
+    {
+      name: "device",
+      displayLabel: "Device",
+      defaultValue: isWebGPUAvailable() ? Devices.webgpu : Devices.wasm,
+      type: CustomDataTypeEnum.DEVICES,
+      editorSpec: {
+        type: EditorType.DROPDOWN,
+        options: Object.values(Devices).map((value) => ({
+          value,
+          label: value,
+        })),
       },
     },
     {

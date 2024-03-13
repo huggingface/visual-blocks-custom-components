@@ -1,5 +1,7 @@
 import { COLLECTION_NAME_CLIENT } from "../../constants";
-import { CustomDataTypeEnum } from "../../types";
+import { Devices, CustomDataTypeEnum } from "../../types";
+import { isWebGPUAvailable } from "../../utils";
+
 import {
   DataType,
   Category,
@@ -11,7 +13,8 @@ const DEFAULT_MODEL_ID = "Xenova/segformer_b0_clothes";
 export const NODE_SPEC: NodeSpec = {
   id: "hf-client-transformers-image-segmentation",
   name: "Image Segmentation",
-  description: "Divides an image into segments where each pixel is mapped to an object.",
+  description:
+    "Divides an image into segments where each pixel is mapped to an object.",
 
   category: Category.PROCESSOR,
   collection: COLLECTION_NAME_CLIENT,
@@ -33,6 +36,19 @@ export const NODE_SPEC: NodeSpec = {
       type: DataType.STRING,
       editorSpec: {
         type: EditorType.TEXT_INPUT,
+      },
+    },
+    {
+      name: "device",
+      displayLabel: "Device",
+      defaultValue: isWebGPUAvailable() ? Devices.webgpu : Devices.wasm,
+      type: CustomDataTypeEnum.DEVICES,
+      editorSpec: {
+        type: EditorType.DROPDOWN,
+        options: Object.values(Devices).map((value) => ({
+          value,
+          label: value,
+        })),
       },
     },
     {

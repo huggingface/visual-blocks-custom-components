@@ -1,4 +1,7 @@
 import { COLLECTION_NAME_CLIENT } from "../../constants";
+import { Devices, CustomDataTypeEnum } from "../../types";
+import { isWebGPUAvailable } from "../../utils";
+
 import {
   DataType,
   Category,
@@ -11,7 +14,8 @@ const DEFAULT_MODEL_ID = "Xenova/detr-resnet-50";
 export const NODE_SPEC: NodeSpec = {
   id: "hf-client-transformers-object-detection",
   name: "Object Detection",
-  description: "Identify and locate objects of certain defined classes within an image.",
+  description:
+    "Identify and locate objects of certain defined classes within an image.",
 
   category: Category.PROCESSOR,
   collection: COLLECTION_NAME_CLIENT,
@@ -33,6 +37,19 @@ export const NODE_SPEC: NodeSpec = {
       type: DataType.STRING,
       editorSpec: {
         type: EditorType.TEXT_INPUT,
+      },
+    },
+    {
+      name: "device",
+      displayLabel: "Device",
+      defaultValue: isWebGPUAvailable() ? Devices.webgpu : Devices.wasm,
+      type: CustomDataTypeEnum.DEVICES,
+      editorSpec: {
+        type: EditorType.DROPDOWN,
+        options: Object.values(Devices).map((value) => ({
+          value,
+          label: value,
+        })),
       },
     },
     {

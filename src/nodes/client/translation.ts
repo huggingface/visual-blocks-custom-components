@@ -1,15 +1,17 @@
+import {
+  PipelineSingleton,
+  BasePipelineNode,
+  DevicesType,
+} from "../../backends/client/base";
+import { compareObjects } from "../../utils";
+
+import { NODE_SPEC } from "./translation-specs";
+
 import type {
   Text2TextGenerationPipeline,
   Text2TextGenerationSingle,
 } from "@xenova/transformers";
 import type { CustomNodeInfo } from "@visualblocks/custom-node-types";
-import {
-  PipelineSingleton,
-  BasePipelineNode,
-} from "../../backends/client/base";
-import { compareObjects } from "../../utils";
-
-import { NODE_SPEC } from "./translation-specs";
 
 class Text2TextPipelineSingleton extends PipelineSingleton {
   static task = "text2text-generation";
@@ -19,6 +21,7 @@ declare interface Inputs {
   text: string;
   language: string;
   modelid: string;
+  device: DevicesType;
   quantized: boolean;
 }
 
@@ -31,7 +34,7 @@ class Text2TextGenerationNode extends BasePipelineNode {
   }
 
   async runWithInputs(inputs: Inputs) {
-    const { text, language, modelid, quantized } = inputs;
+    const { text, language, modelid, device, quantized } = inputs;
     if (!text) {
       // No input node
       this.dispatchEvent(
@@ -52,7 +55,8 @@ class Text2TextGenerationNode extends BasePipelineNode {
     }
     const translator: Text2TextGenerationPipeline = await this.getInstance(
       modelid,
-      quantized
+      quantized,
+      device
     );
 
     const prompt = `translate English to ${language}: ${text}`;

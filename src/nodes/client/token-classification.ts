@@ -10,12 +10,17 @@ import type {
 } from "@xenova/transformers";
 import { compareObjects } from "../../utils";
 import { NODE_SPEC } from "./token-classification-specs";
-import type { TokenClassificationResult, ProcessedTokens } from "../../types";
+import type {
+  TokenClassificationResult,
+  ProcessedTokens,
+  DevicesType,
+} from "../../types";
 
 declare interface Inputs {
   text: string;
   modelid: string;
   quantized: boolean;
+  device: DevicesType;
 }
 
 class TokenClassificationPipelineSingleton extends PipelineSingleton {
@@ -85,7 +90,7 @@ class TokenClassificationClientNode extends BasePipelineNode {
   }
 
   async runWithInputs(inputs: Inputs) {
-    const { text, modelid, quantized } = inputs;
+    const { text, modelid, device, quantized } = inputs;
     if (!text) {
       // No input node
       this.dispatchEvent(
@@ -108,7 +113,8 @@ class TokenClassificationClientNode extends BasePipelineNode {
     }
     const classifier: TokenClassificationPipeline = await this.getInstance(
       modelid,
-      quantized
+      quantized,
+      device
     );
 
     const result = await classifier(text, {

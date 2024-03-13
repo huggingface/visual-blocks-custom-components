@@ -13,6 +13,7 @@ import type {
 import {
   PipelineSingleton,
   BasePipelineNode,
+  DevicesType,
 } from "../../backends/client/base";
 
 import { NODE_SPEC } from "./object-detection-spec";
@@ -22,6 +23,7 @@ declare interface Inputs {
   image: VisualBlocksImage;
   modelid: string;
   quantized: boolean;
+  device: DevicesType;
 }
 
 class ObjectDetectionPipelineSingleton extends PipelineSingleton {
@@ -36,7 +38,7 @@ class ObjectDetectionNode extends BasePipelineNode {
   }
 
   async runWithInputs(inputs: Inputs, services: Services) {
-    const { image, modelid, quantized } = inputs;
+    const { image, modelid, device, quantized } = inputs;
     if (!image?.canvasId) {
       // No input node
       this.dispatchEvent(
@@ -59,7 +61,8 @@ class ObjectDetectionNode extends BasePipelineNode {
 
     const detector: ObjectDetectionPipeline = await this.getInstance(
       modelid,
-      quantized
+      quantized,
+      device
     );
 
     // Predict segments

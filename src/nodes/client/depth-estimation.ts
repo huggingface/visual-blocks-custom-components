@@ -12,6 +12,7 @@ import type {
 import {
   PipelineSingleton,
   BasePipelineNode,
+  DevicesType,
 } from "../../backends/client/base";
 
 import { NODE_SPEC } from "./depth-estimation-spec";
@@ -21,6 +22,7 @@ declare interface Inputs {
   image: VisualBlocksImage;
   modelid: string;
   quantized: boolean;
+  device: DevicesType;
 }
 
 declare interface Outputs {
@@ -40,7 +42,7 @@ class DepthEstimationNode extends BasePipelineNode {
   }
 
   async runWithInputs(inputs: Inputs, services: Services) {
-    const { image, modelid, quantized } = inputs;
+    const { image, modelid, device, quantized } = inputs;
     if (!image?.canvasId) {
       // No input node
       this.dispatchEvent(
@@ -64,7 +66,8 @@ class DepthEstimationNode extends BasePipelineNode {
 
     const depth_estimator: DepthEstimationPipeline = await this.getInstance(
       modelid,
-      quantized
+      quantized,
+      device
     );
 
     // Predict depth
@@ -80,9 +83,7 @@ class DepthEstimationNode extends BasePipelineNode {
 
     this.cachedInput = inputs;
 
-    this.dispatchEvent(
-      new CustomEvent("outputs", { detail: detail })
-    );
+    this.dispatchEvent(new CustomEvent("outputs", { detail: detail }));
   }
 }
 

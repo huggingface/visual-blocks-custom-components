@@ -1,5 +1,8 @@
 import { COLLECTION_NAME_CLIENT } from "../../constants";
 import type { NodeSpec } from "@visualblocks/custom-node-types";
+import { Devices, CustomDataTypeEnum } from "../../types";
+import { isWebGPUAvailable } from "../../utils";
+
 import {
   DataType,
   Category,
@@ -37,6 +40,19 @@ export const NODE_SPEC: NodeSpec = {
       type: DataType.STRING,
       editorSpec: {
         type: EditorType.TEXT_INPUT,
+      },
+    },
+    {
+      name: "device",
+      displayLabel: "Device",
+      defaultValue: isWebGPUAvailable() ? Devices.webgpu : Devices.wasm,
+      type: CustomDataTypeEnum.DEVICES,
+      editorSpec: {
+        type: EditorType.DROPDOWN,
+        options: Object.values(Devices).map((value) => ({
+          value,
+          label: value,
+        })),
       },
     },
     {

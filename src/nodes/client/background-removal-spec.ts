@@ -1,12 +1,13 @@
 import { COLLECTION_NAME_CLIENT } from "../../constants";
-import { DevicesType, Devices, CustomDataTypeEnum } from "../../types";
+import { Devices, CustomDataTypeEnum } from "../../types";
+import { isWebGPUAvailable } from "../../utils";
+
 import {
   DataType,
   Category,
   EditorType,
 } from "@visualblocks/custom-node-types";
 import type { NodeSpec } from "@visualblocks/custom-node-types";
-import { isWebGPUAvailable } from "../../utils";
 
 const DEFAULT_MODEL_ID = "briaai/RMBG-1.4@refs/pr/16";
 

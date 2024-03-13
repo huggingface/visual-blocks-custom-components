@@ -10,6 +10,7 @@ import { NODE_SPEC } from "./text-classification-specs";
 import {
   PipelineSingleton,
   BasePipelineNode,
+  DevicesType,
 } from "../../backends/client/base";
 import { compareObjects } from "../../utils";
 
@@ -17,6 +18,7 @@ declare interface Inputs {
   text: string;
   quantized: boolean;
   modelid: string;
+  device: DevicesType;
 }
 
 class TextClassificationPipelineSingleton extends PipelineSingleton {
@@ -32,7 +34,7 @@ class TextClassificationNode extends BasePipelineNode {
   }
 
   async runWithInputs(inputs: Inputs) {
-    const { text, modelid, quantized } = inputs;
+    const { text, modelid, device, quantized } = inputs;
     if (!text) {
       // No input node
       this.dispatchEvent(
@@ -52,7 +54,8 @@ class TextClassificationNode extends BasePipelineNode {
 
     const classifier: TextClassificationPipeline = await this.getInstance(
       modelid,
-      quantized
+      quantized,
+      device
     );
 
     const result = await classifier(text, {
