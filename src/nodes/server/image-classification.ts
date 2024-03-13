@@ -12,6 +12,7 @@ import { HfInference } from "@huggingface/inference";
 interface Inputs {
   image: VisualBlocksImage;
   modelid: string;
+  modelid_curated: string;
   apikey: string;
 }
 interface Outputs {
@@ -32,7 +33,9 @@ class ImageClassificationNode extends LitElement {
     // This node doesn't have a preview UI.
   }
   async runWithInputs(inputs: Inputs, services: Services) {
-    const { image, apikey, modelid } = inputs;
+    const { image, apikey, modelid, modelid_curated } = inputs;
+
+    const _modelid = (modelid || modelid_curated)?.trim();
 
     if (this.hf && apikey) {
       this.hf = new HfInference(apikey);
@@ -75,7 +78,7 @@ class ImageClassificationNode extends LitElement {
 
     try {
       const imageClassRes = await this.hf?.imageClassification({
-        model: modelid.trim(),
+        model: _modelid,
         data: canvasBlob,
       });
       if (!imageClassRes) {

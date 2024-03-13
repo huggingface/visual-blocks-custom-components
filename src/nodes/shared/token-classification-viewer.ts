@@ -41,6 +41,7 @@ const NER_TAGS: Record<string, string[]> = {
   ORG: ["#115E59", "#CCFBF1", "#14B8A6"],
   PER: ["#9D174D", "#FCE7F3", "#EC4899"],
   LOC: ["#86198F", "#FAE8FF", "#D946EF"],
+  MISC: ["#A85507", "#FFEDD5", "#F97316"],
 };
 
 class TokenClassificationViwerNode extends LitElement {

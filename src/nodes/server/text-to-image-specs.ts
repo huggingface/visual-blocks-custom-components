@@ -1,12 +1,10 @@
-import { COLLECTION_NAME_SERVER } from "../../constants";
+import { COLLECTION_NAME_SERVER, CURATED_MODELS } from "../../constants";
 import type { NodeSpec } from "@visualblocks/custom-node-types";
 import {
   DataType,
   Category,
   EditorType,
 } from "@visualblocks/custom-node-types";
-
-const DEFAULT_MODEL_ID = "stabilityai/stable-diffusion-xl-base-1.0";
 
 export const NODE_SPEC: NodeSpec = {
   id: "hf-server-text-to-image",
@@ -17,7 +15,18 @@ export const NODE_SPEC: NodeSpec = {
   collection: COLLECTION_NAME_SERVER,
 
   // Properties.
-  propertySpecs: [],
+  propertySpecs: [
+    {
+      name: "modelid_curated",
+      displayLabel: "Model ID",
+      info: "Curated models from Hugging Face",
+      type: DataType.STRING,
+      editorSpec: {
+        type: EditorType.DROPDOWN,
+        options: CURATED_MODELS.text_to_image,
+      },
+    },
+  ],
   // Inputs.
   inputSpecs: [
     {
@@ -91,7 +100,6 @@ export const NODE_SPEC: NodeSpec = {
       name: "modelid",
       displayLabel: "Model ID",
       info: "Hugging Face model ID",
-      defaultValue: DEFAULT_MODEL_ID,
       type: DataType.STRING,
       editorSpec: {
         type: EditorType.TEXT_INPUT,

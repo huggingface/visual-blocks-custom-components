@@ -1,4 +1,4 @@
-import { COLLECTION_NAME_SERVER } from "../../constants";
+import { COLLECTION_NAME_SERVER, CURATED_MODELS } from "../../constants";
 import type { NodeSpec } from "@visualblocks/custom-node-types";
 import {
   DataType,
@@ -18,7 +18,19 @@ export const NODE_SPEC: NodeSpec = {
   collection: COLLECTION_NAME_SERVER,
 
   // Properties.
-  propertySpecs: [],
+  propertySpecs: [
+    {
+      name: "modelid_curated",
+      displayLabel: "Model ID",
+      info: "Curated models from Hugging Face",
+      type: DataType.STRING,
+      defaultValue: DEFAULT_MODEL_ID,
+      editorSpec: {
+        type: EditorType.DROPDOWN,
+        options: CURATED_MODELS.text_generation,
+      },
+    },
+  ],
 
   // Inputs.
   inputSpecs: [
@@ -79,7 +91,6 @@ export const NODE_SPEC: NodeSpec = {
       name: "modelid",
       displayLabel: "Model ID",
       type: DataType.STRING,
-      defaultValue: DEFAULT_MODEL_ID,
       editorSpec: {
         type: EditorType.TEXT_INPUT,
       },
@@ -100,6 +111,11 @@ export const NODE_SPEC: NodeSpec = {
     {
       name: "results",
       type: DataType.STRING,
+      recommendedNodes: [
+        {
+          nodeSpecId: "markdown_viewer",
+        },
+      ],
     },
   ],
 };
