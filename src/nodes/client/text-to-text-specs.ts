@@ -1,11 +1,6 @@
-import {
-  COLLECTION_NAME_CLIENT,
-  CURATED_MODELS_CLIENT,
-  LANGUAGES,
-} from "../../constants";
+import { COLLECTION_NAME_CLIENT, CURATED_MODELS_CLIENT } from "../../constants";
 import { Devices, CustomDataTypeEnum } from "../../types";
 import { isWebGPUAvailable } from "../../utils";
-
 import type { NodeSpec } from "@visualblocks/custom-node-types";
 import {
   DataType,
@@ -14,9 +9,9 @@ import {
 } from "@visualblocks/custom-node-types";
 
 export const NODE_SPEC: NodeSpec = {
-  id: "hf-client-transformers-translation",
-  name: "Translation",
-  description: "Converting text from one language to another.",
+  id: "hf-client-transformers-text-to-text",
+  name: "Text to Text",
+  description: "Sequence-to-sequence text generation.",
 
   category: Category.PROCESSOR,
   collection: COLLECTION_NAME_CLIENT,
@@ -24,39 +19,13 @@ export const NODE_SPEC: NodeSpec = {
   // Properties.
   propertySpecs: [
     {
-      name: "source_language",
-      type: DataType.STRING,
-      defaultValue: "eng_Latn",
-      displayLabel: "Source",
-      editorSpec: {
-        type: EditorType.DROPDOWN,
-        options: Object.entries(LANGUAGES).map(([label, value]) => ({
-          value,
-          label,
-        })),
-      },
-    },
-    {
-      name: "target_language",
-      type: DataType.STRING,
-      displayLabel: "Target",
-      defaultValue: "fra_Latn",
-      editorSpec: {
-        type: EditorType.DROPDOWN,
-        options: Object.entries(LANGUAGES).map(([label, value]) => ({
-          value,
-          label,
-        })),
-      },
-    },
-    {
       name: "modelid_curated",
       displayLabel: "Model ID",
       info: "Curated models from Hugging Face",
       type: DataType.STRING,
       editorSpec: {
         type: EditorType.DROPDOWN,
-        options: CURATED_MODELS_CLIENT.translation,
+        options: CURATED_MODELS_CLIENT.text_to_text,
       },
     },
   ],

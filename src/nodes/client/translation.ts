@@ -8,35 +8,47 @@ import { compareObjects } from "../../utils";
 import { NODE_SPEC } from "./translation-specs";
 
 import type {
-  Text2TextGenerationPipeline,
-  Text2TextGenerationSingle,
+  TranslationPipeline,
+  TranslationSingle,
 } from "@xenova/transformers";
 import type { CustomNodeInfo } from "@visualblocks/custom-node-types";
 
-class Text2TextPipelineSingleton extends PipelineSingleton {
-  static task = "text2text-generation";
+class TranslationNodeSingleton extends PipelineSingleton {
+  static task = "translation";
 }
 
 declare interface Inputs {
   text: string;
-  language: string;
+  target_language: string;
+  source_language: string;
   modelid: string;
   device: DevicesType;
   modelid_curated: string;
   quantized: boolean;
 }
+interface Outputs {
+  results: string;
+  text: string;
+}
 
-class Text2TextGenerationNode extends BasePipelineNode {
+class TranslationNode extends BasePipelineNode {
   private cachedInput?: Inputs;
-  private cachedResult?: Text2TextGenerationSingle;
+  private cachedResult?: Outputs;
 
   constructor() {
-    super(Text2TextPipelineSingleton);
+    super(TranslationNodeSingleton);
   }
 
   async runWithInputs(inputs: Inputs) {
-    const { text, language, modelid, modelid_curated, device, quantized } =
-      inputs;
+    const {
+      text,
+      target_language,
+      source_language,
+      modelid,
+      modelid_curated,
+      device,
+      quantized,
+    } = inputs;
 
     const _modelid = (modelid || modelid_curated)?.trim();
     if (!text) {
@@ -49,36 +61,37 @@ class Text2TextGenerationNode extends BasePipelineNode {
     if (this.cachedResult && compareObjects(this.cachedInput, inputs)) {
       this.dispatchEvent(
         new CustomEvent("outputs", {
-          detail: {
-            results: this.cachedResult.generated_text,
-            text: text,
-          },
+          detail: this.cachedResult,
         })
       );
       return;
     }
-    const translator: Text2TextGenerationPipeline = await this.getInstance(
+    const translator: TranslationPipeline = await this.getInstance(
       _modelid,
       quantized,
       device
     );
 
-    const prompt = `translate English to ${language}: ${text}`;
     // TODO: Live updates to UI, then dispatch final result at end
-    const result = await translator(prompt);
+    const result = await translator(text, {
+      // @ts-ignore
+      src_lang: source_language,
+      tgt_lang: target_language,
+    });
     const resultSingle = (
       Array.isArray(result) ? result[0] : result
-    ) as Text2TextGenerationSingle;
+    ) as TranslationSingle;
+
     // Output.
     this.cachedInput = inputs;
-    this.cachedResult = resultSingle;
+    this.cachedResult = {
+      results: resultSingle.translation_text,
+      text: text,
+    };
 
     this.dispatchEvent(
       new CustomEvent("outputs", {
-        detail: {
-          results: resultSingle.generated_text,
-          text: text,
-        },
+        detail: this.cachedResult,
       })
     );
   }
@@ -86,5 +99,5 @@ class Text2TextGenerationNode extends BasePipelineNode {
 
 export default {
   nodeSpec: NODE_SPEC,
-  nodeImpl: Text2TextGenerationNode,
+  nodeImpl: TranslationNode,
 } as CustomNodeInfo;
