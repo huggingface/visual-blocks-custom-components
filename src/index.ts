@@ -11,7 +11,8 @@ import TOKEN_CLASSIFICATION_NODE from "./nodes/client/token-classification";
 import IMAGE_SEGMENTATION_NODE from "./nodes/client/image-segmentation";
 import TEXT_CLASSIFICATION_NODE from "./nodes/client/text-classification";
 import IMAGE_CLASSIFICATION_NODE from "./nodes/client/image-classification";
-import TEXT2TEXT_GENERATION_NODE from "./nodes/client/translation";
+import TEXT2TEXT_GENERATION_NODE from "./nodes/client/text-to-text";
+import TRANSLANTION_NODE from "./nodes/client/translation";
 import DEPTH_ESTIMATION_NODE from "./nodes/client/depth-estimation";
 import OBJECT_DETECTION_GENERATION_NODE from "./nodes/client/object-detection";
 import BACKGROUND_REMOVAL_NODE from "./nodes/client/background-removal";
@@ -38,6 +39,7 @@ const client_node = [
   DEPTH_ESTIMATION_NODE,
   OBJECT_DETECTION_GENERATION_NODE,
   BACKGROUND_REMOVAL_NODE,
+  TRANSLANTION_NODE,
 ];
 const server_nodes = [
   TEXT_CLASSIFICATION_SERVER_NODE,
