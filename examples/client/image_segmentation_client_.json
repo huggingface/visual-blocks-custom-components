@@ -1,9 +1,9 @@
 {
   "project": {
     "name": "Image Segmentation (client)",
-    "id": "le03ml",
-    "creationTs": 1709944948158,
-    "lastModifiedTs": 1709945288908,
+    "id": "zjdqjc",
+    "creationTs": 1710445084567,
+    "lastModifiedTs": 1710445096121,
     "userSetData": {
       "description": "",
       "tags": [],
@@ -90,11 +90,15 @@
           "posX": 336,
           "posY": 0,
           "width": 187.79345703125,
-          "height": 142,
+          "height": 204,
           "selected": false
         },
+        "propValues": {
+          "modelid_curated": "Xenova/segformer_b0_clothes"
+        },
         "inputValues": {
-          "modelid": "Xenova/segformer_b0_clothes",
+          "modelid": "",
+          "device": "webgpu",
           "quantized": true
         },
         "incomingEdges": {

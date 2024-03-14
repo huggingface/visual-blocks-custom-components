@@ -1,9 +1,9 @@
 {
   "project": {
     "name": "Image Classification (client)",
-    "id": "new_hfdemo",
-    "creationTs": 1710046043852,
-    "lastModifiedTs": 1710122134215,
+    "id": "z3p8pw",
+    "creationTs": 1710445108571,
+    "lastModifiedTs": 1710445112287,
     "userSetData": {
       "description": "",
       "tags": [],
@@ -26,11 +26,15 @@
           "posX": 157.42666625976562,
           "posY": 17.24720573425293,
           "width": 186.3271484375,
-          "height": 142,
+          "height": 204,
           "selected": false
         },
+        "propValues": {
+          "modelid_curated": "Xenova/mobilevit-x-small"
+        },
         "inputValues": {
-          "modelid": "Xenova/mobilevit-x-small",
+          "modelid": "",
+          "device": "webgpu",
           "quantized": false
         },
         "incomingEdges": {
@@ -78,7 +82,6 @@
         "customData": {
           "initialWidth": 448,
           "initialHeight": 240,
-          "leftOfNode": "hf-client-transformers-image-classification_4u1xs7",
           "previewX": 16,
           "previewY": 16,
           "previewWidth": 448,
@@ -89,7 +92,7 @@
           "posY": 16,
           "width": 176,
           "height": 180,
-          "selected": true
+          "selected": false
         },
         "propValues": {
           "urls": [

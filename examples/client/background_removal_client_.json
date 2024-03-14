@@ -1,9 +1,9 @@
 {
   "project": {
     "name": "Background Removal (client)",
-    "id": "new_hfdemo",
-    "creationTs": 1710046043852,
-    "lastModifiedTs": 1710121924057,
+    "id": "i9yqls",
+    "creationTs": 1710445145840,
+    "lastModifiedTs": 1710445174987,
     "userSetData": {
       "description": "",
       "tags": [],
@@ -25,8 +25,8 @@
           "previewHeight": 240
         },
         "uiData": {
-          "posX": -416,
-          "posY": 16,
+          "posX": 0,
+          "posY": 130.25,
           "width": 176,
           "height": 180,
           "selected": false
@@ -50,39 +50,6 @@
         }
       },
       {
-        "id": "image_viewer_yopc8g",
-        "nodeSpecId": "image_viewer",
-        "customData": {
-          "previewX": 816,
-          "previewY": 16,
-          "previewWidth": 320,
-          "previewHeight": 240
-        },
-        "uiData": {
-          "posX": 288,
-          "posY": -80,
-          "width": 176,
-          "height": 185,
-          "selected": false
-        },
-        "propValues": {
-          "columnCount": "2",
-          "hidePreview": false
-        },
-        "inputValues": {
-          "images": [],
-          "urls": []
-        },
-        "incomingEdges": {
-          "images": [
-            {
-              "sourceNodeId": "hf-client-transformers-background-removal_qo2dkc",
-              "outputId": "foreground"
-            }
-          ]
-        }
-      },
-      {
         "id": "hf-client-transformers-background-removal_qo2dkc",
         "nodeSpecId": "hf-client-transformers-background-removal",
         "customData": {
@@ -92,13 +59,18 @@
           "previewHeight": 240
         },
         "uiData": {
-          "posX": -48,
-          "posY": -16,
+          "posX": 336,
+          "posY": 8.5,
           "width": 194.287109375,
-          "height": 117,
+          "height": 204,
           "selected": false
         },
+        "propValues": {
+          "modelid_curated": "briaai/RMBG-1.4"
+        },
         "inputValues": {
+          "device": "webgpu",
+          "modelid": "",
           "quantized": true
         },
         "incomingEdges": {
@@ -120,11 +92,11 @@
           "previewHeight": 240
         },
         "uiData": {
-          "posX": 592,
-          "posY": 160,
+          "posX": 690.287109375,
+          "posY": 221,
           "width": 224,
           "height": 254,
-          "selected": true
+          "selected": false
         },
         "propValues": {
           "mode": "source-out",
@@ -146,6 +118,39 @@
             {
               "sourceNodeId": "input_image_2ancoy",
               "outputId": "image"
+            }
+          ]
+        }
+      },
+      {
+        "id": "image_viewer_yopc8g",
+        "nodeSpecId": "image_viewer",
+        "customData": {
+          "previewX": 816,
+          "previewY": 16,
+          "previewWidth": 320,
+          "previewHeight": 240
+        },
+        "uiData": {
+          "posX": 714.287109375,
+          "posY": 0,
+          "width": 176,
+          "height": 185,
+          "selected": true
+        },
+        "propValues": {
+          "columnCount": "2",
+          "hidePreview": false
+        },
+        "inputValues": {
+          "images": [],
+          "urls": []
+        },
+        "incomingEdges": {
+          "images": [
+            {
+              "sourceNodeId": "hf-client-transformers-background-removal_qo2dkc",
+              "outputId": "foreground"
             }
           ]
         }

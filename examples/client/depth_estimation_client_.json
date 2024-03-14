@@ -1,9 +1,9 @@
 {
   "project": {
     "name": "Depth Estimation (client)",
-    "id": "new_hfdemo",
-    "creationTs": 1710046043852,
-    "lastModifiedTs": 1710122073527,
+    "id": "6gbqb2",
+    "creationTs": 1710445124869,
+    "lastModifiedTs": 1710445132605,
     "userSetData": {
       "description": "",
       "tags": [],
@@ -26,7 +26,7 @@
         },
         "uiData": {
           "posX": 0,
-          "posY": 34.5,
+          "posY": 81,
           "width": 176,
           "height": 180,
           "selected": false
@@ -60,10 +60,10 @@
         },
         "uiData": {
           "posX": 672,
-          "posY": 41.5,
+          "posY": 88,
           "width": 212.111328125,
           "height": 166,
-          "selected": true
+          "selected": false
         },
         "inputValues": {
           "displacement": 0.5
@@ -94,13 +94,17 @@
         },
         "uiData": {
           "posX": 336,
-          "posY": -80,
+          "posY": 0,
           "width": 176,
-          "height": 142,
+          "height": 204,
           "selected": false
         },
+        "propValues": {
+          "modelid_curated": "Xenova/depth-anything-small-hf"
+        },
         "inputValues": {
-          "modelid": "Xenova/depth-anything-small-hf",
+          "modelid": "",
+          "device": "webgpu",
           "quantized": true
         },
         "incomingEdges": {
