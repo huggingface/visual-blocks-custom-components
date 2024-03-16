@@ -9,8 +9,6 @@ import {
 } from "@visualblocks/custom-node-types";
 import type { NodeSpec } from "@visualblocks/custom-node-types";
 
-const DEFAULT_MODEL_ID = "briaai/RMBG-1.4@refs/pr/16";
-
 export const NODE_SPEC: NodeSpec = {
   id: "hf-client-transformers-background-removal",
   name: "Background Removal",
@@ -54,7 +52,6 @@ export const NODE_SPEC: NodeSpec = {
       name: "modelid",
       displayLabel: "Model ID",
       info: "Transformers.js Depth Estimation model ID",
-      defaultValue: DEFAULT_MODEL_ID,
       type: DataType.STRING,
       editorSpec: {
         type: EditorType.TEXT_INPUT,

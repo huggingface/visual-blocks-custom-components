@@ -34,81 +34,123 @@ export const CURATED_MODELS_CLIENT = {
   depth_estimation: [
     {
       value: "Xenova/depth-anything-small-hf",
-      label: "Xenova/depth-anything-small-hf",
+      label: "Xenova/depth-anything-small-hf - 28MB",
     },
     {
-      value: "Xenova/depth-anything-base-hf",
-      label: "Xenova/depth-anything-base-hf",
+      value: "Xenova/glpn-nyu",
+      label: "Xenova/glpn-nyu - quantized - 65MB",
+    },
+    {
+      value: "Xenova/glpn-kitti",
+      label: "Xenova/glpn-kitti - quantized - 65MB",
     },
   ],
   image_classification: [
     {
-      value: "Xenova/mobilevit-x-small",
-      label: "Xenova/mobilevit-x-small",
+      value: "Xenova/mobilevit-xx-small",
+      label: "Xenova/mobilevit-xx-small - 5MB",
     },
     {
-      value: "Xenova/mobilevit-xx-small",
-      label: "Xenova/mobilevit-xx-small",
+      value: "Xenova/mobilevit-x-small",
+      label: "Xenova/mobilevit-x-small - 10MB",
     },
     {
       value: "Xenova/mobilevit-small",
-      label: "Xenova/mobilevit-small",
+      label: "Xenova/mobilevit-small - 22MB",
+    },
+    {
+      value: "Xenova/convnextv2-femto-1k-224",
+      label: "Xenova/convnextv2-femto-1k-224 - 21MB",
     },
   ],
   image_segmentation: [
     {
       value: "Xenova/segformer_b0_clothes",
-      label: "Xenova/segformer_b0_clothes",
+      label: "Xenova/segformer_b0_clothes - 15MB",
+    },
+    {
+      value: "Xenova/segformer-b0-finetuned-cityscapes-768-768",
+      label: "Xenova/segformer-b0-finetuned-cityscapes-768-768 - 15MB",
+    },
+    {
+      value: "Xenova/segformer-b0-finetuned-ade-512-512",
+      label: "Xenova/segformer-b0-finetuned-ade-512-512 - 15MB",
     },
     {
       value: "Xenova/face-parsing",
-      label: "Xenova/face-parsing",
+      label: "Xenova/face-parsing - quantised - 90MB",
+    },
+    {
+      value: "Xenova/detr-resnet-50-panoptic",
+      label: "Xenova/detr-resnet-50-panoptic - quantised - 45MB",
     },
   ],
   object_detection: [
     {
       value: "Xenova/detr-resnet-50",
-      label: "Xenova/detr-resnet-50",
+      label: "Xenova/detr-resnet-50 - quatized - 45MB",
     },
     {
-      value: "Xenova/detr-resnet-101",
-      label: "Xenova/detr-resnet-101",
+      value: "Xenova/yolos-tiny",
+      label: "Xenova/yolos-tiny - 26MB",
     },
   ],
   text_classification: [
     {
       value: "Xenova/distilbert-base-uncased-finetuned-sst-2-english",
-      label: "Xenova/distilbert-base-uncased-finetuned-sst-2-english",
+      label:
+        "Xenova/distilbert-base-uncased-finetuned-sst-2-english - quantized - 67MB",
     },
     {
-      value: "Xenova/distilbert-base-uncased-distilled-squad",
-      label: "Xenova/distilbert-base-uncased-distilled-squad",
+      value: "Xenova/finbert",
+      label: "Xenova/finbert - quantized - 111MB",
+    },
+    {
+      value: "Xenova/toxic-bert",
+      label: "Xenova/toxic-bert - quantized - 111MB",
     },
   ],
   token_classification: [
     {
-      value: "Xenova/bert-base-multilingual-cased-ner-hrl",
-      label: "Xenova/bert-base-multilingual-cased-ner-hrl",
+      value: "Xenova/bert-base-NER",
+      label: "Xenova/bert-base-NER - quantized - 109MB",
     },
     {
-      value: "Xenova/Xenova/bert-base-NER-uncased",
-      label: "Xenova/Xenova/bert-base-NER-uncased",
+      value: "Xenova/bert-base-NER-uncased",
+      label: "Xenova/bert-base-NER-uncased - quantized - 110MB",
+    },
+    {
+      value: "Xenova/distilbert-base-multilingual-cased-ner-hrl",
+      label:
+        "Xenova/distilbert-base-multilingual-cased-ner-hrl - quantized - 135MB",
     },
   ],
   translation: [
     {
       value: "Xenova/nllb-200-distilled-600M",
-      label: "Xenova/nllb-200-distilled-600M",
+      label: "Xenova/nllb-200-distilled-600M - quantized - 600MB",
     },
   ],
   text_to_text: [
     {
       value: "Xenova/t5-small",
-      label: "Xenova/t5-small",
+      label: "Xenova/t5-small - quantized - 78MB",
     },
     {
-      value: "Xenova/t5-base",
-      label: "Xenova/t5-base",
+      value: "Xenova/LaMini-T5-61M",
+      label: "Xenova/LaMini-T5-61M - quantized - 78MB",
+    },
+    {
+      value: "Xenova/flan-t5-small",
+      label: "Xenova/flan-t5-small - quantized - 95MB",
+    },
+    {
+      value: "Xenova/LaMini-Flan-T5-77M",
+      label: "Xenova/LaMini-Flan-T5-77M - quantized - 95MB",
+    },
+    {
+      value: "Xenova/t5-v1_1-small",
+      label: "Xenova/t5-v1_1-small - quantized - 95MB",
     },
   ],
 };
