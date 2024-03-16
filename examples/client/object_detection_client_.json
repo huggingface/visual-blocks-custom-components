@@ -1,9 +1,9 @@
 {
   "project": {
     "name": "Object detection (client)",
-    "id": "t10jdf",
-    "creationTs": 1710009441213,
-    "lastModifiedTs": 1710009571676,
+    "id": "h533v7",
+    "creationTs": 1710445057460,
+    "lastModifiedTs": 1710445068018,
     "userSetData": {
       "description": "",
       "tags": [],
@@ -63,7 +63,7 @@
           "posY": 216,
           "width": 230,
           "height": 155,
-          "selected": true
+          "selected": false
         },
         "propValues": {
           "mode": "only-cropped",
@@ -98,7 +98,7 @@
           "posY": 0,
           "width": 230,
           "height": 180,
-          "selected": false
+          "selected": true
         },
         "propValues": {
           "keypointScale": 1,
@@ -133,11 +133,15 @@
           "posX": 336,
           "posY": 120.75,
           "width": 176,
-          "height": 142,
+          "height": 204,
           "selected": false
         },
+        "propValues": {
+          "modelid_curated": "Xenova/detr-resnet-50"
+        },
         "inputValues": {
-          "modelid": "Xenova/detr-resnet-50",
+          "modelid": "",
+          "device": "webgpu",
           "quantized": true
         },
         "incomingEdges": {

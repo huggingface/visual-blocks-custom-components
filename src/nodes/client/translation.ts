@@ -1,15 +1,17 @@
+import {
+  PipelineSingleton,
+  BasePipelineNode,
+  DevicesType,
+} from "../../backends/client/base";
+import { compareObjects } from "../../utils";
+
+import { NODE_SPEC } from "./translation-specs";
+
 import type {
   TranslationPipeline,
   TranslationSingle,
 } from "@xenova/transformers";
 import type { CustomNodeInfo } from "@visualblocks/custom-node-types";
-import {
-  PipelineSingleton,
-  BasePipelineNode,
-} from "../../backends/client/base";
-import { compareObjects } from "../../utils";
-
-import { NODE_SPEC } from "./translation-specs";
 
 class TranslationNodeSingleton extends PipelineSingleton {
   static task = "translation";
@@ -20,6 +22,7 @@ declare interface Inputs {
   target_language: string;
   source_language: string;
   modelid: string;
+  device: DevicesType;
   modelid_curated: string;
   quantized: boolean;
 }
@@ -43,6 +46,7 @@ class TranslationNode extends BasePipelineNode {
       source_language,
       modelid,
       modelid_curated,
+      device,
       quantized,
     } = inputs;
 
@@ -64,7 +68,8 @@ class TranslationNode extends BasePipelineNode {
     }
     const translator: TranslationPipeline = await this.getInstance(
       _modelid,
-      quantized
+      quantized,
+      device
     );
 
     // TODO: Live updates to UI, then dispatch final result at end

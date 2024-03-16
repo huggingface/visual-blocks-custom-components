@@ -1,9 +1,9 @@
 {
   "project": {
-    "name": "Translation (client)",
-    "id": "7ju6bq",
-    "creationTs": 1710444051413,
-    "lastModifiedTs": 1710444834424,
+    "name": "Text To Text (client)",
+    "id": "i9yqls",
+    "creationTs": 1710445145840,
+    "lastModifiedTs": 1710445323818,
     "userSetData": {
       "description": "",
       "tags": [],
@@ -14,7 +14,41 @@
   "graph": {
     "nodes": [
       {
-        "id": "markdown_viewer_iy8l5e",
+        "id": "hf-client-transformers-text-to-text_t258va",
+        "nodeSpecId": "hf-client-transformers-text-to-text",
+        "customData": {
+          "previewX": 1152,
+          "previewY": 16,
+          "previewWidth": 320,
+          "previewHeight": 240
+        },
+        "uiData": {
+          "posX": 336,
+          "posY": 0,
+          "width": 176,
+          "height": 228,
+          "selected": false
+        },
+        "propValues": {
+          "modelid_curated": "Xenova/t5-small"
+        },
+        "inputValues": {
+          "text": "",
+          "modelid": "",
+          "device": "webgpu",
+          "quantized": true
+        },
+        "incomingEdges": {
+          "text": [
+            {
+              "sourceNodeId": "input_text_ffk2cj",
+              "outputId": "text"
+            }
+          ]
+        }
+      },
+      {
+        "id": "markdown_viewer_q5g7hn",
         "nodeSpecId": "markdown_viewer",
         "customData": {
           "previewX": 336,
@@ -23,8 +57,8 @@
           "previewHeight": 240
         },
         "uiData": {
-          "posX": 752,
-          "posY": 74,
+          "posX": 672,
+          "posY": 49,
           "width": 176,
           "height": 130,
           "selected": false
@@ -39,14 +73,14 @@
         "incomingEdges": {
           "markdownString": [
             {
-              "sourceNodeId": "hf-client-transformers-translation_suvh9q",
+              "sourceNodeId": "hf-client-transformers-text-to-text_t258va",
               "outputId": "results"
             }
           ]
         }
       },
       {
-        "id": "input_text_b91wiq",
+        "id": "input_text_ffk2cj",
         "nodeSpecId": "input_text",
         "customData": {
           "initialWidth": 304,
@@ -58,51 +92,15 @@
         },
         "uiData": {
           "posX": 0,
-          "posY": 74,
+          "posY": 49,
           "width": 176,
           "height": 130,
           "selected": false
         },
         "propValues": {
-          "text": "I don't speak French\n",
+          "text": "Translate English to French: I don't speak french.",
           "passwordMode": false,
           "hidePreview": false
-        }
-      },
-      {
-        "id": "hf-client-transformers-translation_suvh9q",
-        "nodeSpecId": "hf-client-transformers-translation",
-        "customData": {
-          "previewX": 16,
-          "previewY": 16,
-          "previewWidth": 320,
-          "previewHeight": 240
-        },
-        "uiData": {
-          "posX": 336,
-          "posY": 0,
-          "width": 256,
-          "height": 278,
-          "selected": false
-        },
-        "propValues": {
-          "source_language": "eng_Latn",
-          "target_language": "fra_Latn",
-          "modelid_curated": "Xenova/nllb-200-distilled-600M"
-        },
-        "inputValues": {
-          "text": "",
-          "modelid": "",
-          "device": "wasm",
-          "quantized": true
-        },
-        "incomingEdges": {
-          "text": [
-            {
-              "sourceNodeId": "input_text_b91wiq",
-              "outputId": "text"
-            }
-          ]
         }
       }
     ]

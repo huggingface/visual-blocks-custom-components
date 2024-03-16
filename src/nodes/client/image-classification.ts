@@ -12,6 +12,7 @@ import { NODE_SPEC } from "./image-classification-specs";
 import {
   PipelineSingleton,
   BasePipelineNode,
+  DevicesType,
 } from "../../backends/client/base";
 import { compareObjects } from "../../utils";
 
@@ -20,6 +21,7 @@ declare interface Inputs {
   modelid: string;
   modelid_curated: string;
   quantized: boolean;
+  device: DevicesType;
 }
 
 class ImageClassificationPipelineSingleton extends PipelineSingleton {
@@ -35,7 +37,7 @@ class ImageClassificationNode extends BasePipelineNode {
   }
 
   async runWithInputs(inputs: Inputs, services: Services) {
-    const { image, modelid, modelid_curated, quantized } = inputs;
+    const { image, modelid, modelid_curated, device, quantized } = inputs;
 
     const _modelid = (modelid || modelid_curated)?.trim();
     if (!image?.canvasId) {
@@ -60,7 +62,8 @@ class ImageClassificationNode extends BasePipelineNode {
 
     const classifier: ImageClassificationPipeline = await this.getInstance(
       _modelid,
-      quantized
+      quantized,
+      device
     );
 
     const result = await classifier(data, {

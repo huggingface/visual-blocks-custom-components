@@ -14,3 +14,7 @@ export function blobToBase64(blob: Blob): Promise<string | ArrayBuffer> {
 export function compareObjects(obj1: any, obj2: any) {
   return JSON.stringify(obj1) === JSON.stringify(obj2);
 }
+
+export function isWebGPUAvailable() {
+  return "gpu" in navigator;
+}

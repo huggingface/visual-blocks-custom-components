@@ -6,10 +6,13 @@ import type {
 
 import { AutoModel, AutoProcessor, RawImage } from "@xenova/transformers";
 
-import { BasePipelineNode } from "../../backends/client/base";
+import {
+  BasePipelineNode,
+  Devices,
+  type DevicesType,
+} from "../../backends/client/base";
 
 import type { ProgressCallbackFunction } from "../../backends/client/base";
-// import { compareObjects } from "../../utils";
 
 import { NODE_SPEC } from "./background-removal-spec";
 import { compareObjects } from "../../utils";
@@ -18,6 +21,7 @@ declare interface Inputs {
   image: VisualBlocksImage;
   quantized: boolean;
   modelid: string;
+  device: DevicesType;
   modelid_curated: string;
 }
 declare interface Outputs {
@@ -26,46 +30,45 @@ declare interface Outputs {
 
 export class ModelSingleton {
   static task?: any;
-
   static instance: { [key: string]: Promise<AutoModel> } = {};
 
   static async getInstance(
     modelId: string,
     quantized: boolean,
+    device: DevicesType,
     progress_callback?: ProgressCallbackFunction
   ) {
-    const key = `${modelId}${quantized ? "_quantized" : ""}`;
+    const revision = modelId.split("@")[1] || "main";
+    modelId = modelId.split("@")[0];
+    const key = `${modelId}${
+      quantized ? "_quantized" : ""
+    }_${device}_${revision}`;
     if (!(key in this.instance)) {
       console.info(
         "Creating model instance. Model not loaded yet, modelId:",
-        modelId
+        modelId,
+        "Device",
+        device
       );
-      const model = AutoModel.from_pretrained("briaai/RMBG-1.4", {
+      const model = AutoModel.from_pretrained(modelId, {
         // Do not require config.json to be present in the repository
-        config: { model_type: "custom" },
+        quantized: device === Devices.webgpu ? false : quantized,
+        device: device,
+        revision: revision,
       });
-
-      const processor = await AutoProcessor.from_pretrained("briaai/RMBG-1.4", {
-        // Do not require config.json to be present in the repository
-        config: {
-          do_normalize: true,
-          do_pad: false,
-          do_rescale: true,
-          do_resize: true,
-          image_mean: [0.5, 0.5, 0.5],
-          feature_extractor_type: "ImageFeatureExtractor",
-          image_std: [1, 1, 1],
-          resample: 2,
-          rescale_factor: 0.00392156862745098,
-          size: { width: 1024, height: 1024 },
-        },
+      const processor = await AutoProcessor.from_pretrained(modelId, {
+        revision: revision,
       });
-
       this.instance[key] = Promise.all([model, processor]);
 
       // TODO: use progress callback
     } else {
-      console.info("Model instance already created for modelId:", modelId);
+      console.info(
+        "Model instance already created for modelId:",
+        modelId,
+        "Device",
+        device
+      );
     }
     return this.instance[key];
   }
@@ -81,7 +84,7 @@ class BackgroundRemovalNode extends BasePipelineNode {
   render() {}
 
   async runWithInputs(inputs: Inputs, services: Services) {
-    const { image, modelid, quantized, modelid_curated } = inputs;
+    const { image, modelid, quantized, device, modelid_curated } = inputs;
 
     const _modelid = (modelid || modelid_curated)?.trim();
 
@@ -110,7 +113,11 @@ class BackgroundRemovalNode extends BasePipelineNode {
       image.canvasId
     ) as HTMLCanvasElement;
     const data = canvas.toDataURL();
-    const [model, processor] = await this.getInstance(_modelid, quantized);
+    const [model, processor] = await this.getInstance(
+      _modelid,
+      quantized,
+      device
+    );
 
     // TODO: .fromCanvas() method
     const i = await RawImage.fromURL(data);

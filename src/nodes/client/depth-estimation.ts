@@ -12,6 +12,7 @@ import type {
 import {
   PipelineSingleton,
   BasePipelineNode,
+  DevicesType,
 } from "../../backends/client/base";
 
 import { NODE_SPEC } from "./depth-estimation-spec";
@@ -22,6 +23,7 @@ declare interface Inputs {
   modelid: string;
   modelid_curated: string;
   quantized: boolean;
+  device: DevicesType;
 }
 
 declare interface Outputs {
@@ -41,7 +43,7 @@ class DepthEstimationNode extends BasePipelineNode {
   }
 
   async runWithInputs(inputs: Inputs, services: Services) {
-    const { image, modelid, modelid_curated, quantized } = inputs;
+    const { image, modelid, modelid_curated, device, quantized } = inputs;
 
     const _modelid = (modelid || modelid_curated)?.trim();
     if (!image?.canvasId) {
@@ -67,7 +69,8 @@ class DepthEstimationNode extends BasePipelineNode {
 
     const depth_estimator: DepthEstimationPipeline = await this.getInstance(
       _modelid,
-      quantized
+      quantized,
+      device
     );
 
     // Predict depth

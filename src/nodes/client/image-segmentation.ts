@@ -12,8 +12,8 @@ import type {
 import {
   PipelineSingleton,
   BasePipelineNode,
+  DevicesType,
 } from "../../backends/client/base";
-// import { compareObjects } from "../../utils";
 
 import { NODE_SPEC } from "./image-segmentation-spec";
 import { compareObjects } from "../../utils";
@@ -29,6 +29,7 @@ declare interface Inputs {
   quantized: boolean;
   modelid_curated: string;
   modelid: string;
+  device: DevicesType;
 }
 declare interface Outputs {
   segData: ImageSegmentationPipelineOutput[];
@@ -44,7 +45,7 @@ class ImageSegmentationNode extends BasePipelineNode {
   render() {}
 
   async runWithInputs(inputs: Inputs, services: Services) {
-    const { image, modelid, modelid_curated, quantized } = inputs;
+    const { image, modelid, modelid_curated, device, quantized } = inputs;
 
     const _modelid = (modelid || modelid_curated)?.trim();
     if (!image?.canvasId) {
@@ -72,7 +73,8 @@ class ImageSegmentationNode extends BasePipelineNode {
     const data = canvas.toDataURL();
     const segmenter: ImageSegmentationPipeline = await this.getInstance(
       _modelid,
-      quantized
+      quantized,
+      device
     );
 
     // Predict segments

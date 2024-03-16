@@ -6,6 +6,7 @@ import type { CustomNodeInfo } from "@visualblocks/custom-node-types";
 import {
   PipelineSingleton,
   BasePipelineNode,
+  DevicesType,
 } from "../../backends/client/base";
 import { compareObjects } from "../../utils";
 
@@ -19,6 +20,7 @@ declare interface Inputs {
   text: string;
   modelid: string;
   modelid_curated: string;
+  device: DevicesType;
   quantized: boolean;
 }
 
@@ -31,7 +33,7 @@ class Text2TextGenerationNode extends BasePipelineNode {
   }
 
   async runWithInputs(inputs: Inputs) {
-    const { text, modelid, modelid_curated, quantized } = inputs;
+    const { text, modelid, modelid_curated, device, quantized } = inputs;
 
     const _modelid = (modelid || modelid_curated)?.trim();
     if (!text) {
@@ -54,7 +56,8 @@ class Text2TextGenerationNode extends BasePipelineNode {
     }
     const translator: Text2TextGenerationPipeline = await this.getInstance(
       _modelid,
-      quantized
+      quantized,
+      device
     );
 
     const result = await translator(text);
