@@ -84,7 +84,12 @@ class HFHubLoginNode extends LitElement {
     const hfHUB = await import("https://esm.sh/@huggingface/hub");
     return hfHUB.oauthHandleRedirectIfPresent();
   };
-  oauthLoginUrl = async (params: { clientId: string; scopes: string }) => {
+  oauthLoginUrl = async (params: {
+    clientId: string;
+    scopes: string;
+    redirectUrl: string;
+    state: string;
+  }) => {
     // @ts-ignore
     const hfHUB = await import("https://esm.sh/@huggingface/hub");
     return hfHUB.oauthLoginUrl(params);
@@ -117,6 +122,8 @@ class HFHubLoginNode extends LitElement {
     window.location.href = await this.oauthLoginUrl({
       clientId: "8da93e24-c51a-430b-b8cb-1affa96c1f81",
       scopes: "inference-api",
+      redirectUrl: window.location.origin + "/#/edit/new",
+      state: window.location.hash,
     });
   }
   async _logout() {
