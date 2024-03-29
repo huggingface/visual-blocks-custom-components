@@ -44,7 +44,7 @@ export const NODE_SPEC: NodeSpec = {
     {
       name: "apikey",
       displayLabel: "API Key",
-      type: DataType.STRING,
+      type: CustomDataTypeEnum.HF_TOKEN,
       editorSpec: {
         type: EditorType.TEXT_INPUT,
         password: true,
