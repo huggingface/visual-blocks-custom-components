@@ -73,6 +73,7 @@ export const NODE_SPEC: NodeSpec = {
       recommendedNodes: [
         {
           nodeSpecId: "hf-transformers-image-segmentation-viewer",
+          extraInputIdsToConnect: ["image"],
         },
       ],
     },

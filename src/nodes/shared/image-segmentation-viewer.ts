@@ -96,7 +96,7 @@ class ImageSegmentationViewerNode extends LitElement {
     this.cachedOutputImage = canvas;
     this.dispatchEvent(
       new CustomEvent("outputs", {
-        detail: { segData: null, image: outputImage },
+        detail: { image: outputImage },
       })
     );
   }
@@ -260,7 +260,6 @@ class ImageSegmentationViewerNode extends LitElement {
       this.dispatchEvent(
         new CustomEvent("outputs", {
           detail: {
-            segData: this.cachedSegData,
             image: outputImage,
           },
         })
@@ -295,7 +294,7 @@ class ImageSegmentationViewerNode extends LitElement {
 
     this.dispatchEvent(
       new CustomEvent("outputs", {
-        detail: { segData: segData, image: image },
+        detail: { image: image },
       })
     );
   }
