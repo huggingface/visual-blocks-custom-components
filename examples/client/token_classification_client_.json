@@ -1,9 +1,9 @@
 {
   "project": {
     "name": "Token Classification (client)",
-    "id": "1i4dt7",
-    "creationTs": 1710444921813,
-    "lastModifiedTs": 1710445011393,
+    "id": "7d9ztv",
+    "creationTs": 1711687362791,
+    "lastModifiedTs": 1711687794193,
     "userSetData": {
       "description": "",
       "tags": [],
@@ -26,7 +26,7 @@
         },
         "uiData": {
           "posX": 0,
-          "posY": 49,
+          "posY": 24,
           "width": 176,
           "height": 130,
           "selected": false
@@ -48,7 +48,7 @@
         },
         "uiData": {
           "posX": 680.88623046875,
-          "posY": 80,
+          "posY": 55,
           "width": 228.005859375,
           "height": 68,
           "selected": false
@@ -75,17 +75,16 @@
           "posX": 336,
           "posY": 0,
           "width": 184.88623046875,
-          "height": 228,
-          "selected": false
+          "height": 178,
+          "selected": true
         },
         "propValues": {
-          "modelid_curated": "Xenova/bert-base-multilingual-cased-ner-hrl"
+          "device": "webgpu",
+          "quantized": true
         },
         "inputValues": {
           "text": "",
-          "modelid": "",
-          "device": "webgpu",
-          "quantized": true
+          "modelid": "Xenova/bert-base-NER"
         },
         "incomingEdges": {
           "text": [

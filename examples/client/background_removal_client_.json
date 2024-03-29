@@ -1,9 +1,9 @@
 {
   "project": {
     "name": "Background Removal (client)",
-    "id": "i9yqls",
-    "creationTs": 1710445145840,
-    "lastModifiedTs": 1710445174987,
+    "id": "3l9grv",
+    "creationTs": 1711690648807,
+    "lastModifiedTs": 1711690698770,
     "userSetData": {
       "description": "",
       "tags": [],
@@ -62,16 +62,15 @@
           "posX": 336,
           "posY": 8.5,
           "width": 194.287109375,
-          "height": 204,
-          "selected": false
+          "height": 154,
+          "selected": true
         },
         "propValues": {
-          "modelid_curated": "briaai/RMBG-1.4"
+          "device": "webgpu",
+          "quantized": true
         },
         "inputValues": {
-          "device": "webgpu",
-          "modelid": "",
-          "quantized": true
+          "modelid": "Xenova/modnet"
         },
         "incomingEdges": {
           "image": [
@@ -136,7 +135,7 @@
           "posY": 0,
           "width": 176,
           "height": 185,
-          "selected": true
+          "selected": false
         },
         "propValues": {
           "columnCount": "2",
