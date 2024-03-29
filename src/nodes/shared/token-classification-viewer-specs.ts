@@ -19,10 +19,5 @@ export const NODE_SPEC: NodeSpec = {
     },
   ],
   // Outputs.
-  outputSpecs: [
-    {
-      name: "results",
-      type: DataType.ANY,
-    },
-  ],
+  outputSpecs: [],
 };

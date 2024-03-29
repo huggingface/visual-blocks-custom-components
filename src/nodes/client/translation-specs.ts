@@ -53,7 +53,7 @@ export const NODE_SPEC: NodeSpec = {
     {
       name: "device",
       displayLabel: "Device",
-      defaultValue: isWebGPUAvailable() ? Devices.webgpu : Devices.wasm,
+      defaultValue: Devices.wasm, // temporary: since only model supported works on wasm
       type: CustomDataTypeEnum.DEVICES,
       editorSpec: {
         type: EditorType.DROPDOWN,
