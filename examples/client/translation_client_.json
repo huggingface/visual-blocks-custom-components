@@ -1,9 +1,9 @@
 {
   "project": {
     "name": "Translation (client)",
-    "id": "7ju6bq",
-    "creationTs": 1710444051413,
-    "lastModifiedTs": 1710444834424,
+    "id": "8lpmuo",
+    "creationTs": 1711684678953,
+    "lastModifiedTs": 1711684769716,
     "userSetData": {
       "description": "",
       "tags": [],
@@ -13,38 +13,6 @@
   },
   "graph": {
     "nodes": [
-      {
-        "id": "markdown_viewer_iy8l5e",
-        "nodeSpecId": "markdown_viewer",
-        "customData": {
-          "previewX": 336,
-          "previewY": 16,
-          "previewWidth": 320,
-          "previewHeight": 240
-        },
-        "uiData": {
-          "posX": 752,
-          "posY": 74,
-          "width": 176,
-          "height": 130,
-          "selected": false
-        },
-        "propValues": {
-          "hidePreview": false,
-          "hidePreviewFrame": false
-        },
-        "inputValues": {
-          "markdownString": ""
-        },
-        "incomingEdges": {
-          "markdownString": [
-            {
-              "sourceNodeId": "hf-client-transformers-translation_suvh9q",
-              "outputId": "results"
-            }
-          ]
-        }
-      },
       {
         "id": "input_text_b91wiq",
         "nodeSpecId": "input_text",
@@ -82,25 +50,56 @@
           "posX": 336,
           "posY": 0,
           "width": 256,
-          "height": 278,
+          "height": 253,
           "selected": false
         },
         "propValues": {
           "source_language": "eng_Latn",
           "target_language": "fra_Latn",
-          "modelid_curated": "Xenova/nllb-200-distilled-600M"
+          "device": "wasm",
+          "quantized": true
         },
         "inputValues": {
           "text": "",
-          "modelid": "",
-          "device": "wasm",
-          "quantized": true
+          "modelid": "Xenova/nllb-200-distilled-600M"
         },
         "incomingEdges": {
           "text": [
             {
               "sourceNodeId": "input_text_b91wiq",
               "outputId": "text"
+            }
+          ]
+        }
+      },
+      {
+        "id": "markdown_viewer_iy8l5e",
+        "nodeSpecId": "markdown_viewer",
+        "customData": {
+          "previewX": 336,
+          "previewY": 16,
+          "previewWidth": 320,
+          "previewHeight": 240
+        },
+        "uiData": {
+          "posX": 752,
+          "posY": 74,
+          "width": 176,
+          "height": 130,
+          "selected": false
+        },
+        "propValues": {
+          "hidePreview": false,
+          "hidePreviewFrame": false
+        },
+        "inputValues": {
+          "markdownString": ""
+        },
+        "incomingEdges": {
+          "markdownString": [
+            {
+              "sourceNodeId": "hf-client-transformers-translation_suvh9q",
+              "outputId": "results"
             }
           ]
         }

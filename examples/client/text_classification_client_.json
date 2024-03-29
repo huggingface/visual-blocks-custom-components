@@ -1,9 +1,9 @@
 {
   "project": {
     "name": "Text Classification (client)",
-    "id": "yc6zaw",
-    "creationTs": 1710445018990,
-    "lastModifiedTs": 1710445037029,
+    "id": "su3q9d",
+    "creationTs": 1711687933556,
+    "lastModifiedTs": 1711687942461,
     "userSetData": {
       "description": "",
       "tags": [],
@@ -80,17 +80,16 @@
           "posX": 240,
           "posY": 192,
           "width": 176,
-          "height": 228,
-          "selected": false
+          "height": 178,
+          "selected": true
         },
         "propValues": {
-          "modelid_curated": "Xenova/distilbert-base-uncased-finetuned-sst-2-english"
+          "device": "webgpu",
+          "quantized": true
         },
         "inputValues": {
           "text": "",
-          "modelid": "",
-          "device": "webgpu",
-          "quantized": true
+          "modelid": ""
         },
         "incomingEdges": {
           "text": [

@@ -19,7 +19,6 @@ import { compareObjects } from "../../utils";
 declare interface Inputs {
   image: VisualBlocksImage;
   modelid: string;
-  modelid_curated: string;
   quantized: boolean;
   device: DevicesType;
 }
@@ -37,9 +36,9 @@ class ImageClassificationNode extends BasePipelineNode {
   }
 
   async runWithInputs(inputs: Inputs, services: Services) {
-    const { image, modelid, modelid_curated, device, quantized } = inputs;
+    const { image, modelid, device, quantized } = inputs;
 
-    const _modelid = (modelid || modelid_curated)?.trim();
+    const _modelid = modelid?.trim();
     if (!image?.canvasId) {
       // No input node
       this.dispatchEvent(

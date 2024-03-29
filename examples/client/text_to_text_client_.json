@@ -1,9 +1,9 @@
 {
   "project": {
     "name": "Text To Text (client)",
-    "id": "i9yqls",
-    "creationTs": 1710445145840,
-    "lastModifiedTs": 1710445323818,
+    "id": "1s1skb",
+    "creationTs": 1711687804803,
+    "lastModifiedTs": 1711687815985,
     "userSetData": {
       "description": "",
       "tags": [],
@@ -26,17 +26,16 @@
           "posX": 336,
           "posY": 0,
           "width": 176,
-          "height": 228,
+          "height": 178,
           "selected": false
         },
         "propValues": {
-          "modelid_curated": "Xenova/t5-small"
+          "device": "webgpu",
+          "quantized": true
         },
         "inputValues": {
           "text": "",
-          "modelid": "",
-          "device": "webgpu",
-          "quantized": true
+          "modelid": "Xenova/t5-small"
         },
         "incomingEdges": {
           "text": [
@@ -58,7 +57,7 @@
         },
         "uiData": {
           "posX": 672,
-          "posY": 49,
+          "posY": 24,
           "width": 176,
           "height": 130,
           "selected": false
@@ -92,7 +91,7 @@
         },
         "uiData": {
           "posX": 0,
-          "posY": 49,
+          "posY": 24,
           "width": 176,
           "height": 130,
           "selected": false
