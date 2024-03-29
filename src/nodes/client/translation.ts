@@ -23,7 +23,6 @@ declare interface Inputs {
   source_language: string;
   modelid: string;
   device: DevicesType;
-  modelid_curated: string;
   quantized: boolean;
 }
 interface Outputs {
@@ -45,12 +44,11 @@ class TranslationNode extends BasePipelineNode {
       target_language,
       source_language,
       modelid,
-      modelid_curated,
       device,
       quantized,
     } = inputs;
 
-    const _modelid = (modelid || modelid_curated)?.trim();
+    const _modelid = modelid?.trim();
     if (!text) {
       // No input node
       this.dispatchEvent(

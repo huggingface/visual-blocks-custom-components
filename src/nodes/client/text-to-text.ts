@@ -19,7 +19,6 @@ class Text2TextPipelineSingleton extends PipelineSingleton {
 declare interface Inputs {
   text: string;
   modelid: string;
-  modelid_curated: string;
   device: DevicesType;
   quantized: boolean;
 }
@@ -33,9 +32,9 @@ class Text2TextGenerationNode extends BasePipelineNode {
   }
 
   async runWithInputs(inputs: Inputs) {
-    const { text, modelid, modelid_curated, device, quantized } = inputs;
+    const { text, modelid, device, quantized } = inputs;
 
-    const _modelid = (modelid || modelid_curated)?.trim();
+    const _modelid = modelid?.trim();
     if (!text) {
       // No input node
       this.dispatchEvent(

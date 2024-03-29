@@ -49,36 +49,7 @@ export const NODE_SPEC: NodeSpec = {
         })),
       },
     },
-    {
-      name: "modelid_curated",
-      displayLabel: "Model ID",
-      info: "Curated models from Hugging Face",
-      type: DataType.STRING,
-      editorSpec: {
-        type: EditorType.DROPDOWN,
-        options: CURATED_MODELS_CLIENT.translation,
-      },
-    },
-  ],
 
-  // Inputs.
-  inputSpecs: [
-    {
-      name: "text",
-      type: DataType.STRING,
-      editorSpec: {
-        type: EditorType.TEXT_INPUT,
-      },
-    },
-    {
-      name: "modelid",
-      displayLabel: "Model ID",
-      info: "Transformers.js Translation model ID",
-      type: DataType.STRING,
-      editorSpec: {
-        type: EditorType.TEXT_INPUT,
-      },
-    },
     {
       name: "device",
       displayLabel: "Device",
@@ -99,6 +70,30 @@ export const NODE_SPEC: NodeSpec = {
       type: DataType.BOOLEAN,
       editorSpec: {
         type: EditorType.SLIDE_TOGGLE,
+      },
+      hideCondition: {
+        propertyValues: { device: [Devices.webgpu] },
+      },
+    },
+  ],
+
+  // Inputs.
+  inputSpecs: [
+    {
+      name: "text",
+      type: DataType.STRING,
+      editorSpec: {
+        type: EditorType.TEXT_INPUT,
+      },
+    },
+    {
+      name: "modelid",
+      displayLabel: "Model ID",
+      info: "Transformers.js Translation model ID",
+      type: DataType.STRING,
+      editorSpec: {
+        type: EditorType.DROPDOWN,
+        options: CURATED_MODELS_CLIENT.translation,
       },
     },
   ],

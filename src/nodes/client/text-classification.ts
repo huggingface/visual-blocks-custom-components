@@ -19,7 +19,6 @@ declare interface Inputs {
   quantized: boolean;
   modelid: string;
   device: DevicesType;
-  modelid_curated: string;
 }
 
 class TextClassificationPipelineSingleton extends PipelineSingleton {
@@ -35,9 +34,9 @@ class TextClassificationNode extends BasePipelineNode {
   }
 
   async runWithInputs(inputs: Inputs) {
-    const { text, modelid, modelid_curated, device, quantized } = inputs;
+    const { text, modelid, device, quantized } = inputs;
 
-    const _modelid = (modelid || modelid_curated)?.trim();
+    const _modelid = modelid?.trim();
     if (!text) {
       // No input node
       this.dispatchEvent(

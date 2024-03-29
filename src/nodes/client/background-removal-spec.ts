@@ -19,23 +19,6 @@ export const NODE_SPEC: NodeSpec = {
 
   propertySpecs: [
     {
-      name: "modelid_curated",
-      displayLabel: "Model ID",
-      info: "Curated models from Hugging Face",
-      type: DataType.STRING,
-      editorSpec: {
-        type: EditorType.DROPDOWN,
-        options: CURATED_MODELS_CLIENT.background_removal,
-      },
-    },
-  ],
-  // Inputs.
-  inputSpecs: [
-    {
-      name: "image",
-      type: DataType.IMAGE,
-    },
-    {
       name: "device",
       displayLabel: "Device",
       defaultValue: isWebGPUAvailable() ? Devices.webgpu : Devices.wasm,
@@ -49,21 +32,32 @@ export const NODE_SPEC: NodeSpec = {
       },
     },
     {
-      name: "modelid",
-      displayLabel: "Model ID",
-      info: "Transformers.js Depth Estimation model ID",
-      type: DataType.STRING,
-      editorSpec: {
-        type: EditorType.TEXT_INPUT,
-      },
-    },
-    {
       name: "quantized",
       displayLabel: "Quantized Model",
       defaultValue: true,
       type: DataType.BOOLEAN,
       editorSpec: {
         type: EditorType.SLIDE_TOGGLE,
+      },
+      hideCondition: {
+        propertyValues: { device: [Devices.webgpu] },
+      },
+    },
+  ],
+  // Inputs.
+  inputSpecs: [
+    {
+      name: "image",
+      type: DataType.IMAGE,
+    },
+    {
+      name: "modelid",
+      displayLabel: "Model ID",
+      info: "Transformers.js Depth Estimation model ID",
+      type: DataType.STRING,
+      editorSpec: {
+        type: EditorType.DROPDOWN,
+        options: CURATED_MODELS_CLIENT.background_removal,
       },
     },
   ],
