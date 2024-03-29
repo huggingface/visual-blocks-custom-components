@@ -35,7 +35,9 @@ export const NODE_SPEC: NodeSpec = {
       name: "text",
       type: DataType.STRING,
       editorSpec: {
-        type: EditorType.TEXT_INPUT,
+        type: EditorType.TEXT_AREA,
+        autoResize: true,
+        autoResizeMaxHeight: 150,
       },
     },
     {

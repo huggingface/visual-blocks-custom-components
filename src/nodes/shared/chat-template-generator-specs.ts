@@ -24,21 +24,27 @@ export const NODE_SPEC: NodeSpec = {
       name: "user",
       type: DataType.STRING,
       editorSpec: {
-        type: EditorType.TEXT_INPUT,
+        type: EditorType.TEXT_AREA,
+        autoResize: true,
+        autoResizeMaxHeight: 150,
       },
     },
     {
       name: "assistant",
       type: DataType.STRING,
       editorSpec: {
-        type: EditorType.TEXT_INPUT,
+        type: EditorType.TEXT_AREA,
+        autoResize: true,
+        autoResizeMaxHeight: 150,
       },
     },
     {
       name: "system",
       type: DataType.STRING,
       editorSpec: {
-        type: EditorType.TEXT_INPUT,
+        type: EditorType.TEXT_AREA,
+        autoResize: true,
+        autoResizeMaxHeight: 150,
       },
     },
     {

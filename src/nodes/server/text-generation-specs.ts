@@ -40,6 +40,8 @@ export const NODE_SPEC: NodeSpec = {
       type: DataType.STRING,
       editorSpec: {
         type: EditorType.TEXT_AREA,
+        autoResize: true,
+        autoResizeMaxHeight: 150,
       },
     },
     {

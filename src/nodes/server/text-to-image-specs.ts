@@ -36,7 +36,9 @@ export const NODE_SPEC: NodeSpec = {
       info: "Text prompt to guide image generation.",
       type: DataType.STRING,
       editorSpec: {
-        type: EditorType.TEXT_INPUT,
+        type: EditorType.TEXT_AREA,
+        autoResize: true,
+        autoResizeMaxHeight: 150,
       },
     },
     {
