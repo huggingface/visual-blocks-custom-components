@@ -11,7 +11,6 @@ declare interface Inputs {
   system: string;
   user: string;
   modelid: string;
-  modelid_curated: string;
   add_generation_prompt: boolean;
 }
 
@@ -36,16 +35,9 @@ class ChatTemplateGenerator extends LitElement {
   }
 
   async runWithInputs(inputs: Inputs) {
-    const {
-      user,
-      assistant,
-      system,
-      modelid,
-      modelid_curated,
-      add_generation_prompt,
-    } = inputs;
+    const { user, assistant, system, modelid, add_generation_prompt } = inputs;
 
-    const _modelid = (modelid || modelid_curated)?.trim();
+    const _modelid = modelid?.trim();
 
     if (!user || !_modelid) {
       // No input node

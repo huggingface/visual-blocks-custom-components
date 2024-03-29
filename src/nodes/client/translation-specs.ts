@@ -4,7 +4,6 @@ import {
   LANGUAGES,
 } from "../../constants";
 import { Devices, CustomDataTypeEnum } from "../../types";
-import { isWebGPUAvailable } from "../../utils";
 
 import type { NodeSpec } from "@visualblocks/custom-node-types";
 import {
