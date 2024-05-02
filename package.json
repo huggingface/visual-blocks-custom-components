@@ -1,5 +1,5 @@
 {
-  "name": "@huggingface/visual-blocks-custom-components",
+  "name": "huggingface-visualblocks-nodes",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/huggingface/visual-blocks-custom-components.git"
