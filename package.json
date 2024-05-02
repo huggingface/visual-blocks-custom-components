@@ -5,7 +5,7 @@
     "url": "git+https://github.com/huggingface/visual-blocks-custom-components.git"
   },
   "description": "Custom Hugging Face components for Visual Blocks",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "type": "module",
   "private": false,
   "main": "./dist/index.js",
@@ -17,7 +17,8 @@
     "dev": "run-p dev:*",
     "dev:server": "npm run build -- --servedir=dist --serve=8080",
     "dev:tsc": "tsc --watch --preserveWatchOutput",
-    "build": "esbuild --bundle ./src/index.ts --outfile=dist/index.js"
+    "build": "esbuild --bundle ./src/index.ts --outfile=dist/index.js",
+    "prepublishOnly": "npm run build"
   },
   "license": "Apache-2.0",
   "author": "Hugging Face",
