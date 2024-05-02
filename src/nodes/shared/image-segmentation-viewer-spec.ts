@@ -32,11 +32,6 @@ export const NODE_SPEC: NodeSpec = {
   // Outputs.
   outputSpecs: [
     {
-      name: "segData",
-      displayLabel: "Seg Data",
-      type: CustomDataTypeEnum.IMAGE_SEGMENTATION_RESULT,
-    },
-    {
       name: "image",
       type: DataType.IMAGE,
     },

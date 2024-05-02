@@ -17,9 +17,38 @@ export const NODE_SPEC: NodeSpec = {
   collection: COLLECTION_NAME_SHARED,
 
   // Properties.
-  propertySpecs: [
+  propertySpecs: [],
+  // Inputs.
+  inputSpecs: [
     {
-      name: "modelid_curated",
+      name: "user",
+      type: DataType.STRING,
+      editorSpec: {
+        type: EditorType.TEXT_AREA,
+        autoResize: true,
+        autoResizeMaxHeight: 150,
+      },
+    },
+    {
+      name: "assistant",
+      type: DataType.STRING,
+      editorSpec: {
+        type: EditorType.TEXT_AREA,
+        autoResize: true,
+        autoResizeMaxHeight: 150,
+      },
+    },
+    {
+      name: "system",
+      type: DataType.STRING,
+      editorSpec: {
+        type: EditorType.TEXT_AREA,
+        autoResize: true,
+        autoResizeMaxHeight: 150,
+      },
+    },
+    {
+      name: "modelid",
       displayLabel: "Model ID",
       info: "Curated models from Hugging Face",
       type: DataType.STRING,
@@ -27,39 +56,6 @@ export const NODE_SPEC: NodeSpec = {
       editorSpec: {
         type: EditorType.DROPDOWN,
         options: CURATED_MODELS.text_generation,
-      },
-    },
-  ],
-  // Inputs.
-  inputSpecs: [
-    {
-      name: "user",
-      type: DataType.STRING,
-      editorSpec: {
-        type: EditorType.TEXT_INPUT,
-      },
-    },
-    {
-      name: "assistant",
-      type: DataType.STRING,
-      editorSpec: {
-        type: EditorType.TEXT_INPUT,
-      },
-    },
-    {
-      name: "system",
-      type: DataType.STRING,
-      editorSpec: {
-        type: EditorType.TEXT_INPUT,
-      },
-    },
-    {
-      name: "modelid",
-      displayLabel: "Model ID",
-      info: "Transformers.js Text Classification model ID",
-      type: DataType.STRING,
-      editorSpec: {
-        type: EditorType.TEXT_INPUT,
       },
     },
     {
@@ -81,6 +77,10 @@ export const NODE_SPEC: NodeSpec = {
       recommendedNodes: [
         {
           nodeSpecId: "hf-server-text-generation",
+        },
+        {
+          nodeSpecId: "logger-node",
+          extraInputIdsToConnect: ["template", "data"],
         },
       ],
     },

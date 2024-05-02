@@ -1,4 +1,5 @@
 import { COLLECTION_NAME_SERVER, CURATED_MODELS } from "../../constants";
+import { CustomDataTypeEnum } from "../../types";
 import type { NodeSpec } from "@visualblocks/custom-node-types";
 import {
   DataType,
@@ -33,7 +34,9 @@ export const NODE_SPEC: NodeSpec = {
       name: "text",
       type: DataType.STRING,
       editorSpec: {
-        type: EditorType.TEXT_INPUT,
+        type: EditorType.TEXT_AREA,
+        autoResize: true,
+        autoResizeMaxHeight: 150,
       },
     },
     {
@@ -47,7 +50,7 @@ export const NODE_SPEC: NodeSpec = {
     {
       name: "apikey",
       displayLabel: "API Key",
-      type: DataType.STRING,
+      type: CustomDataTypeEnum.HF_TOKEN,
       editorSpec: {
         type: EditorType.TEXT_INPUT,
         password: true,

@@ -1,4 +1,6 @@
 import { COLLECTION_NAME_SERVER } from "../../constants";
+import { CustomDataTypeEnum } from "../../types";
+
 import type { NodeSpec } from "@visualblocks/custom-node-types";
 import {
   DataType,
@@ -19,7 +21,7 @@ export const NODE_SPEC: NodeSpec = {
     {
       name: "apikey",
       displayLabel: "API Key",
-      type: DataType.STRING,
+      type: CustomDataTypeEnum.HF_TOKEN,
       info: "Type your Hugging Face API Key or click the button to login",
       editorSpec: {
         type: EditorType.TEXT_INPUT,
@@ -40,7 +42,7 @@ export const NODE_SPEC: NodeSpec = {
   outputSpecs: [
     {
       name: "apikey",
-      type: DataType.STRING,
+      type: CustomDataTypeEnum.HF_TOKEN,
     },
   ],
 };

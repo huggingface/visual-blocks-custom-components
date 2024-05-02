@@ -1,7 +1,7 @@
 import { COLLECTION_NAME_SHARED } from "../../constants";
 import { CustomDataTypeEnum } from "../../types";
 import type { NodeSpec } from "@visualblocks/custom-node-types";
-import { DataType, Category } from "@visualblocks/custom-node-types";
+import { Category } from "@visualblocks/custom-node-types";
 
 export const NODE_SPEC: NodeSpec = {
   id: "hf-token-classification-viewer",
@@ -19,10 +19,5 @@ export const NODE_SPEC: NodeSpec = {
     },
   ],
   // Outputs.
-  outputSpecs: [
-    {
-      name: "results",
-      type: DataType.ANY,
-    },
-  ],
+  outputSpecs: [],
 };

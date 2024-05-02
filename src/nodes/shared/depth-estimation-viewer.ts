@@ -10,8 +10,8 @@ import { html, LitElement } from "lit";
 import { property } from "lit/decorators.js";
 import { NODE_SPEC } from "./depth-estimation-viewer-spec";
 
-import * as THREE from 'three';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import * as THREE from "three";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 
 const IMAGE_SEGMENTATION_NODE_STYLE = `
 .container {
@@ -64,10 +64,7 @@ class DepthEstimationViewerNode extends LitElement {
       return html`<div class="container"></div>`;
     }
     return html`<div class="container">
-      <div
-        title=${NODE_SPEC.description}
-        @pointerdown=${this.onPointerDown}
-      >
+      <div title=${NODE_SPEC.description} @pointerdown=${this.onPointerDown}>
         ${this.canvas}
       </div>
       <style>
@@ -85,8 +82,8 @@ class DepthEstimationViewerNode extends LitElement {
     this.canvas = document.createElement("canvas");
 
     // Create new scene
-    const width = this.canvas.width = this.offsetWidth;
-    const height = this.canvas.height = this.offsetHeight;
+    const width = (this.canvas.width = this.offsetWidth);
+    const height = (this.canvas.height = this.offsetHeight);
 
     const scene = new THREE.Scene();
 
@@ -95,7 +92,10 @@ class DepthEstimationViewerNode extends LitElement {
     camera.position.z = 2;
     scene.add(camera);
 
-    const renderer = new THREE.WebGLRenderer({ canvas: this.canvas, antialias: true });
+    const renderer = new THREE.WebGLRenderer({
+      canvas: this.canvas,
+      antialias: true,
+    });
     renderer.setSize(width, height);
     renderer.setPixelRatio(window.devicePixelRatio);
 
@@ -124,9 +124,21 @@ class DepthEstimationViewerNode extends LitElement {
 
       renderer.render(scene, camera);
       controls.update();
+      this.updateOutputImage();
     });
   }
-
+  updateOutputImage() {
+    if (this.services) {
+      const outputImage = {
+        canvasId: this.services.resourceService.put(this.canvas),
+      };
+      this.dispatchEvent(
+        new CustomEvent("outputs", {
+          detail: { image: outputImage },
+        })
+      );
+    }
+  }
   async runWithInputs(inputs: Inputs, services: Services) {
     const { depthData, image, displacement } = inputs;
 
@@ -158,26 +170,13 @@ class DepthEstimationViewerNode extends LitElement {
       this.cachedOutputImage &&
       this.cachedInputImage === image.canvasId
     ) {
-      let outputImage = image;
-      if (this.cachedOutputImage) {
-        outputImage = {
-          canvasId: this.services.resourceService.put(this.cachedOutputImage),
-        };
-      }
       if (this.material && this.cachedDisplacement !== displacement) {
-        // Only update displacement 
+        // Only update displacement
         this.material.displacementScale = displacement;
         this.material.needsUpdate = true;
       }
 
-      this.dispatchEvent(
-        new CustomEvent("outputs", {
-          detail: {
-            depthData: this.cachedDepthData,
-            image: outputImage,
-          },
-        })
-      );
+      this.updateOutputImage();
       return;
     }
 
@@ -186,10 +185,9 @@ class DepthEstimationViewerNode extends LitElement {
         image.canvasId
       ) as HTMLCanvasElement;
       this.inputImage = imgCanvas;
-      this.cachedOutputImage = imgCanvas;
 
       // Create plane and rescale it so that max(w, h) = 1
-      const [w, h] = [imgCanvas.width, imgCanvas.height]
+      const [w, h] = [imgCanvas.width, imgCanvas.height];
       const [pw, ph] = w > h ? [1, h / w] : [w / h, 1];
       const geometry = new THREE.PlaneGeometry(pw, ph, w, h);
 
@@ -206,19 +204,16 @@ class DepthEstimationViewerNode extends LitElement {
       this.material.displacementScale = displacement;
 
       if (depthData?.[0]) {
-        this.material.displacementMap = new THREE.CanvasTexture(depthData[0].depth.toCanvas());
+        this.material.displacementMap = new THREE.CanvasTexture(
+          depthData[0].depth.toCanvas()
+        );
       }
       this.material.needsUpdate = true;
     }
 
     this.cachedDepthData = depthData;
     this.cachedInputImage = image?.canvasId;
-
-    this.dispatchEvent(
-      new CustomEvent("outputs", {
-        detail: { depthData: depthData, image: image },
-      })
-    );
+    this.updateOutputImage();
   }
 }
 

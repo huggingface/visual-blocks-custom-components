@@ -5,6 +5,7 @@ export enum CustomDataTypeEnum {
   TOKEN_CLASSIFICATION_RESULT = "tokenClassificationResult",
   DEPTH_ESTIMATION_RESULT = "depthEstimationResult",
   DEVICES = "devices",
+  HF_TOKEN = "hf_Token",
 }
 export { Devices, DevicesType };
 

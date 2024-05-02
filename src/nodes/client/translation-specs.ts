@@ -4,7 +4,6 @@ import {
   LANGUAGES,
 } from "../../constants";
 import { Devices, CustomDataTypeEnum } from "../../types";
-import { isWebGPUAvailable } from "../../utils";
 
 import type { NodeSpec } from "@visualblocks/custom-node-types";
 import {
@@ -53,7 +52,7 @@ export const NODE_SPEC: NodeSpec = {
     {
       name: "device",
       displayLabel: "Device",
-      defaultValue: isWebGPUAvailable() ? Devices.webgpu : Devices.wasm,
+      defaultValue: Devices.wasm, // temporary: since only model supported works on wasm
       type: CustomDataTypeEnum.DEVICES,
       editorSpec: {
         type: EditorType.DROPDOWN,
@@ -83,7 +82,9 @@ export const NODE_SPEC: NodeSpec = {
       name: "text",
       type: DataType.STRING,
       editorSpec: {
-        type: EditorType.TEXT_INPUT,
+        type: EditorType.TEXT_AREA,
+        autoResize: true,
+        autoResizeMaxHeight: 150,
       },
     },
     {
