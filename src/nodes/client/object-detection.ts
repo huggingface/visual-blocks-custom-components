@@ -78,7 +78,7 @@ class ObjectDetectionNode extends BasePipelineNode {
       Array.isArray(result) ? result : [result]
     ) as ObjectDetectionPipelineOutput;
 
-    const outputVB = resultArray.map((x) => {
+    const outputVB = resultArray.map((x: any) => {
       return {
         label: x.label,
         score: x.score,

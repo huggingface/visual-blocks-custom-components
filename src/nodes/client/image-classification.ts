@@ -73,7 +73,7 @@ class ImageClassificationNode extends BasePipelineNode {
       Array.isArray(result) ? result : [result]
     ) as ImageClassificationOutput;
 
-    const classProb = resultArray.map((e) => ({
+    const classProb = resultArray.map((e: any) => ({
       className: e.label,
       probability: e.score,
     }));
