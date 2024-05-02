@@ -20,11 +20,20 @@ const IMAGE_SEGMENTATION_NODE_STYLE = `
 .container {
     width: 100%;
     height: auto;
+    position: relative;
 }
 
 canvas {
     width: 100%;
     height: auto;
+}
+span.label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 0.5em;
 }
 `;
 
@@ -44,11 +53,15 @@ class ImageSegmentationViewerNode extends LitElement {
   masks: HTMLCanvasElement[] = [];
   @property()
   inputImage!: HTMLCanvasElement;
-  @property()
-  selectedPoints: { x: number; y: number }[] = [];
 
   @property()
   services!: Services;
+
+  @property()
+  selectedLayers = new Set<string>();
+
+  @property()
+  currentLabel = "";
 
   constructor() {
     super();
@@ -65,6 +78,8 @@ class ImageSegmentationViewerNode extends LitElement {
         @pointerdown=${this.onPointerDown}
       >
         ${this.canvas}
+        <span class="label">
+          ${this.currentLabel}
       </div>
       <style>
         ${IMAGE_SEGMENTATION_NODE_STYLE}
@@ -84,11 +99,26 @@ class ImageSegmentationViewerNode extends LitElement {
     // Clamp the coordinates to the image
     px = clamp(px);
     py = clamp(py);
-    this.selectedPoints.push({ x: px, y: py });
-    if (event.metaKey) {
-      this.selectedPoints = [];
+
+    // Loop over all canvases
+    for (const mask of this.masks) {
+      const canvasX = mask.width * px;
+      const canvasY = mask.height * py;
+      // Get the pixel data of the mouse coordinates
+      const maskctx = mask.getContext("2d") as CanvasRenderingContext2D;
+      const pixelData = maskctx.getImageData(canvasX, canvasY, 1, 1).data;
+
+      if (pixelData[3] >= 255) {
+        const layer = mask.getAttribute("data-label") as string;
+        if (this.selectedLayers.has(layer)) {
+          this.selectedLayers.delete(layer);
+        } else {
+          this.selectedLayers.add(layer);
+        }
+      }
     }
-    const canvas = this.cutImage(this.selectedPoints);
+
+    const canvas = this.cutImage(this.selectedLayers);
 
     const outputImage = {
       canvasId: this.services.resourceService.put(canvas),
@@ -101,7 +131,7 @@ class ImageSegmentationViewerNode extends LitElement {
     );
   }
 
-  cutImage(points: { x: number; y: number }[]) {
+  cutImage(layers: Set<string>) {
     const canvas = document.createElement("canvas");
     canvas.width = this.inputImage.width;
     canvas.height = this.inputImage.height;
@@ -114,22 +144,15 @@ class ImageSegmentationViewerNode extends LitElement {
     const tempCtx = tempCanvas.getContext("2d") as CanvasRenderingContext2D;
     tempCanvas.width = this.inputImage.width;
     tempCanvas.height = this.inputImage.height;
-    // Loop over all canvases
-    for (const { x: px, y: py } of points) {
-      for (const mask of this.masks) {
-        const canvasX = mask.width * px;
-        const canvasY = mask.height * py;
-        // Get the pixel data of the mouse coordinates
-        const maskctx = mask.getContext("2d") as CanvasRenderingContext2D;
-        const pixelData = maskctx.getImageData(canvasX, canvasY, 1, 1).data;
 
-        // Apply hover effect if not fully opaque
-        if (pixelData[3] === 255) {
-          tempCtx.drawImage(mask, 0, 0);
-          break;
-        }
-      }
+    const masks = this.masks.filter((mask) =>
+      layers.has(mask.getAttribute("data-label") as string)
+    );
+
+    for (const mask of masks) {
+      tempCtx.drawImage(mask, 0, 0);
     }
+
     ctx.globalCompositeOperation = "destination-in";
     ctx.drawImage(tempCanvas, 0, 0);
     ctx.restore();
@@ -170,8 +193,9 @@ class ImageSegmentationViewerNode extends LitElement {
       } else {
         ctx.globalAlpha = 0.6;
         ctx.drawImage(mask, 0, 0);
-        // TODO: Show label
-        // status.textContent = canvas.getAttribute('data-label');
+        const label = mask.getAttribute("data-label");
+        const score = mask.getAttribute("data-score");
+        this.currentLabel = `${label} ${score ? ` - ${score}` : ""}`;
       }
     }
     ctx.restore();
@@ -202,6 +226,7 @@ class ImageSegmentationViewerNode extends LitElement {
     canvas.width = mask.width;
     canvas.height = mask.height;
     canvas.setAttribute("data-label", label);
+    canvas.setAttribute("data-score", score || "");
 
     // Create context and allocate buffer for pixel data
     const context = canvas.getContext("2d") as CanvasRenderingContext2D;
@@ -230,7 +255,6 @@ class ImageSegmentationViewerNode extends LitElement {
 
   async runWithInputs(inputs: Inputs, services: Services) {
     const { segData, image } = inputs;
-
     this.services = services;
     if (segData === undefined || segData?.length === 0) {
       this.dispatchEvent(
