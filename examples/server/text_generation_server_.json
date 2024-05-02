@@ -1,9 +1,9 @@
 {
   "project": {
     "name": "Text Generation (Server)",
-    "id": "wcoaj8",
-    "creationTs": 1710123932380,
-    "lastModifiedTs": 1710125539028,
+    "id": "d64k47",
+    "creationTs": 1714628450910,
+    "lastModifiedTs": 1714628568762,
     "userSetData": {
       "description": "",
       "tags": [],
@@ -17,7 +17,6 @@
         "id": "markdown_viewer_gen3z5",
         "nodeSpecId": "markdown_viewer",
         "customData": {
-          "rightOfNode": "hf-server-text-generation_64q4cp",
           "previewX": 352,
           "previewY": 16,
           "previewWidth": 528,
@@ -81,7 +80,7 @@
           "posY": -144,
           "width": 176,
           "height": 242,
-          "selected": true
+          "selected": false
         },
         "inputValues": {
           "text": "A lovely day",
@@ -89,7 +88,7 @@
           "max_new_tokens": 200,
           "return_full_text": false,
           "repetition_penalty": 1,
-          "modelid": "mistralai/Mistral-7B-Instruct-v0.1",
+          "modelid": "mistralai/Mixtral-8x7B-Instruct-v0.1",
           "apikey": ""
         },
         "incomingEdges": {

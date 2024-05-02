@@ -1,9 +1,9 @@
 {
   "project": {
     "name": "Chat Template - Text Generation (server)",
-    "id": "new_hfdemo",
-    "creationTs": 1710046043852,
-    "lastModifiedTs": 1710135082259,
+    "id": "g804xc",
+    "creationTs": 1714630314914,
+    "lastModifiedTs": 1714630933403,
     "userSetData": {
       "description": "",
       "tags": [],
@@ -23,7 +23,7 @@
           "previewHeight": 240
         },
         "uiData": {
-          "posX": 375.96435546875,
+          "posX": 749.783203125,
           "posY": 0,
           "width": 176,
           "height": 242,
@@ -60,82 +60,6 @@
         }
       },
       {
-        "id": "hf-hub-login_wmn1pq",
-        "nodeSpecId": "hf-hub-login",
-        "customData": {
-          "previewX": 16,
-          "previewY": 16,
-          "previewWidth": 320,
-          "previewHeight": 240
-        },
-        "uiData": {
-          "posX": 1.07275390625,
-          "posY": 38,
-          "width": 213.81884765625,
-          "height": 130,
-          "selected": true
-        },
-        "propValues": {
-          "apikey": "",
-          "hidePreview": true
-        }
-      },
-      {
-        "id": "hf-chat-template-generator_tdp8kh",
-        "nodeSpecId": "hf-chat-template-generator",
-        "customData": {
-          "previewX": 352,
-          "previewY": 16,
-          "previewWidth": 320,
-          "previewHeight": 240
-        },
-        "uiData": {
-          "posX": 0,
-          "posY": 234.75,
-          "width": 215.96435546875,
-          "height": 191,
-          "selected": false
-        },
-        "inputValues": {
-          "user": "How to make fresh pasta?",
-          "assistant": "",
-          "system": "",
-          "modelid": "mistralai/Mixtral-8x7B-Instruct-v0.1"
-        }
-      },
-      {
-        "id": "markdown_viewer_9566l8",
-        "nodeSpecId": "markdown_viewer",
-        "customData": {
-          "previewX": 736,
-          "previewY": 16,
-          "previewWidth": 320,
-          "previewHeight": 240
-        },
-        "uiData": {
-          "posX": 375.96435546875,
-          "posY": 283.25,
-          "width": 176,
-          "height": 130,
-          "selected": false
-        },
-        "propValues": {
-          "hidePreview": false,
-          "hidePreviewFrame": false
-        },
-        "inputValues": {
-          "markdownString": ""
-        },
-        "incomingEdges": {
-          "markdownString": [
-            {
-              "sourceNodeId": "hf-chat-template-generator_tdp8kh",
-              "outputId": "template"
-            }
-          ]
-        }
-      },
-      {
         "id": "markdown_viewer_c6xcbn",
         "nodeSpecId": "markdown_viewer",
         "customData": {
@@ -145,7 +69,7 @@
           "previewHeight": 448
         },
         "uiData": {
-          "posX": 711.96435546875,
+          "posX": 1085.783203125,
           "posY": 56,
           "width": 176,
           "height": 130,
@@ -163,6 +87,91 @@
             {
               "sourceNodeId": "hf-server-text-generation_zbop0f",
               "outputId": "results"
+            }
+          ]
+        }
+      },
+      {
+        "id": "hf-hub-login_wmn1pq",
+        "nodeSpecId": "hf-hub-login",
+        "customData": {
+          "previewX": 16,
+          "previewY": 16,
+          "previewWidth": 320,
+          "previewHeight": 240
+        },
+        "uiData": {
+          "posX": 0,
+          "posY": 167,
+          "width": 213.81884765625,
+          "height": 130,
+          "selected": false
+        },
+        "propValues": {
+          "apikey": "",
+          "hidePreview": false
+        }
+      },
+      {
+        "id": "hf-chat-template-generator_tdp8kh",
+        "nodeSpecId": "hf-chat-template-generator",
+        "customData": {
+          "previewX": 352,
+          "previewY": 16,
+          "previewWidth": 320,
+          "previewHeight": 240
+        },
+        "uiData": {
+          "posX": 373.81884765625,
+          "posY": 204.5,
+          "width": 215.96435546875,
+          "height": 241,
+          "selected": false
+        },
+        "inputValues": {
+          "user": "How to make fresh pasta?",
+          "assistant": "",
+          "system": "",
+          "modelid": "microsoft/Phi-3-mini-4k-instruct",
+          "add_generation_prompt": false
+        },
+        "incomingEdges": {
+          "apikey": [
+            {
+              "sourceNodeId": "hf-hub-login_wmn1pq",
+              "outputId": "apikey"
+            }
+          ]
+        }
+      },
+      {
+        "id": "markdown_viewer_9566l8",
+        "nodeSpecId": "markdown_viewer",
+        "customData": {
+          "previewX": 736,
+          "previewY": 16,
+          "previewWidth": 320,
+          "previewHeight": 240
+        },
+        "uiData": {
+          "posX": 749.783203125,
+          "posY": 278,
+          "width": 176,
+          "height": 130,
+          "selected": true
+        },
+        "propValues": {
+          "hidePreview": false,
+          "hidePreviewFrame": false
+        },
+        "inputValues": {
+          "markdownString": ""
+        },
+        "incomingEdges": {
+          "markdownString": [
+            {
+              "sourceNodeId": "hf-chat-template-generator_tdp8kh",
+              "outputId": "template"
             }
           ]
         }

@@ -1,9 +1,9 @@
 {
   "project": {
     "name": "Text-Classification (Server)",
-    "id": "c1fxs6",
-    "creationTs": 1710016035815,
-    "lastModifiedTs": 1710016053220,
+    "id": "6gl91i",
+    "creationTs": 1714628589715,
+    "lastModifiedTs": 1714628597698,
     "userSetData": {
       "description": "",
       "tags": [],
@@ -82,7 +82,7 @@
         },
         "inputValues": {
           "text": "",
-          "modelid": "cardiffnlp/twitter-roberta-base-sentiment-latest",
+          "modelid": "distilbert-base-uncased-finetuned-sst-2-english",
           "apikey": ""
         },
         "incomingEdges": {
@@ -106,7 +106,6 @@
         "customData": {
           "initialWidth": 304,
           "initialHeight": 144,
-          "leftOfNode": "hf-server-transformers-text-classification_mjltdd",
           "previewX": 608,
           "previewY": 16,
           "previewWidth": 304,

@@ -1,9 +1,9 @@
 {
   "project": {
     "name": "Fill Mask (Server)",
-    "id": "ozns7w",
-    "creationTs": 1710052502659,
-    "lastModifiedTs": 1710052502659,
+    "id": "055sfu",
+    "creationTs": 1714628664447,
+    "lastModifiedTs": 1714628681596,
     "userSetData": {
       "description": "",
       "tags": [],
@@ -27,12 +27,12 @@
           "posY": 65,
           "width": 176,
           "height": 166,
-          "selected": false
+          "selected": true
         },
         "inputValues": {
           "text": "",
-          "modelid": "google-bert/bert-base-uncased",
-          "apikey": ""
+          "apikey": "",
+          "modelid": "distilbert-base-uncased"
         },
         "incomingEdges": {
           "text": [

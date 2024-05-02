@@ -1,9 +1,9 @@
 {
   "project": {
     "name": "Image Classification (Server)",
-    "id": "zfv2x2",
-    "creationTs": 1710122192981,
-    "lastModifiedTs": 1710122766817,
+    "id": "9gkw0v",
+    "creationTs": 1714628636157,
+    "lastModifiedTs": 1714628638764,
     "userSetData": {
       "description": "",
       "tags": [],
@@ -27,7 +27,7 @@
           "posY": 32,
           "width": 186.3271484375,
           "height": 142,
-          "selected": false
+          "selected": true
         },
         "inputValues": {
           "modelid": "google/vit-base-patch16-224",
@@ -84,7 +84,6 @@
         "customData": {
           "initialWidth": 448,
           "initialHeight": 240,
-          "leftOfNode": "hf-server-transformers-image-classification_pnm02e",
           "previewX": 608,
           "previewY": 16,
           "previewWidth": 448,
@@ -119,7 +118,6 @@
         "id": "hf-hub-login_8p9uvq",
         "nodeSpecId": "hf-hub-login",
         "customData": {
-          "leftOfNode": "hf-server-transformers-image-classification_pnm02e",
           "previewX": 16,
           "previewY": 16,
           "previewWidth": 320,
@@ -130,7 +128,7 @@
           "posY": 144,
           "width": 213.81884765625,
           "height": 130,
-          "selected": true
+          "selected": false
         },
         "propValues": {
           "apikey": "",

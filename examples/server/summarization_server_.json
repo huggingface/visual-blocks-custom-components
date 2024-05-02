@@ -1,9 +1,9 @@
 {
   "project": {
     "name": "Summarization (Server)",
-    "id": "new_hfdemo",
-    "creationTs": 1710046043852,
-    "lastModifiedTs": 1710052467106,
+    "id": "kv4wl4",
+    "creationTs": 1714628617571,
+    "lastModifiedTs": 1714628619481,
     "userSetData": {
       "description": "",
       "tags": [],
@@ -27,7 +27,7 @@
           "posY": 65,
           "width": 176,
           "height": 166,
-          "selected": false
+          "selected": true
         },
         "inputValues": {
           "text": "",
@@ -53,7 +53,6 @@
         "id": "markdown_viewer_fdblme",
         "nodeSpecId": "markdown_viewer",
         "customData": {
-          "rightOfNode": "hf-server-summarization_gvors1",
           "previewX": 420,
           "previewY": 20,
           "previewWidth": 320,
@@ -64,7 +63,7 @@
           "posY": 83,
           "width": 176,
           "height": 130,
-          "selected": true
+          "selected": false
         },
         "propValues": {
           "hidePreview": false,
@@ -88,7 +87,6 @@
         "customData": {
           "initialWidth": 304,
           "initialHeight": 144,
-          "leftOfNode": "hf-server-summarization_gvors1",
           "previewX": 16,
           "previewY": 16,
           "previewWidth": 351,
@@ -111,7 +109,6 @@
         "id": "hf-hub-login_wqrv61",
         "nodeSpecId": "hf-hub-login",
         "customData": {
-          "leftOfNode": "hf-server-summarization_gvors1",
           "previewX": 672,
           "previewY": 16,
           "previewWidth": 320,

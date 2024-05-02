@@ -180,10 +180,20 @@ export const CURATED_MODELS = {
       label: m.id,
     })
   ),
-  text_generation: (TASKS_DATA["text-generation"]?.models ?? []).map((m) => ({
-    value: m.id,
-    label: m.id,
-  })),
+  text_generation: [
+    {
+      value: "meta-llama/Meta-Llama-3-8B",
+      label: "meta-llama/Meta-Llama-3-8B",
+    },
+    {
+      value: "microsoft/Phi-3-mini-4k-instruct",
+      label: "microsoft/Phi-3-mini-4k-instruct",
+    },
+    ...(TASKS_DATA["text-generation"]?.models ?? []).map((m) => ({
+      value: m.id,
+      label: m.id,
+    })),
+  ],
   text_classification: (TASKS_DATA["text-classification"]?.models ?? []).map(
     (m) => ({
       value: m.id,

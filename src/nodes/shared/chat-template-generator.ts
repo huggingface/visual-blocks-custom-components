@@ -1,4 +1,4 @@
-import type { RepoDesignation, Credentials } from "@huggingface/hub";
+import type { RepoDesignation } from "@huggingface/hub";
 import type { CustomNodeInfo } from "@visualblocks/custom-node-types";
 import { Template } from "@huggingface/jinja";
 import { NODE_SPEC } from "./chat-template-generator-specs";

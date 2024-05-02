@@ -1,9 +1,9 @@
 {
   "project": {
     "name": "Token-Classification (Server)",
-    "id": "d01qdd",
-    "creationTs": 1710015776216,
-    "lastModifiedTs": 1710016008283,
+    "id": "wmxaxr",
+    "creationTs": 1714628298448,
+    "lastModifiedTs": 1714628299053,
     "userSetData": {
       "description": "",
       "tags": [],
@@ -101,7 +101,6 @@
         "customData": {
           "initialWidth": 304,
           "initialHeight": 144,
-          "leftOfNode": "hf-server-token-classification_4rf7sk",
           "previewX": 688,
           "previewY": 16,
           "previewWidth": 304,

@@ -1,9 +1,9 @@
 {
   "project": {
     "name": "Text-To-Image (server)",
-    "id": "d01qdd",
-    "creationTs": 1710015776216,
-    "lastModifiedTs": 1710015860508,
+    "id": "0k99qm",
+    "creationTs": 1714628317405,
+    "lastModifiedTs": 1714628320294,
     "userSetData": {
       "description": "",
       "tags": [],
@@ -55,7 +55,7 @@
           "posY": 0,
           "width": 176,
           "height": 267,
-          "selected": false
+          "selected": true
         },
         "inputValues": {
           "prompt": "A monster cat",
@@ -90,7 +90,7 @@
           "posY": 68.5,
           "width": 213.81884765625,
           "height": 130,
-          "selected": true
+          "selected": false
         },
         "propValues": {
           "apikey": "",
