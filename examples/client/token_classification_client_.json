@@ -98,6 +98,6 @@
     ]
   },
   "customNodeUrls": [
-    "http://localhost:8080/index.js"
+    "https://cdn.jsdelivr.net/npm/huggingface-visualblocks-nodes@latest"
   ]
 }
