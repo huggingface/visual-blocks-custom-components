@@ -1,4 +1,6 @@
 import { COLLECTION_NAME_SHARED, CURATED_MODELS } from "../../constants";
+import { CustomDataTypeEnum } from "../../types";
+
 import type { NodeSpec } from "@visualblocks/custom-node-types";
 import {
   DataType,
@@ -56,6 +58,17 @@ export const NODE_SPEC: NodeSpec = {
       editorSpec: {
         type: EditorType.DROPDOWN,
         options: CURATED_MODELS.text_generation,
+      },
+    },
+    {
+      name: "apikey",
+      displayLabel: "API Key",
+      defaultValue: "",
+      type: CustomDataTypeEnum.HF_TOKEN,
+      info: "You need an API key if the model data is not public or the model is gated.",
+      editorSpec: {
+        type: EditorType.TEXT_INPUT,
+        password: true,
       },
     },
     {

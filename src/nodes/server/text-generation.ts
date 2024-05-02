@@ -6,7 +6,6 @@ import { compareObjects } from "../../utils";
 declare interface Inputs {
   text: string;
   modelid: string;
-  modelid_curated: string;
   apikey: string;
   temperature: number;
   repetition_penalty: number;
@@ -35,14 +34,13 @@ class TextGenerationServerNode extends LitElement {
       text,
       apikey,
       modelid,
-      modelid_curated,
       temperature,
       repetition_penalty,
       max_new_tokens,
       return_full_text,
     } = inputs;
 
-    const _modelid = (modelid || modelid_curated)?.trim();
+    const _modelid = modelid?.trim();
 
     if (this.hf && apikey) {
       this.hf = new HfInference(apikey);

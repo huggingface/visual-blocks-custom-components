@@ -7,7 +7,6 @@ import type { TokenClassificationResult } from "../../types";
 declare interface Inputs {
   text: string;
   modelid: string;
-  modelid_curated: string;
   apikey: string;
 }
 
@@ -25,7 +24,7 @@ class TokenClassificationServerNode extends LitElement {
     // This node doesn't have a preview UI.
   }
   async runWithInputs(inputs: Inputs) {
-    const { text, modelid, apikey, modelid_curated } = inputs;
+    const { text, modelid, apikey } = inputs;
     if (this.hf && apikey) {
       this.hf = new HfInference(apikey);
     }
@@ -53,7 +52,7 @@ class TokenClassificationServerNode extends LitElement {
 
     try {
       const tokenClassResult = await this.hf?.tokenClassification({
-        model: modelid ? modelid.trim() : modelid_curated,
+        model: modelid?.trim(),
         inputs: text,
         parameters: {
           aggregation_strategy: "max",

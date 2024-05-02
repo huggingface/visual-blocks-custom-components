@@ -7,7 +7,7 @@ export const NODE_SPEC: NodeSpec = {
   id: "hf-transformers-image-segmentation-viewer",
   name: "Image segmentation Viewer",
   description:
-    "View the image segmentation result. Click on the image to see the segmentation mask to select segments, CMD/CTRL + click to clear selection.",
+    "View the image segmentation result. Click on the masks to toggle output.",
 
   category: Category.OUTPUT,
   collection: COLLECTION_NAME_SHARED,

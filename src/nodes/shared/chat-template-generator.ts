@@ -1,6 +1,6 @@
-import type { RepoDesignation } from "@huggingface/hub";
-import { Template } from "@huggingface/jinja";
+import type { RepoDesignation, Credentials } from "@huggingface/hub";
 import type { CustomNodeInfo } from "@visualblocks/custom-node-types";
+import { Template } from "@huggingface/jinja";
 import { NODE_SPEC } from "./chat-template-generator-specs";
 
 import { compareObjects } from "../../utils";
@@ -12,6 +12,7 @@ declare interface Inputs {
   user: string;
   modelid: string;
   add_generation_prompt: boolean;
+  apikey: string;
 }
 
 declare interface Outputs {
@@ -28,14 +29,21 @@ class ChatTemplateGenerator extends LitElement {
     super();
   }
 
-  async downloadFile(params: { repo: RepoDesignation; path: string }) {
+  async downloadFile(params: {
+    repo: RepoDesignation;
+    path: string;
+    credentials?: {
+      accessToken: string;
+    };
+  }) {
     // @ts-ignore
     const hfHUB = await import("https://esm.sh/@huggingface/hub");
     return hfHUB.downloadFile(params);
   }
 
   async runWithInputs(inputs: Inputs) {
-    const { user, assistant, system, modelid, add_generation_prompt } = inputs;
+    const { user, assistant, system, modelid, add_generation_prompt, apikey } =
+      inputs;
 
     const _modelid = modelid?.trim();
 
@@ -59,6 +67,7 @@ class ChatTemplateGenerator extends LitElement {
         const file = await this.downloadFile({
           repo: _modelid,
           path: "tokenizer_config.json",
+          credentials: apikey ? { accessToken: apikey } : undefined,
         });
         if (file) {
           this.configFile = await file.json();

@@ -16,18 +16,7 @@ export const NODE_SPEC: NodeSpec = {
   collection: COLLECTION_NAME_SERVER,
 
   // Properties.
-  propertySpecs: [
-    {
-      name: "modelid_curated",
-      displayLabel: "Model ID",
-      info: "Curated models from Hugging Face",
-      type: DataType.STRING,
-      editorSpec: {
-        type: EditorType.DROPDOWN,
-        options: CURATED_MODELS.image_classification,
-      },
-    },
-  ],
+  propertySpecs: [],
 
   // Inputs.
   inputSpecs: [
@@ -38,9 +27,11 @@ export const NODE_SPEC: NodeSpec = {
     {
       name: "modelid",
       displayLabel: "Model ID",
+      info: "Curated models from Hugging Face or input your own model ID",
       type: DataType.STRING,
       editorSpec: {
-        type: EditorType.TEXT_INPUT,
+        type: EditorType.DROPDOWN,
+        options: CURATED_MODELS.image_classification,
       },
     },
     {

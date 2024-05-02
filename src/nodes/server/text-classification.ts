@@ -7,7 +7,6 @@ import { compareObjects } from "../../utils";
 declare interface Inputs {
   text: string;
   modelid: string;
-  modelid_curated: string;
   apikey: string;
 }
 interface Outputs {
@@ -28,9 +27,9 @@ class TextClassificationNode extends LitElement {
     // This node doesn't have a preview UI.
   }
   async runWithInputs(inputs: Inputs) {
-    const { text, apikey, modelid, modelid_curated } = inputs;
+    const { text, apikey, modelid } = inputs;
 
-    const _modelid = (modelid || modelid_curated)?.trim();
+    const _modelid = modelid?.trim();
     if (this.hf && apikey) {
       this.hf = new HfInference(apikey);
     }

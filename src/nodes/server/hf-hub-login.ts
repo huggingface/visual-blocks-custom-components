@@ -121,7 +121,7 @@ class HFHubLoginNode extends LitElement {
   async _login() {
     window.location.href = await this.oauthLoginUrl({
       clientId: "8da93e24-c51a-430b-b8cb-1affa96c1f81",
-      scopes: "inference-api",
+      scopes: "inference-api read-repos",
       redirectUrl: window.location.origin + "/#/edit/new",
       state: window.location.hash,
     });

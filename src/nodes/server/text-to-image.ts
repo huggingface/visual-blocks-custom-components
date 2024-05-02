@@ -10,7 +10,6 @@ interface Inputs {
   guidance_scale: number;
   seed: number;
   modelid: string;
-  modelid_curated: string;
   apikey: string;
   useCache: boolean;
 }
@@ -40,12 +39,11 @@ class TextToImageNode extends LitElement {
       guidance_scale,
       seed,
       modelid,
-      modelid_curated,
       apikey,
       useCache,
     } = inputs;
 
-    const _modelid = (modelid || modelid_curated)?.trim();
+    const _modelid = modelid?.trim();
     if (this.hf && apikey) {
       this.hf = new HfInference(apikey);
     }
