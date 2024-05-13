@@ -1,9 +1,18 @@
 # Hugging Face + Visual Blocks Custom Components
 
-<img src="https://huggingface.co/spaces/hf-vb/README/raw/main/hf-vb-logo.svg" width="250">
 
+<p align="center">
+    <br/>
+    <picture> 
+        <source media="(prefers-color-scheme: dark)" srcset="https://huggingface.co/spaces/hf-vb/README/raw/main/hf-vb-logo-dark.svg" width="400" style="max-width: 100%;">
+        <source media="(prefers-color-scheme: light)" srcset="https://huggingface.co/spaces/hf-vb/README/raw/main/hf-vb-logo.svg" width="400" style="max-width: 100%;">
+        <img alt="transformers.js javascript library logo" src="https://huggingface.co/spaces/hf-vb/README/raw/main/hf-vb-logo.svg" width="400" style="max-width: 100%;">
+    </picture>
+    <br/>
+</p>
 Visual blocks is an amazing tool from our friends at [Google](https://github.com/google/visualblocks)
-that allows you to easily create and experiment with machine learning pipelines using a visual interface. This repository contains the source code for custom components that allow you to use Hugging Face client and server models in your Visual Blocks pipelines.
+that allows you to easily create and experiment with machine learning pipelines using a visual interface.
+This repository contains the source code for custom components that allow you to use Hugging Face client and server models in your Visual Blocks pipelines.
 We've created a few nodes supporting different tasks and models following our [Tasks](https://huggingface.co/tasks) definitions.
 
 > [!NOTE]
@@ -44,34 +53,34 @@ Important links:
 
 ## How to use the custom components
 
-To start playing with our custom components you need to Add a custom node to your Visual Blocks project. First you need to start a new project [https://visualblocks.withgoogle.com/#/edit/new](https://visualblocks.withgoogle.com/#/edit/new), then click on the "+" button in the bottom left corner to add a new node.
+To start playing with our custom components you need to **Add a custom node** to your Visual Blocks project. First you need to start a new project [https://visualblocks.withgoogle.com/#/edit/new](https://visualblocks.withgoogle.com/#/edit/new), then click on the "+" button in the bottom left corner to add a new node.
 
-<img src="https://huggingface.co/spaces/hf-vb/README/resolve/main/left_button.png" width="150">
+<img src="https://huggingface.co/spaces/hf-vb/README/resolve/main/left_button.png" width="200">
 
 Then input the pre-bundled code from our npm package. You can do this by pasting the following link into the input field and clicking "Submit":
 
-```js
+```
 https://cdn.jsdelivr.net/npm/huggingface-visualblocks-nodes@latest
 ```
 
-<img src="https://huggingface.co/spaces/hf-vb/README/resolve/main/custom_node.jpg" width="400">
+<img src="https://huggingface.co/spaces/hf-vb/README/resolve/main/custom_node.jpg" width="450">
 
 Then you will be able to see three Hugging Face Collections: Client, Server and Common.
 
-<img src="https://huggingface.co/spaces/hf-vb/README/resolve/main/collections.jpg" width="200">
+<img src="https://huggingface.co/spaces/hf-vb/README/resolve/main/collections.jpg" width="250">
 
 # Nodes and Examples
 
 ## Client Nodes
 
-Client nodes are nodes running tranformers pipelines on the client side using [Transformers.js](https://github.com/xenova/transformers.js) library. All Client nodes have an experimental WebGPU and WASM backend support, and models listed in the [Xenova](https://huggingface.co/Xenova) profile are supported.
+Client nodes are nodes running tranformers pipelines on the client side using [Transformers.js](https://github.com/xenova/transformers.js). All Client nodes have WASM and WebGPU (experimental) backend support, and you can find web-compatible models by visiting https://huggingface.co/models?library=transformers.js.
 
 > [!NOTE]
-> WebGPU support on transformers.js is experimental and may not work on all devices, not all models are supported by WebGPU backend yet.
+> WebGPU support in transformers.js is still experimental and may not work on all devices. Not all models are supported by WebGPU backend yet.
 
 ### Translation
 
-<img src="https://huggingface.co/spaces/hf-vb/README/resolve/main/translation.jpg" width="400">
+<img src="https://huggingface.co/spaces/hf-vb/README/resolve/main/translation.jpg" width="500">
 
 [**Translation Node Example**](https://visualblocks.withgoogle.com/#/edit/new_hfdemo?project_json=https://cdn.jsdelivr.net/npm/huggingface-visualblocks-nodes@latest/examples/client/translation_client_.json)
 
@@ -82,7 +91,7 @@ More info:
 
 ### Token Classification
 
-<img src="https://huggingface.co/spaces/hf-vb/README/resolve/main/token.jpg" width="400">
+<img src="https://huggingface.co/spaces/hf-vb/README/resolve/main/token.jpg" width="500">
 
 [**Token Classification Node Exampl**e](https://visualblocks.withgoogle.com/#/edit/new_hfdemo?project_json=https://cdn.jsdelivr.net/npm/huggingface-visualblocks-nodes@latest/examples/client/token_classification_client_.json)
 
@@ -93,7 +102,7 @@ More info:
 
 ### Text Classification
 
-<img src="https://huggingface.co/spaces/hf-vb/README/resolve/main/text-classification.jpg" width="400">
+<img src="https://huggingface.co/spaces/hf-vb/README/resolve/main/text-classification.jpg" width="500">
 
 [**Text Classification Node Example**](https://visualblocks.withgoogle.com/#/edit/new_hfdemo?project_json=https://cdn.jsdelivr.net/npm/huggingface-visualblocks-nodes@latest/examples/client/text_classification_client_.json)
 
@@ -104,7 +113,7 @@ More info:
 
 ### Object Detection
 
-<img src="https://huggingface.co/spaces/hf-vb/README/resolve/main/object-detc.jpg" width="400">
+<img src="https://huggingface.co/spaces/hf-vb/README/resolve/main/object-detc.jpg" width="500">
 
 [**Object Detection Node Example**](https://visualblocks.withgoogle.com/#/edit/new_hfdemo?project_json=https://cdn.jsdelivr.net/npm/huggingface-visualblocks-nodes@latest/examples/client/object_detection_client_.json)
 
@@ -115,7 +124,7 @@ More info:
 
 ### Image Segmentation
 
-<img src="https://huggingface.co/spaces/hf-vb/README/resolve/main/segment.jpg" width="400">
+<img src="https://huggingface.co/spaces/hf-vb/README/resolve/main/segment.jpg" width="500">
 
 [**Image Segmentation Node Example**](https://visualblocks.withgoogle.com/#/edit/new_hfdemo?project_json=https://cdn.jsdelivr.net/npm/huggingface-visualblocks-nodes@latest/examples/client/image_segmentation_client_.json)
 
@@ -126,7 +135,7 @@ More info:
 
 ### Image Classification
 
-<img src="https://huggingface.co/spaces/hf-vb/README/resolve/main/class.jpg" width="400">
+<img src="https://huggingface.co/spaces/hf-vb/README/resolve/main/class.jpg" width="500">
 
 [**Image Classification Node Example**](https://visualblocks.withgoogle.com/#/edit/new_hfdemo?project_json=https://cdn.jsdelivr.net/npm/huggingface-visualblocks-nodes@latest/examples/client/image_classification_client_.json)
 
@@ -137,7 +146,7 @@ More info:
 
 ### Depth Estimation
 
-<img src="https://huggingface.co/spaces/hf-vb/README/resolve/main/dept-es.jpg" width="400">
+<img src="https://huggingface.co/spaces/hf-vb/README/resolve/main/dept-es.jpg" width="500">
 
 [Depth Estimation Node Example](https://visualblocks.withgoogle.com/#/edit/new_hfdemo?project_json=https://cdn.jsdelivr.net/npm/huggingface-visualblocks-nodes@latest/examples/client/depth_estimation_client_.json)
 
@@ -148,7 +157,7 @@ More info:
 
 ### Background Removal
 
-<img src="https://huggingface.co/spaces/hf-vb/README/resolve/main/removal.jpg" width="400">
+<img src="https://huggingface.co/spaces/hf-vb/README/resolve/main/removal.jpg" width="500">
 
 [**Background Removal Node Example**](https://visualblocks.withgoogle.com/#/edit/new_hfdemo?project_json=https://cdn.jsdelivr.net/npm/huggingface-visualblocks-nodes@latest/examples/client/background_removal_client_.json)
 
@@ -161,19 +170,19 @@ Server nodes are nodes running Transformers pipeline tasks using the [Hugging Fa
 
 For server nodes you have the option to Login using your Hugging Face account to get more usage and access to private models. Using **Hugging Face Hub Login**
 
-<img src="https://huggingface.co/spaces/hf-vb/README/resolve/main/server/button-auth.jpg" width="150">
+<img src="https://huggingface.co/spaces/hf-vb/README/resolve/main/server/button-auth.jpg" width="250">
 
-<img src="https://huggingface.co/spaces/hf-vb/README/resolve/main/server/auth.jpg" width="300">
+<img src="https://huggingface.co/spaces/hf-vb/README/resolve/main/server/auth.jpg" width="400">
 
-<img src="https://huggingface.co/spaces/hf-vb/README/resolve/main/server/button-logged.jpg" width="150">
+<img src="https://huggingface.co/spaces/hf-vb/README/resolve/main/server/button-logged.jpg" width="250">
 
-If successful, you can **Apikey** directly from the **Hugging Face Hub Login** node.
+If successful, you can obtain your **Apikey** directly from the **Hugging Face Hub Login** node.
 
 <img src="https://huggingface.co/spaces/hf-vb/README/resolve/main/server/logged.jpg" width="350">
 
 ### Text Generation and Chat Completion
 
-<img src="https://huggingface.co/spaces/hf-vb/README/resolve/main/server/chat-template.jpg" width="400">
+<img src="https://huggingface.co/spaces/hf-vb/README/resolve/main/server/chat-template.jpg" width="500">
 
 [**Chat Template Text Generation Node Example**](https://visualblocks.withgoogle.com/#/edit/new_hfdemo?project_json=https://cdn.jsdelivr.net/npm/huggingface-visualblocks-nodes@latest/examples/server/chat_template_text_generation_server_.json)
 
@@ -183,7 +192,7 @@ More info:
 
 ### Fill Mask
 
-<img src="https://huggingface.co/spaces/hf-vb/README/resolve/main/server/fill-mask.jpg" width="400">
+<img src="https://huggingface.co/spaces/hf-vb/README/resolve/main/server/fill-mask.jpg" width="500">
 
 [**Fill Mask Node Example**](https://visualblocks.withgoogle.com/#/edit/new_hfdemo?project_json=https://cdn.jsdelivr.net/npm/huggingface-visualblocks-nodes@latest/examples/server/fill_mask_server_.json)
 
@@ -193,7 +202,7 @@ More info:
 
 ### Image Classification
 
-<img src="https://huggingface.co/spaces/hf-vb/README/resolve/main/server/image-class.jpg" width="400">
+<img src="https://huggingface.co/spaces/hf-vb/README/resolve/main/server/image-class.jpg" width="500">
 
 [**Image Classification Node Example**](https://visualblocks.withgoogle.com/#/edit/new_hfdemo?project_json=https://cdn.jsdelivr.net/npm/huggingface-visualblocks-nodes@latest/examples/server/image_classification_server_.json)
 
@@ -203,7 +212,7 @@ More info:
 
 ### Summarization
 
-<img src="https://huggingface.co/spaces/hf-vb/README/resolve/main/server/summarization.jpg" width="400">
+<img src="https://huggingface.co/spaces/hf-vb/README/resolve/main/server/summarization.jpg" width="500">
 
 [**Summarization Node Example**](https://visualblocks.withgoogle.com/#/edit/new_hfdemo?project_json=https://cdn.jsdelivr.net/npm/huggingface-visualblocks-nodes@latest/examples/server/summarization_server_.json)
 
@@ -213,7 +222,7 @@ More info:
 
 ### Text Classification
 
-<img src="https://huggingface.co/spaces/hf-vb/README/resolve/main/server/text-class.jpg" width="400">
+<img src="https://huggingface.co/spaces/hf-vb/README/resolve/main/server/text-class.jpg" width="500">
 
 [**Text Classification Node Example**](https://visualblocks.withgoogle.com/#/edit/new_hfdemo?project_json=https://cdn.jsdelivr.net/npm/huggingface-visualblocks-nodes@latest/examples/server/text_classification_server_.json)
 
@@ -223,7 +232,7 @@ More info:
 
 ### Text Generation
 
-<img src="https://huggingface.co/spaces/hf-vb/README/resolve/main/server/text-generation.jpg" width="400">
+<img src="https://huggingface.co/spaces/hf-vb/README/resolve/main/server/text-generation.jpg" width="500">
 
 [**Text Generation Node Example**](https://visualblocks.withgoogle.com/#/edit/new_hfdemo?project_json=https://cdn.jsdelivr.net/npm/huggingface-visualblocks-nodes@latest/examples/server/text_generation_server_.json)
 
@@ -233,7 +242,7 @@ More info:
 
 ### Text to Image
 
-<img src="https://huggingface.co/spaces/hf-vb/README/resolve/main/server/text-to-image.jpg" width="400">
+<img src="https://huggingface.co/spaces/hf-vb/README/resolve/main/server/text-to-image.jpg" width="500">
 
 [**Text to Image Node Example**](https://visualblocks.withgoogle.com/#/edit/new_hfdemo?project_json=https://cdn.jsdelivr.net/npm/huggingface-visualblocks-nodes@latest/examples/server/text_to_image_server_.json)
 
@@ -243,7 +252,7 @@ More info:
 
 ### Token Classification
 
-<img src="https://huggingface.co/spaces/hf-vb/README/resolve/main/server/token-class.jpg" width="400">
+<img src="https://huggingface.co/spaces/hf-vb/README/resolve/main/server/token-class.jpg" width="500">
 
 [**Token Classification Node Example**](https://visualblocks.withgoogle.com/#/edit/new_hfdemo?project_json=https://cdn.jsdelivr.net/npm/huggingface-visualblocks-nodes@latest/examples/server/token_classification_server_.json)
 
@@ -276,4 +285,4 @@ More info:
 
 5. Click the + in the bottom left corner to add the custom nodes.
 
-6. Paste in the link to the script (http://localhost:8080/index.js) and click "Submit".
+6. Paste in the link to the script (e.g., http://localhost:8080/index.js) and click "Submit".
