@@ -10,6 +10,7 @@
     </picture>
     <br/>
 </p>
+
 Visual blocks is an amazing tool from our friends at [Google](https://github.com/google/visualblocks)
 that allows you to easily create and experiment with machine learning pipelines using a visual interface.
 This repository contains the source code for custom components that allow you to use Hugging Face client and server models in your Visual Blocks pipelines.
