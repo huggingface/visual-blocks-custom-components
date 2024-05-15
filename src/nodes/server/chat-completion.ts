@@ -24,10 +24,12 @@ class ChatCompletionServerNode extends LitElement {
   private cachedInputs?: Inputs;
   private cachedOutput?: Outputs;
   private hf?: HfInference | HfInferenceEndpoint;
+  private controller: AbortController;
 
   constructor() {
     super();
     this.hf = new HfInference();
+    this.controller = new AbortController();
   }
 
   render() {
@@ -56,7 +58,10 @@ class ChatCompletionServerNode extends LitElement {
     if (this.hf && endpointurl) {
       this.hf = new HfInferenceEndpoint(_endpointurl, apikey);
     }
-
+    if (this.controller && this.controller.signal) {
+      this.controller.abort();
+      this.controller = new AbortController();
+    }
     if (!user || !_modelid) {
       this.dispatchEvent(
         new CustomEvent("outputs", { detail: { results: null } })
@@ -94,13 +99,16 @@ class ChatCompletionServerNode extends LitElement {
           results: textGenerationRes.choices[0].message?.content,
         };
       } else {
-        const textGenerationStream = this.hf?.chatCompletionStream({
-          model: _modelid,
-          messages: messages,
-          frequency_penalty: frequency_penalty,
-          max_tokens: max_tokens,
-          temperature: temperature,
-        });
+        const textGenerationStream = this.hf?.chatCompletionStream(
+          {
+            model: _modelid,
+            messages: messages,
+            frequency_penalty: frequency_penalty,
+            max_tokens: max_tokens,
+            temperature: temperature,
+          },
+          { signal: this.controller.signal }
+        );
         if (!textGenerationStream) {
           throw new Error("Invalid response");
         }

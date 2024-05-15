@@ -54,7 +54,7 @@ export const NODE_SPEC: NodeSpec = {
       name: "temperature",
       displayLabel: "Temperature",
       type: DataType.NUMBER,
-      defaultValue: 1.0,
+      defaultValue: 0.0,
       editorSpec: {
         type: EditorType.NUMBER,
         min: 0.1,
