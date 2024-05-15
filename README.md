@@ -1,6 +1,5 @@
 # Hugging Face + Visual Blocks Custom Components
 
-
 <p align="center">
     <br/>
     <picture> 
@@ -186,6 +185,10 @@ If successful, you can obtain your **Apikey** directly from the **Hugging Face H
 <img src="https://huggingface.co/spaces/hf-vb/README/resolve/main/server/chat-template.jpg" width="500">
 
 [**Chat Template Text Generation Node Example**](https://visualblocks.withgoogle.com/#/edit/new_hfdemo?project_json=https://cdn.jsdelivr.net/npm/huggingface-visualblocks-nodes@latest/examples/server/chat_template_text_generation_server_.json)
+
+<img src="https://huggingface.co/spaces/hf-vb/README/resolve/main/chat_completion.jpg" width="500">
+
+[**Chat Completion Node Example**](https://visualblocks.withgoogle.com/#/edit/new_hfdemo?project_json=https://cdn.jsdelivr.net/npm/huggingface-visualblocks-nodes@latest/examples/server/chat_completion_server_.json)
 
 More info:
 
