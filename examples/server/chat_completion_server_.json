@@ -1,0 +1,111 @@
+{
+  "project": {
+    "id": "obvgss",
+    "name": "ChatCompletion(server)",
+    "creationTs": 1715732974263,
+    "lastModifiedTs": 1715756748732,
+    "userSetData": {
+      "description": "",
+      "tags": [],
+      "contactURL": "",
+      "tutorialYouTube": ""
+    }
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "markdown_viewer_ei0wse",
+        "nodeSpecId": "markdown_viewer",
+        "customData": {
+          "previewX": 736,
+          "previewY": 16,
+          "previewWidth": 320,
+          "previewHeight": 608
+        },
+        "uiData": {
+          "posX": 933.81884765625,
+          "posY": 100.5,
+          "width": 176,
+          "height": 130,
+          "selected": false
+        },
+        "propValues": {
+          "hidePreview": false,
+          "hidePreviewFrame": false
+        },
+        "inputValues": {
+          "markdownString": ""
+        },
+        "incomingEdges": {
+          "markdownString": [
+            {
+              "sourceNodeId": "hf-server-chat-completion_mzibjw",
+              "outputId": "results"
+            }
+          ]
+        }
+      },
+      {
+        "id": "hf-hub-login_npu4br",
+        "nodeSpecId": "hf-hub-login",
+        "customData": {
+          "previewX": 16,
+          "previewY": 16,
+          "previewWidth": 320,
+          "previewHeight": 240
+        },
+        "uiData": {
+          "posX": 0,
+          "posY": 100.5,
+          "width": 213.81884765625,
+          "height": 130,
+          "selected": false
+        },
+        "propValues": {
+          "apikey": "",
+          "hidePreview": false
+        }
+      },
+      {
+        "id": "hf-server-chat-completion_mzibjw",
+        "nodeSpecId": "hf-server-chat-completion",
+        "customData": {
+          "previewX": 352,
+          "previewY": 16,
+          "previewWidth": 320,
+          "previewHeight": 240
+        },
+        "uiData": {
+          "posX": 373.81884765625,
+          "posY": 0,
+          "width": 400,
+          "height": 331,
+          "selected": true
+        },
+        "inputValues": {
+          "user": "who made you?\n",
+          "assistant": "",
+          "system": "",
+          "temperature": 0.1,
+          "max_tokens": 205,
+          "frequency_penalty": 0.053,
+          "modelid": "google/gemma-1.1-7b-it",
+          "endpointurl": "",
+          "apikey": "",
+          "stream": true
+        },
+        "incomingEdges": {
+          "apikey": [
+            {
+              "sourceNodeId": "hf-hub-login_npu4br",
+              "outputId": "apikey"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "customNodeUrls": [
+    "https://cdn.jsdelivr.net/npm/huggingface-visualblocks-nodes@latest"
+  ]
+}
