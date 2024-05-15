@@ -5,7 +5,7 @@
     "url": "git+https://github.com/huggingface/visual-blocks-custom-components.git"
   },
   "description": "Custom Hugging Face components for Visual Blocks",
-  "version": "0.0.6",
+  "version": "0.0.8",
   "type": "module",
   "private": false,
   "main": "./dist/index.js",

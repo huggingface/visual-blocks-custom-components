@@ -81,16 +81,18 @@ class ChatCompletionServerNode extends LitElement {
       ...(user ? [{ role: "user", content: user }] : []),
       ...(assistant ? [{ role: "assistant", content: assistant }] : []),
     ];
-
     try {
       if (!stream) {
-        const textGenerationRes = await this.hf?.chatCompletion({
-          model: _modelid,
-          messages: messages,
-          frequency_penalty: frequency_penalty,
-          max_tokens: max_tokens,
-          temperature: temperature,
-        });
+        const textGenerationRes = await this.hf?.chatCompletion(
+          {
+            model: _modelid,
+            messages: messages,
+            frequency_penalty: frequency_penalty,
+            max_tokens: max_tokens,
+            temperature: temperature,
+          },
+          { signal: this.controller.signal }
+        );
         if (!textGenerationRes) {
           throw new Error("Invalid response");
         }
