@@ -180,6 +180,38 @@ export const CURATED_MODELS = {
       label: m.id,
     })
   ),
+  chat_completion: [
+    {
+      value: "meta-llama/Meta-Llama-3-8B-Instruct",
+      label: "meta-llama/Meta-Llama-3-8B-Instruct",
+    },
+    {
+      value: "meta-llama/Meta-Llama-3-70B-Instruct",
+      label: "meta-llama/Meta-Llama-3-70B-Instruct",
+    },
+    {
+      value: "HuggingFaceH4/zephyr-orpo-141b-A35b-v0.1",
+      label: "HuggingFaceH4/zephyr-orpo-141b-A35b-v0.1",
+    },
+    { value: "google/gemma-1.1-7b-it", label: "google/gemma-1.1-7b-it" },
+
+    {
+      value: "mistralai/Mistral-7B-Instruct-v0.2",
+      label: "mistralai/Mistral-7B-Instruct-v0.2",
+    },
+    {
+      value: "NousResearch/Nous-Hermes-2-Mixtral-8x7B-DPO",
+      label: "NousResearch/Nous-Hermes-2-Mixtral-8x7B-DPO",
+    },
+    {
+      value: "CohereForAI/c4ai-command-r-plus",
+      label: "CohereForAI/c4ai-command-r-plus",
+    },
+    {
+      value: "microsoft/Phi-3-mini-4k-instruct",
+      label: "microsoft/Phi-3-mini-4k-instruct",
+    },
+  ],
   text_generation: [
     {
       value: "meta-llama/Meta-Llama-3-8B",

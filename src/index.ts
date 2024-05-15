@@ -24,6 +24,7 @@ import FILL_MASK_SERVER_NODE from "./nodes/server/fill-mask";
 import SUMMARIZATION_SERVER from "./nodes/server/summarization";
 import IMAGE_CLASSIFICATION_SERVER_NODE from "./nodes/server/image-classification";
 import TEXT_GENERATION_SERVER_NODE from "./nodes/server/text-generation";
+import CHAT_COMPLETION_SERVER_NODE from "./nodes/server/chat-completion";
 
 import HF_LOGIN_HUB from "./nodes/server/hf-hub-login";
 //
@@ -50,6 +51,7 @@ const server_nodes = [
   FILL_MASK_SERVER_NODE,
   IMAGE_CLASSIFICATION_SERVER_NODE,
   TEXT_GENERATION_SERVER_NODE,
+  CHAT_COMPLETION_SERVER_NODE,
   CHAT_TEMPLATE_GENERATOR_NODE,
 ];
 
