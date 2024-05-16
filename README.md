@@ -47,6 +47,7 @@ Important links:
     - [Text Generation](#text-generation)
     - [Text to Image](#text-to-image)
     - [Token Classification](#token-classification-1)
+  - [Extra Examples](#extra-examples)
 - [Local Development](#local-development)
 
 </details>
@@ -263,6 +264,14 @@ More info:
 More info:
 
 - https://huggingface.co/tasks/token-classification
+
+## Extra Examples
+
+[**Background Removal Text to Image**](https://visualblocks.withgoogle.com/#/edit/new_hfdemo?project_json=https://cdn.jsdelivr.net/npm/huggingface-visualblocks-nodes@latest/examples/extras/background_removal_text_to_image.json)
+
+[**Chat Completion Text to Image Depth**](https://visualblocks.withgoogle.com/#/edit/new_hfdemo?project_json=https://cdn.jsdelivr.net/npm/huggingface-visualblocks-nodes@latest/examples/extras/chat_completion_txt2img_depth.json)
+
+[**Image Segmentation Webcam Client**](https://visualblocks.withgoogle.com/#/edit/new_hfdemo?project_json=https://cdn.jsdelivr.net/npm/huggingface-visualblocks-nodes@latest/examples/extras/image_segmentation_webcam_client.json)
 
 # Local Development
 

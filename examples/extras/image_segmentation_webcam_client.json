@@ -1,0 +1,252 @@
+{
+  "project": {
+    "name": "Image Segmentation + webcam client",
+    "id": "y0eh0a",
+    "creationTs": 1715838205821,
+    "lastModifiedTs": 1715838906328,
+    "userSetData": {
+      "description": "",
+      "tags": [],
+      "contactURL": "",
+      "tutorialYouTube": ""
+    }
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "hf-transformers-image-segmentation-viewer_drr7z6",
+        "nodeSpecId": "hf-transformers-image-segmentation-viewer",
+        "customData": {
+          "previewX": 480,
+          "previewY": 16,
+          "previewWidth": 320,
+          "previewHeight": 464
+        },
+        "uiData": {
+          "posX": 832,
+          "posY": 173.25,
+          "width": 230.9130859375,
+          "height": 93,
+          "selected": false
+        },
+        "incomingEdges": {
+          "segData": [
+            {
+              "sourceNodeId": "hf-client-transformers-image-segmentation_vwi3na",
+              "outputId": "segData"
+            }
+          ],
+          "image": [
+            {
+              "sourceNodeId": "input_image_yhy4xn",
+              "outputId": "image"
+            }
+          ]
+        }
+      },
+      {
+        "id": "image_viewer_d1bt2n",
+        "nodeSpecId": "image_viewer",
+        "customData": {
+          "previewX": 816,
+          "previewY": 16,
+          "previewWidth": 320,
+          "previewHeight": 240
+        },
+        "uiData": {
+          "posX": 1222.9130859375,
+          "posY": 0,
+          "width": 176,
+          "height": 185,
+          "selected": false
+        },
+        "propValues": {
+          "columnCount": "2",
+          "hidePreview": false
+        },
+        "inputValues": {
+          "images": [],
+          "urls": []
+        },
+        "incomingEdges": {
+          "images": [
+            {
+              "sourceNodeId": "hf-transformers-image-segmentation-viewer_drr7z6",
+              "outputId": "image"
+            }
+          ]
+        }
+      },
+      {
+        "id": "input_image_yhy4xn",
+        "nodeSpecId": "input_image",
+        "customData": {
+          "initialWidth": 448,
+          "initialHeight": 240,
+          "previewX": 16,
+          "previewY": 16,
+          "previewWidth": 448,
+          "previewHeight": 240
+        },
+        "uiData": {
+          "posX": 0,
+          "posY": 129.75,
+          "width": 176,
+          "height": 180,
+          "selected": false
+        },
+        "propValues": {
+          "urls": [
+            "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic1.jpg",
+            "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic2.jpeg",
+            "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic3.jpg",
+            "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic4.jpeg",
+            "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic5.jpg",
+            "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic6.jpg",
+            "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic7.jpeg",
+            "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic8.jpg",
+            "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic9.jpg"
+          ],
+          "gridColumnCount": 3,
+          "allowUserUpload": false,
+          "selectedImageUrl": "https://storage.googleapis.com/tfweb/visualblocks-input-images/pic1.jpg",
+          "hidePreview": false
+        }
+      },
+      {
+        "id": "hf-client-transformers-image-segmentation_vwi3na",
+        "nodeSpecId": "hf-client-transformers-image-segmentation",
+        "customData": {
+          "previewX": 16,
+          "previewY": 16,
+          "previewWidth": 320,
+          "previewHeight": 240
+        },
+        "uiData": {
+          "posX": 336,
+          "posY": 86.25,
+          "width": 336,
+          "height": 154,
+          "selected": false
+        },
+        "propValues": {
+          "device": "webgpu",
+          "quantized": true
+        },
+        "inputValues": {
+          "modelid": "Xenova/face-parsing"
+        },
+        "incomingEdges": {
+          "image": [
+            {
+              "sourceNodeId": "input_image_yhy4xn",
+              "outputId": "image"
+            }
+          ]
+        }
+      },
+      {
+        "id": "image_mixer_pj0rco",
+        "nodeSpecId": "image_mixer",
+        "customData": {
+          "previewX": 16,
+          "previewY": 272,
+          "previewWidth": 320,
+          "previewHeight": 240
+        },
+        "uiData": {
+          "posX": 1558.9130859375,
+          "posY": 327.25,
+          "width": 224,
+          "height": 254,
+          "selected": false
+        },
+        "propValues": {
+          "mode": "source-atop",
+          "hidePreview": false
+        },
+        "inputValues": {
+          "topText": "",
+          "midText": "",
+          "bottomText": ""
+        },
+        "incomingEdges": {
+          "image1": [
+            {
+              "sourceNodeId": "live_camera_ltsth8",
+              "outputId": "image"
+            }
+          ],
+          "image2": [
+            {
+              "sourceNodeId": "image_processor_ruldbg",
+              "outputId": "image"
+            }
+          ]
+        }
+      },
+      {
+        "id": "image_processor_ruldbg",
+        "nodeSpecId": "image_processor",
+        "customData": {
+          "initialWidth": 480,
+          "initialHeight": 384,
+          "previewX": 816,
+          "previewY": 352,
+          "previewWidth": 480,
+          "previewHeight": 384
+        },
+        "uiData": {
+          "posX": 1222.9130859375,
+          "posY": 221,
+          "width": 176,
+          "height": 252,
+          "selected": true
+        },
+        "propValues": {
+          "hidePreview": false,
+          "resize": {
+            "width": 307,
+            "height": -1
+          },
+          "resize,,,width": 307,
+          "resize,,,height": -1
+        },
+        "incomingEdges": {
+          "image": [
+            {
+              "sourceNodeId": "hf-transformers-image-segmentation-viewer_drr7z6",
+              "outputId": "image"
+            }
+          ]
+        }
+      },
+      {
+        "id": "live_camera_ltsth8",
+        "nodeSpecId": "live_camera",
+        "customData": {
+          "runContinuously": true,
+          "initialWidth": 240,
+          "initialHeight": 320,
+          "previewX": 1152,
+          "previewY": 16,
+          "previewWidth": 240,
+          "previewHeight": 320
+        },
+        "uiData": {
+          "posX": 1222.9130859375,
+          "posY": 509,
+          "width": 176,
+          "height": 105,
+          "selected": false
+        },
+        "propValues": {
+          "hidePreview": false
+        }
+      }
+    ]
+  },
+  "customNodeUrls": [
+    "https://cdn.jsdelivr.net/npm/huggingface-visualblocks-nodes@latest"
+  ]
+}

@@ -1,0 +1,275 @@
+{
+  "project": {
+    "id": "rtobte",
+    "name": "Chat_Completion_txt2img_depth_local_final",
+    "creationTs": 1715756850177,
+    "lastModifiedTs": 1715810727083,
+    "userSetData": {
+      "description": "",
+      "tags": [],
+      "contactURL": "",
+      "tutorialYouTube": ""
+    }
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "markdown_viewer_ei0wse",
+        "nodeSpecId": "markdown_viewer",
+        "customData": {
+          "previewX": 352,
+          "previewY": 16,
+          "previewWidth": 304,
+          "previewHeight": 432
+        },
+        "uiData": {
+          "posX": 1021.81884765625,
+          "posY": 96.5,
+          "width": 176,
+          "height": 130,
+          "selected": false
+        },
+        "propValues": {
+          "hidePreview": false,
+          "hidePreviewFrame": false
+        },
+        "inputValues": {
+          "markdownString": ""
+        },
+        "incomingEdges": {
+          "markdownString": [
+            {
+              "sourceNodeId": "hf-server-chat-completion_mzibjw",
+              "outputId": "results"
+            }
+          ]
+        }
+      },
+      {
+        "id": "hf-hub-login_npu4br",
+        "nodeSpecId": "hf-hub-login",
+        "customData": {
+          "previewX": 16,
+          "previewY": 16,
+          "previewWidth": 320,
+          "previewHeight": 240
+        },
+        "uiData": {
+          "posX": 0,
+          "posY": 222.25,
+          "width": 213.81884765625,
+          "height": 130,
+          "selected": false
+        },
+        "propValues": {
+          "apikey": "",
+          "hidePreview": false
+        }
+      },
+      {
+        "id": "hf-server-text-to-image_6vlgwg",
+        "nodeSpecId": "hf-server-text-to-image",
+        "customData": {
+          "previewX": 352,
+          "previewY": 16,
+          "previewWidth": 320,
+          "previewHeight": 240
+        },
+        "uiData": {
+          "posX": 933.81884765625,
+          "posY": 271,
+          "width": 352,
+          "height": 267,
+          "selected": false
+        },
+        "inputValues": {
+          "prompt": "",
+          "negative_prompt": "",
+          "num_inference_steps": 25,
+          "guidance_scale": 7.5,
+          "seed": 0,
+          "useCache": true,
+          "modelid": "stabilityai/stable-diffusion-xl-base-1.0"
+        },
+        "incomingEdges": {
+          "prompt": [
+            {
+              "sourceNodeId": "hf-server-chat-completion_mzibjw",
+              "outputId": "results"
+            }
+          ],
+          "apikey": [
+            {
+              "sourceNodeId": "hf-hub-login_npu4br",
+              "outputId": "apikey"
+            }
+          ]
+        }
+      },
+      {
+        "id": "base64_to_image_77vwac",
+        "nodeSpecId": "base64_to_image",
+        "customData": {
+          "previewX": 672,
+          "previewY": 16,
+          "previewWidth": 320,
+          "previewHeight": 352
+        },
+        "uiData": {
+          "posX": 1445.81884765625,
+          "posY": 370.5,
+          "width": 176,
+          "height": 68,
+          "selected": false
+        },
+        "inputValues": {
+          "base64": ""
+        },
+        "incomingEdges": {
+          "base64": [
+            {
+              "sourceNodeId": "hf-server-text-to-image_6vlgwg",
+              "outputId": "results"
+            }
+          ]
+        }
+      },
+      {
+        "id": "hf-client-transformers-depth-estimation_rag6hl",
+        "nodeSpecId": "hf-client-transformers-depth-estimation",
+        "customData": {
+          "previewX": 1488,
+          "previewY": 16,
+          "previewWidth": 320,
+          "previewHeight": 240
+        },
+        "uiData": {
+          "posX": 1781.81884765625,
+          "posY": 271,
+          "width": 272,
+          "height": 154,
+          "selected": false
+        },
+        "propValues": {
+          "device": "webgpu",
+          "quantized": true
+        },
+        "inputValues": {
+          "modelid": "Xenova/depth-anything-small-hf"
+        },
+        "incomingEdges": {
+          "image": [
+            {
+              "sourceNodeId": "base64_to_image_77vwac",
+              "outputId": "image"
+            }
+          ]
+        }
+      },
+      {
+        "id": "hf-server-chat-completion_mzibjw",
+        "nodeSpecId": "hf-server-chat-completion",
+        "customData": {
+          "previewX": 352,
+          "previewY": 16,
+          "previewWidth": 320,
+          "previewHeight": 240
+        },
+        "uiData": {
+          "posX": 373.81884765625,
+          "posY": 0,
+          "width": 400,
+          "height": 317,
+          "selected": false
+        },
+        "inputValues": {
+          "user": "Enhance this prompt for a text to image system, add words and concepts to illustrate the idea, respond only with the prompt:\n\nA very giraffe car in San Francisco",
+          "assistant": "",
+          "system": "",
+          "temperature": 0.1,
+          "max_tokens": 205,
+          "frequency_penalty": 0,
+          "modelid": "mistralai/Mistral-7B-Instruct-v0.2",
+          "endpointurl": "",
+          "apikey": "",
+          "stream": false
+        },
+        "incomingEdges": {
+          "user": [
+            {
+              "sourceNodeId": "input_text_0yxnpm",
+              "outputId": "text"
+            }
+          ],
+          "apikey": [
+            {
+              "sourceNodeId": "hf-hub-login_npu4br",
+              "outputId": "apikey"
+            }
+          ]
+        }
+      },
+      {
+        "id": "hf-transformers-depth-estimation-viewer_tpmprq",
+        "nodeSpecId": "hf-transformers-depth-estimation-viewer",
+        "customData": {
+          "previewX": 1008,
+          "previewY": 16,
+          "previewWidth": 336,
+          "previewHeight": 352
+        },
+        "uiData": {
+          "posX": 2160,
+          "posY": 352,
+          "width": 212.111328125,
+          "height": 142,
+          "selected": false
+        },
+        "inputValues": {
+          "displacement": 0.4
+        },
+        "incomingEdges": {
+          "depthData": [
+            {
+              "sourceNodeId": "hf-client-transformers-depth-estimation_rag6hl",
+              "outputId": "depthData"
+            }
+          ],
+          "image": [
+            {
+              "sourceNodeId": "base64_to_image_77vwac",
+              "outputId": "image"
+            }
+          ]
+        }
+      },
+      {
+        "id": "input_text_0yxnpm",
+        "nodeSpecId": "input_text",
+        "customData": {
+          "initialWidth": 304,
+          "initialHeight": 144,
+          "previewX": 16,
+          "previewY": 272,
+          "previewWidth": 304,
+          "previewHeight": 160
+        },
+        "uiData": {
+          "posX": 112,
+          "posY": -48,
+          "width": 176,
+          "height": 130,
+          "selected": false
+        },
+        "propValues": {
+          "text": "Enhance this prompt for a text to image system, add words and concepts to illustrate the idea, respond only with the prompt:\n\nA very silly cat on top of a car in San Francisco",
+          "passwordMode": false,
+          "hidePreview": false
+        }
+      }
+    ]
+  },
+  "customNodeUrls": [
+    "https://cdn.jsdelivr.net/npm/huggingface-visualblocks-nodes@latest"
+  ]
+}

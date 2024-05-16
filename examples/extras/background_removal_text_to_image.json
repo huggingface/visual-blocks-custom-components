@@ -1,0 +1,231 @@
+{
+  "project": {
+    "name": "Background Removal + text to image",
+    "id": "llo7bh",
+    "creationTs": 1715839751914,
+    "lastModifiedTs": 1715840262086,
+    "userSetData": {
+      "description": "",
+      "tags": [],
+      "contactURL": "",
+      "tutorialYouTube": ""
+    }
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "image_viewer_yopc8g",
+        "nodeSpecId": "image_viewer",
+        "customData": {
+          "previewX": 16,
+          "previewY": 272,
+          "previewWidth": 320,
+          "previewHeight": 240
+        },
+        "uiData": {
+          "posX": 1088.10595703125,
+          "posY": 0,
+          "width": 176,
+          "height": 185,
+          "selected": false
+        },
+        "propValues": {
+          "columnCount": "2",
+          "hidePreview": false
+        },
+        "inputValues": {
+          "images": [],
+          "urls": []
+        },
+        "incomingEdges": {
+          "images": [
+            {
+              "sourceNodeId": "hf-client-transformers-background-removal_qo2dkc",
+              "outputId": "foreground"
+            }
+          ]
+        }
+      },
+      {
+        "id": "image_mixer_7r1fo4",
+        "nodeSpecId": "image_mixer",
+        "customData": {
+          "previewX": 688,
+          "previewY": 16,
+          "previewWidth": 432,
+          "previewHeight": 272
+        },
+        "uiData": {
+          "posX": 1064.10595703125,
+          "posY": 225.75,
+          "width": 224,
+          "height": 254,
+          "selected": true
+        },
+        "propValues": {
+          "mode": "destination-atop",
+          "hidePreview": false
+        },
+        "inputValues": {
+          "topText": "",
+          "midText": "",
+          "bottomText": ""
+        },
+        "incomingEdges": {
+          "image1": [
+            {
+              "sourceNodeId": "hf-client-transformers-background-removal_qo2dkc",
+              "outputId": "foreground"
+            }
+          ],
+          "image2": [
+            {
+              "sourceNodeId": "base64_to_image_z4qfam",
+              "outputId": "image"
+            }
+          ]
+        }
+      },
+      {
+        "id": "base64_to_image_z4qfam",
+        "nodeSpecId": "base64_to_image",
+        "customData": {
+          "previewX": 352,
+          "previewY": 16,
+          "previewWidth": 320,
+          "previewHeight": 336
+        },
+        "uiData": {
+          "posX": 718.96240234375,
+          "posY": 336.75,
+          "width": 176,
+          "height": 68,
+          "selected": false
+        },
+        "inputValues": {
+          "base64": ""
+        },
+        "incomingEdges": {
+          "base64": [
+            {
+              "sourceNodeId": "hf-server-text-to-image_3wh2ph",
+              "outputId": "results"
+            }
+          ]
+        }
+      },
+      {
+        "id": "hf-hub-login_p4jron",
+        "nodeSpecId": "hf-hub-login",
+        "customData": {
+          "previewX": 16,
+          "previewY": 16,
+          "previewWidth": 320,
+          "previewHeight": 240
+        },
+        "uiData": {
+          "posX": 0,
+          "posY": 305.75,
+          "width": 213.81884765625,
+          "height": 130,
+          "selected": false
+        },
+        "propValues": {
+          "hidePreview": false
+        }
+      },
+      {
+        "id": "hf-client-transformers-background-removal_qo2dkc",
+        "nodeSpecId": "hf-client-transformers-background-removal",
+        "customData": {
+          "previewX": 16,
+          "previewY": 16,
+          "previewWidth": 320,
+          "previewHeight": 240
+        },
+        "uiData": {
+          "posX": 709.81884765625,
+          "posY": 33.5,
+          "width": 194.287109375,
+          "height": 154,
+          "selected": false
+        },
+        "propValues": {
+          "device": "webgpu",
+          "quantized": true
+        },
+        "inputValues": {
+          "modelid": "Xenova/modnet"
+        },
+        "incomingEdges": {
+          "image": [
+            {
+              "sourceNodeId": "live_camera_5tqlyj",
+              "outputId": "image"
+            }
+          ]
+        }
+      },
+      {
+        "id": "live_camera_5tqlyj",
+        "nodeSpecId": "live_camera",
+        "customData": {
+          "runContinuously": true,
+          "initialWidth": 240,
+          "initialHeight": 320,
+          "previewX": 1136,
+          "previewY": 16,
+          "previewWidth": 240,
+          "previewHeight": 320
+        },
+        "uiData": {
+          "posX": 149.24172973632812,
+          "posY": 84.79096984863281,
+          "width": 176,
+          "height": 105,
+          "selected": false
+        },
+        "propValues": {
+          "hidePreview": false
+        }
+      },
+      {
+        "id": "hf-server-text-to-image_3wh2ph",
+        "nodeSpecId": "hf-server-text-to-image",
+        "customData": {
+          "previewX": 1488,
+          "previewY": 16,
+          "previewWidth": 320,
+          "previewHeight": 240
+        },
+        "uiData": {
+          "posX": 368,
+          "posY": 208,
+          "width": 256,
+          "height": 281,
+          "selected": false
+        },
+        "inputValues": {
+          "prompt": "a beautiful sunset in san francisco, golden gate bridge",
+          "negative_prompt": "",
+          "num_inference_steps": 25,
+          "guidance_scale": 7.5,
+          "seed": 0,
+          "useCache": false,
+          "modelid": "stabilityai/stable-diffusion-xl-base-1.0"
+        },
+        "incomingEdges": {
+          "apikey": [
+            {
+              "sourceNodeId": "hf-hub-login_p4jron",
+              "outputId": "apikey"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "customNodeUrls": [
+    "https://cdn.jsdelivr.net/npm/huggingface-visualblocks-nodes@latest"
+  ]
+}
